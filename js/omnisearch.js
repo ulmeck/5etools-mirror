@@ -407,7 +407,7 @@ class Omnisearch {
 
 		data.forEach(it => this._addToIndex(it));
 
-		const brewIndex = await BrewUtil2.pGetSearchIndex({id: this._maxId + 1});
+		const brewIndex = await BrewUtil2.pGetSearchIndex({id: this._searchIndex.documentStore.length});
 		brewIndex.forEach(it => this._addToIndex(it));
 
 		this._adventureBookLookup = {};
@@ -418,9 +418,7 @@ class Omnisearch {
 		});
 	}
 
-	static _maxId = null;
 	static _addToIndex (d) {
-		this._maxId = d.id;
 		d.cf = Parser.pageCategoryToFull(d.c);
 		if (!this._CATEGORY_COUNTS[d.cf]) this._CATEGORY_COUNTS[d.cf] = 1;
 		else this._CATEGORY_COUNTS[d.cf]++;

@@ -11374,7 +11374,8 @@
 				"prone"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Duergar Hammerer",
@@ -11642,7 +11643,8 @@
 				"invisible"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Duergar Mind Master",
@@ -11911,7 +11913,8 @@
 				"prone"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Duergar Soulblade",
@@ -13627,7 +13630,8 @@
 				"paralyzed"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Evoker Wizard",
@@ -14247,7 +14251,8 @@
 				"MW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Firenewt Warrior",
@@ -17184,7 +17189,8 @@
 				"THW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Gnoll Witherling",
@@ -18102,7 +18108,8 @@
 					},
 					"variant": null
 				}
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Grung Elite Warrior",
@@ -18389,7 +18396,8 @@
 					},
 					"variant": null
 				}
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Grung Wildling",
@@ -18699,7 +18707,8 @@
 					},
 					"variant": null
 				}
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Guard Drake",
@@ -18847,7 +18856,6 @@
 			],
 			"hasToken": true,
 			"hasFluff": true,
-			"hasFluffImages": true,
 			"_versions": [
 				{
 					"name": "Guard Drake (Black)",
@@ -18932,7 +18940,8 @@
 					],
 					"variant": null
 				}
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Hadrosaurus",
@@ -22293,7 +22302,8 @@
 				"grappled"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Martial Arts Adept",
@@ -25568,7 +25578,8 @@
 				"paralyzed"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Neothelid",
@@ -26416,7 +26427,8 @@
 				"RW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Ogre Chain Brute",
@@ -26515,7 +26527,8 @@
 				"stunned"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Ogre Howdah",
@@ -26987,7 +27000,13 @@
 				{
 					"name": "Tail",
 					"entries": [
-						"{@atk mw} {@hit 16} to hit, reach 10 ft., one target. {@h}21 ({@damage 3d8 + 8}) force damage plus 9 ({@damage 2d8}) poison damage."
+						"{@atk mw} {@hit 16} to hit, reach 10 ft., one target."
+					]
+				},
+				{
+					"name": "Hit",
+					"entries": [
+						"21 ({@damage 3d8 + 8}) force damage plus 9 ({@damage 2d8}) poison damage."
 					]
 				},
 				{
@@ -27335,7 +27354,8 @@
 				"MW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Phoenix",
@@ -27710,7 +27730,8 @@
 				"THW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Red Abishai",
@@ -29419,7 +29440,8 @@
 				"prone"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Shoosuva",
@@ -31846,7 +31868,8 @@
 				"poisoned"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Stone Cursed",
@@ -32927,7 +32950,8 @@
 				"RW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Sword Wraith Warrior",
@@ -33896,7 +33920,8 @@
 				"paralyzed"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Transmuter Wizard",
@@ -34712,7 +34737,8 @@
 				"RW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Vegepygmy Chief",
@@ -35379,7 +35405,8 @@
 				"unconscious"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Warlock of the Fiend",
@@ -35546,7 +35573,8 @@
 				"MW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Warlock of the Great Old One",
@@ -36946,7 +36974,8 @@
 				"invisible"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Yagnoloth",

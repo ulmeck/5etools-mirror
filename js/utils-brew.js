@@ -21,7 +21,7 @@ class BrewDoc {
 		});
 	}
 
-	static fromObject (obj, opts = {}) {
+	static fromObject (obj, opts) {
 		const {isCopy = false} = opts;
 		return new this({
 			head: BrewDocHead.fromObject(obj.head, opts),
@@ -139,13 +139,10 @@ class BrewDoc {
 		// endregion
 
 		// region Creature (monster)
+		// 2022-03-22
 		if (json.monster) {
 			json.monster.forEach(mon => {
-				// 2022-03-22
 				if (typeof mon.size === "string") mon.size = [mon.size];
-
-				// 2022=05-29
-				if (mon.summonedBySpell && !mon.summonedBySpellLevel) mon.summonedBySpellLevel = 1;
 			});
 		}
 		// endregion
@@ -1375,7 +1372,6 @@ class ManageBrewUi {
 			$iptSearch,
 			$wrpList,
 			isUseJquery: true,
-			isFuzzy: true,
 			sortByInitial: rdState.list ? rdState.list.sortBy : undefined,
 			sortDirInitial: rdState.list ? rdState.list.sortDir : undefined,
 		});
@@ -1573,12 +1569,11 @@ class ManageBrewUi {
 		// region These are mutually exclusive
 		const btnPull = this._pRender_getBtnPull({rdState, brew});
 		const btnEdit = this._pRender_getBtnEdit({rdState, brew});
-		const btnPullEditPlaceholder = (btnPull || btnEdit) ? null : this.constructor._pRender_getBtnPlaceholder();
 		// endregion
 
 		const btnDownload = e_({
 			tag: "button",
-			clazz: `btn btn-default btn-xs mobile__hidden w-24p`,
+			clazz: `btn btn-default btn-xs mobile__hidden`,
 			title: this.constructor._LBL_LIST_EXPORT,
 			children: [
 				e_({
@@ -1591,7 +1586,7 @@ class ManageBrewUi {
 
 		const btnViewJson = e_({
 			tag: "button",
-			clazz: `btn btn-default btn-xs mobile-ish__hidden w-24p`,
+			clazz: `btn btn-default btn-xs mobile-ish__hidden`,
 			title: `${this.constructor._LBL_LIST_VIEW_JSON}: ${this.constructor._getBrewJsonTitle({brew, brewName})}`,
 			children: [
 				e_({
@@ -1605,7 +1600,7 @@ class ManageBrewUi {
 
 		const btnOpenMenu = e_({
 			tag: "button",
-			clazz: `btn btn-default btn-xs w-24p`,
+			clazz: `btn btn-default btn-xs`,
 			title: "Menu",
 			children: [
 				e_({
@@ -1618,7 +1613,7 @@ class ManageBrewUi {
 
 		const btnDelete = this.constructor._isBrewOperationPermitted_delete(brew) ? e_({
 			tag: "button",
-			clazz: `btn btn-danger btn-xs mobile__hidden w-24p`,
+			clazz: `btn btn-danger btn-xs mobile__hidden`,
 			title: this.constructor._LBL_LIST_DELETE,
 			children: [
 				e_({
@@ -1627,7 +1622,7 @@ class ManageBrewUi {
 				}),
 			],
 			click: () => this._pRender_pDoDelete({rdState, brews: [brew]}),
-		}) : this.constructor._pRender_getBtnPlaceholder();
+		}) : null;
 
 		// Weave in HRs
 		const elesSub = rowsSubMetas.map(it => it.eleRow);
@@ -1671,7 +1666,6 @@ class ManageBrewUi {
 					children: [
 						btnPull,
 						btnEdit,
-						btnPullEditPlaceholder,
 						btnDownload,
 						btnViewJson,
 						btnOpenMenu,
@@ -1703,21 +1697,12 @@ class ManageBrewUi {
 		return rowMeta;
 	}
 
-	static _pRender_getBtnPlaceholder () {
-		return e_({
-			tag: "button",
-			clazz: `btn btn-default btn-xs mobile__hidden w-24p`,
-			html: "&nbsp;",
-		})
-			.attr("disabled", true);
-	}
-
 	_pRender_getBtnPull ({rdState, brew}) {
 		if (!this.constructor._isBrewOperationPermitted_update(brew)) return null;
 
 		const btnPull = e_({
 			tag: "button",
-			clazz: `btn btn-default btn-xs mobile__hidden w-24p`,
+			clazz: `btn btn-default btn-xs mobile__hidden`,
 			title: this.constructor._LBL_LIST_UPDATE,
 			children: [
 				e_({
@@ -1736,7 +1721,7 @@ class ManageBrewUi {
 
 		return e_({
 			tag: "button",
-			clazz: `btn btn-default btn-xs mobile__hidden w-24p`,
+			clazz: `btn btn-default btn-xs mobile__hidden`,
 			title: this.constructor._LBL_LIST_MANAGE_CONTENTS,
 			children: [
 				e_({
@@ -1775,9 +1760,7 @@ class ManageBrewUi {
 
 		if (!isChooseSources) {
 			const outFilename = filename || brewName || this.constructor._getBrewName(brew);
-			const json = brew.head.isEditable ? MiscUtil.copy(brew.body) : brew.body;
-			this.constructor._mutExportableEditableData({json: json});
-			return DataUtil.userDownload(outFilename, json, {isSkipAdditionalMetadata: true});
+			return DataUtil.userDownload(outFilename, brew.body, {isSkipAdditionalMetadata: true});
 		}
 
 		// region Get chosen sources
@@ -1815,21 +1798,7 @@ class ManageBrewUi {
 
 		const reducedFilename = filename || this.constructor._getBrewName({body: cpyBrew});
 
-		this.constructor._mutExportableEditableData({json: cpyBrew});
-
 		return DataUtil.userDownload(reducedFilename, cpyBrew, {isSkipAdditionalMetadata: true});
-	}
-
-	/**
-	 * The editable brew may contain `uniqueId` references from the builder, which should be stripped before export.
-	 */
-	static _mutExportableEditableData ({json}) {
-		Object.values(json)
-			.forEach(arr => {
-				if (arr == null || !(arr instanceof Array)) return;
-				arr.forEach(ent => delete ent.uniqueId);
-			});
-		return json;
 	}
 
 	static _getBrewJsonTitle ({brew, brewName}) {

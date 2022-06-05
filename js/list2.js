@@ -215,7 +215,6 @@ class List {
 					fields: {
 						s: {expand: true},
 					},
-					bool: "AND",
 					expand: true,
 				},
 			);
@@ -349,13 +348,16 @@ class List {
 	 * @param [opts.fnBindListeners] Function which binds event listeners to the list.
 	 */
 	doAbsorbItems (dataArr, opts) {
-		const children = [...this._$wrpList[0].children];
+		const childNodesRaw = this._$wrpList[0].childNodes;
+		const childNodes = [];
+		const lenRaw = childNodesRaw.length;
+		for (let i = 0; i < lenRaw; ++i) if (childNodesRaw[i].nodeType !== Node.TEXT_NODE) childNodes.push(childNodesRaw[i]);
 
-		const len = children.length;
+		const len = childNodes.length;
 		if (len !== dataArr.length) throw new Error(`Data source length and list element length did not match!`);
 
 		for (let i = 0; i < len; ++i) {
-			const node = children[i];
+			const node = childNodes[i];
 			const dataItem = dataArr[i];
 			const listItem = new ListItem(
 				i,

@@ -40,8 +40,6 @@ class PageUi {
 
 	get creatureBuilder () { return this._builders.creatureBuilder; }
 
-	get builders () { return this._builders; }
-
 	get activeBuilder () { return this._settings.activeBuilder || PageUi._DEFAULT_ACTIVE_BUILDER; }
 
 	get $wrpInput () { return this._$wrpInput; }
@@ -360,8 +358,6 @@ class Builder extends ProxyBase {
 	}
 
 	set ui (ui) { this._ui = ui; }
-
-	get prop () { return this._prop; }
 
 	getSaveableState () {
 		return {
@@ -1254,7 +1250,6 @@ class Makebrew {
 		// generic init
 		await BrewUtil2.pInit();
 		ExcludeUtil.pInitialise().then(null); // don't await, as this is only used for search
-		await this._pPrepareExistingEditableBrew();
 		await BrewUtil2.pGetBrewProcessed();
 		await SearchUiUtil.pDoGlobalInit();
 		// Do this asynchronously, to avoid blocking the load
@@ -1273,61 +1268,32 @@ class Makebrew {
 		window.dispatchEvent(new Event("toolsLoaded"));
 	}
 
-	/**
-	 * The editor requires that each entity has a `uniqueId`, as e.g. hashing the entity does not produce a
-	 * stable ID (since there may be duplicates, or the name may change).
-	 */
-	static async _pPrepareExistingEditableBrew () {
-		const brew = MiscUtil.copy(await BrewUtil2.pGetOrCreateEditableBrewDoc());
-
-		let isAnyMod = false;
-		Object.values(ui.builders)
-			.forEach(builder => {
-				if (!brew.body[builder.prop]?.length) return;
-
-				brew.body[builder.prop].forEach(ent => {
-					if (ent.uniqueId) return;
-					ent.uniqueId = CryptUtil.uid();
-					isAnyMod = true;
-				});
-			});
-
-		if (!isAnyMod) return;
-
-		await BrewUtil2.pSetEditableBrewDoc(brew);
-	}
-
 	static async pHashChange () {
 		try {
 			await Makebrew._LOCK.pLock();
-			return (await this._pHashChange());
-		} finally {
-			Makebrew._LOCK.unlock();
-		}
-	}
 
-	static async _pHashChange () {
-		const [builderMode, ...sub] = Hist.getHashParts();
-		Hist.initialLoad = false; // Once we've extracted the hash's parts, we no longer care about preserving it
+			const [builderMode, ...sub] = Hist.getHashParts();
+			Hist.initialLoad = false; // Once we've extracted the hash's parts, we no longer care about preserving it
 
-		if (!builderMode) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
+			if (!builderMode) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
 
-		const builder = ui.getBuilderById(builderMode);
-		if (!builder) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
+			const builder = ui.getBuilderById(builderMode);
+			if (!builder) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
 
-		await ui.pSetActiveBuilderById(builderMode); // (This will update the hash to the active builder)
+			await ui.pSetActiveBuilderById(builderMode); // (This will update the hash to the active builder)
 
-		if (!sub.length) return;
+			if (sub.length) {
+				const initialLoadMeta = UrlUtil.unpackSubHash(sub[0]);
+				if (!initialLoadMeta.statemeta) return;
 
-		const initialLoadMeta = UrlUtil.unpackSubHash(sub[0]);
-		if (!initialLoadMeta.statemeta) return;
+				const [page, source, hash] = initialLoadMeta.statemeta;
+				let toLoad = await Renderer.hover.pCacheAndGet(page, source, hash, {isCopy: true});
 
-		const [page, source, hash] = initialLoadMeta.statemeta;
-		let toLoad = await Renderer.hover.pCacheAndGet(page, source, hash, {isCopy: true});
+				toLoad = await builder._pHashChange_pHandleSubHashes(sub, toLoad);
 
-		toLoad = await builder._pHashChange_pHandleSubHashes(sub, toLoad);
-
-		return builder.pHandleSidebarLoadExistingData(toLoad, {isForce: true});
+				return builder.pHandleSidebarLoadExistingData(toLoad, {isForce: true, meta});
+			}
+		} finally { Makebrew._LOCK.unlock(); }
 	}
 }
 Makebrew._LOCK = null;

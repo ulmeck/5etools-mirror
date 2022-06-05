@@ -318,8 +318,6 @@ class UiUtil {
 	 *
 	 * @param {string} [opts.title] Modal title.
 	 *
-	 * @param {string} [opts.window] Browser window.
-	 *
 	 * @param [opts.isUncappedHeight] {boolean}
 	 * @param [opts.isUncappedWidth] {boolean}
 	 * @param [opts.isHeight100] {boolean}
@@ -343,11 +341,9 @@ class UiUtil {
 	static getShowModal (opts) {
 		opts = opts || {};
 
-		const doc = (opts.window || window).document;
-
-		UiUtil._initModalEscapeHandler({doc});
-		UiUtil._initModalMouseupHandlers({doc});
-		if (doc.activeElement) doc.activeElement.blur(); // blur any active element as it will be behind the modal
+		UiUtil._initModalEscapeHandler();
+		UiUtil._initModalMouseupHandlers();
+		if (document.activeElement) document.activeElement.blur(); // blur any active element as it will be behind the modal
 
 		let resolveModal;
 		const pResolveModal = new Promise(resolve => { resolveModal = resolve; });
@@ -365,12 +361,12 @@ class UiUtil {
 
 		const doTeardown = () => {
 			UiUtil._popFromModalStack(modalStackMeta);
-			if (!UiUtil._MODAL_STACK.length) doc.body.classList.remove(`ui-modal__body-active`);
+			if (!UiUtil._MODAL_STACK.length) document.body.classList.remove(`ui-modal__body-active`);
 		};
 
 		const doOpen = () => {
-			wrpOverlay.appendTo(doc.body);
-			doc.body.classList.add(`ui-modal__body-active`);
+			wrpOverlay.appendTo(document.body);
+			document.body.classList.add(`ui-modal__body-active`);
 		};
 
 		const wrpOverlay = e_({tag: "div", clazz: "ui-modal__overlay"});
@@ -494,11 +490,11 @@ class UiUtil {
 		if (~ixStack) UiUtil._MODAL_STACK.splice(ixStack, 1);
 	}
 
-	static _initModalEscapeHandler ({doc}) {
+	static _initModalEscapeHandler () {
 		if (UiUtil._MODAL_STACK) return;
 		UiUtil._MODAL_STACK = [];
 
-		doc.addEventListener("keydown", evt => {
+		document.addEventListener("keydown", evt => {
 			if (evt.which !== 27) return;
 			if (!UiUtil._MODAL_STACK.length) return;
 			if (EventUtil.isInInput(evt)) return;
@@ -510,8 +506,8 @@ class UiUtil {
 		});
 	}
 
-	static _initModalMouseupHandlers ({doc}) {
-		doc.addEventListener("mousedown", evt => {
+	static _initModalMouseupHandlers () {
+		document.addEventListener("mousedown", evt => {
 			UiUtil._MODAL_LAST_MOUSEDOWN = evt.target;
 		});
 	}
@@ -2103,12 +2099,9 @@ class InputUiUtil {
 		const $iptNumber = $(`<input class="form-control mb-2 text-right" ${opts.min ? `min="${opts.min}"` : ""} ${opts.max ? `max="${opts.max}"` : ""}>`)
 			.keydown(evt => {
 				if (evt.key === "Escape") { $iptNumber.blur(); return; }
-
+				// return key
+				if (evt.which === 13) doClose(true);
 				evt.stopPropagation();
-				if (evt.key === "Enter") {
-					evt.preventDefault();
-					doClose(true);
-				}
 			});
 		if (defaultVal !== undefined) $iptNumber.val(defaultVal);
 
@@ -2242,14 +2235,7 @@ class InputUiUtil {
 	static async pGetUserEnum (opts) {
 		opts = opts || {};
 
-		const $selEnum = $(`<select class="form-control mb-2"><option value="-1" disabled>${opts.placeholder || "Select..."}</option></select>`)
-			.keydown(async evt => {
-				evt.stopPropagation();
-				if (evt.key === "Enter") {
-					evt.preventDefault();
-					doClose(true);
-				}
-			});
+		const $selEnum = $(`<select class="form-control mb-2"><option value="-1" disabled>${opts.placeholder || "Select..."}</option></select>`);
 
 		if (opts.isAllowNull) $(`<option value="-1"></option>`).text(opts.fnDisplay ? opts.fnDisplay(null, -1) : "(None)").appendTo($selEnum);
 
@@ -2490,12 +2476,9 @@ class InputUiUtil {
 					await MiscUtil.pDelay(17); // arbitrary delay to allow dropdown to render (~1000/60, i.e. 1 60 FPS frame)
 					if ($modalInner.find(`.typeahead.dropdown-menu`).is(":visible")) return;
 				}
-
+				// return key
+				if (evt.key === "Enter") doClose(true);
 				evt.stopPropagation();
-				if (evt.key === "Enter") {
-					evt.preventDefault();
-					doClose(true);
-				}
 			});
 		if (opts.isCode) $iptStr.addClass("code");
 

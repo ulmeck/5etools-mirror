@@ -118,7 +118,6 @@ PropOrder._MONSTER = [
 	"reprintedAs",
 
 	"summonedBySpell",
-	"summonedBySpellLevel",
 	"summonedByClass",
 
 	"_isCopy",
@@ -726,12 +725,6 @@ PropOrder._FEAT = [
 	"armorProficiencies",
 	"skillToolLanguageProficiencies",
 	"savingThrowProficiencies",
-	"expertise",
-
-	"immune",
-	"resist",
-	"vulnerable",
-	"conditionImmune",
 
 	"additionalSpells",
 
