@@ -463,7 +463,7 @@ SourceUtil = {
 		return `${docPage}#${[mappedSource, page ? `page:${page}` : null].filter(Boolean).join(HASH_PART_SEP)}`;
 	},
 
-	getEntitySource (it) { return it.source || it.inherits?.source; },
+	getEntitySource (it) { return it.source || it.inherits.source; },
 };
 
 // CURRENCY ============================================================================================================
