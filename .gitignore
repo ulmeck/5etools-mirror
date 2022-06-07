@@ -20,3 +20,4 @@ sitemap.xml
 # Generated service worker files
 sw.js
 sw-injector.js
+js/.utils.js.swp
