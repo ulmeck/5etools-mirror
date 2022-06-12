@@ -102,7 +102,7 @@
 			"name": "Daylight",
 			"source": "PHB",
 			"data": {
-				"target.value": 120,
+				"target.value": 60,
 				"target.units": "ft",
 				"target.type": "sphere"
 			}

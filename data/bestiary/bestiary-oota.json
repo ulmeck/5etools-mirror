@@ -128,8 +128,7 @@
 						"flags": "i"
 					}
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "Awakened Zurkhwood",
@@ -371,8 +370,7 @@
 			"senseTags": [
 				"D",
 				"T"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Chamberlain of Zuggtmoy",
@@ -2133,8 +2131,7 @@
 				"Elvish",
 				"Undercommon",
 				"Common"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Hook Horror Spore Servant",
@@ -2994,8 +2991,7 @@
 						"flags": "i"
 					}
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "Narrak",
@@ -3386,8 +3382,7 @@
 					},
 					"ability": "wis"
 				}
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Regenerating Black Pudding",
@@ -3760,8 +3755,7 @@
 					"name": "Deep Gnome",
 					"source": "DMG"
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "The Pudding King",
@@ -4146,7 +4140,6 @@
 			"conditionInflict": [
 				"poisoned"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -4400,8 +4393,7 @@
 			],
 			"spellcastingTags": [
 				"I"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Veteran of the Gauntlet",
@@ -4540,8 +4532,7 @@
 				"C",
 				"E"
 			],
-			"cr": "5",
-			"hasToken": true
+			"cr": "5"
 		},
 		{
 			"name": "Vizeran DeVir",

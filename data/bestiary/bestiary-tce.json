@@ -117,8 +117,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Adult Red Dracolich",
@@ -136,8 +135,7 @@
 				"Legendary Resistances",
 				"Magic Resistance"
 			],
-			"damageTagsLegendary": [],
-			"hasToken": true
+			"damageTagsLegendary": []
 		},
 		{
 			"name": "Beast of the Land",
@@ -467,8 +465,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Celestial Spirit",
@@ -657,8 +654,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Dancing Item",
@@ -884,8 +880,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Fey Spirit",
@@ -990,8 +985,7 @@
 			],
 			"conditionInflict": [
 				"charmed"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Fiendish Spirit",
@@ -1118,8 +1112,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Homunculus Servant",
@@ -1821,8 +1814,7 @@
 				"frightened",
 				"paralyzed",
 				"poisoned"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Wildfire Spirit",

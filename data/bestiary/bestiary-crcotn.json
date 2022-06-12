@@ -2550,8 +2550,7 @@
 				"Abyssal",
 				"Common",
 				"Orc"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Foghomer",
@@ -2577,8 +2576,7 @@
 			"alignment": [
 				"N",
 				"G"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Galeokaerda",
@@ -4819,7 +4817,6 @@
 					]
 				}
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -5977,7 +5974,6 @@
 				"paralyzed",
 				"poisoned"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{

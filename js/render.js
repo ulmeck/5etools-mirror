@@ -1253,7 +1253,7 @@ function Renderer () {
 		this._renderDataHeader(textStack, entry.name);
 		textStack[0] += `<tr>
 			<td colspan="6" data-rd-tag="${entry.tag.qq()}" data-rd-page="${page.qq()}" data-rd-source="${(source || "").qq()}" data-rd-hash="${hash.qq()}" data-rd-name="${(entry.name || "").qq()}">
-				<i>Loading ${Renderer.get().render(`{@${entry.tag} ${entry.name}|${source}}`)}...</i>
+				<i>Loading ${Renderer.get().render(`{@${entry.tag} ${entry.name}|${entry.source}}`)}...</i>
 				<style onload="Renderer.events.handleLoad_inlineStatblock(this)"></style>
 			</td>
 		</tr>`;
@@ -1985,12 +1985,11 @@ Renderer.events = {
 					throw new Error(`Could not find ${tag} ${hash}`);
 				}
 
-				const fnRender = Renderer.hover.getFnRenderCompact(page);
 				const tbl = tr.closest("table");
 				tbl.parentNode.replaceChild(
 					e_({
-						outer: Renderer.utils.getEmbeddedDataHeader(toRender.name)
-							+ fnRender(toRender)
+						html: Renderer.utils.getEmbeddedDataHeader(toRender.name)
+							+ Renderer.monster.getCompactRenderedString(toRender, Renderer.get(), {isEmbeddedEntity: true})
 							+ Renderer.utils.getEmbeddedDataFooter(),
 					}),
 					tbl,
@@ -5439,9 +5438,8 @@ Renderer.monster = {
 		}
 	},
 
-	getSectionIntro (mon, {renderer = Renderer.get(), prop}) {
-		const headerProp = `${prop}Header`;
-		if (mon[headerProp]) return renderer.render({entries: mon[headerProp]});
+	getMythicActionIntro (mon, renderer = Renderer.get()) {
+		if (mon.mythicHeader) return renderer.render({entries: mon.mythicHeader});
 		return "";
 	},
 
@@ -5764,12 +5762,10 @@ Renderer.monster = {
 			? [{type: "entries", entries: mon[key]}]
 			: mon[key];
 
-		const ptHeader = mon[key] ? Renderer.monster.getSectionIntro(mon, {prop: key}) : "";
-
 		return `<tr class="mon__stat-header-underline"><td colspan="6"><h3 class="mon__sect-header-inner">${title}${mon[noteKey] ? ` (<span class="ve-small">${mon[noteKey]}</span>)` : ""}</h3></td></tr>
 		<tr class="text"><td colspan="6">
 		${key === "legendary" && mon.legendary ? `<p>${Renderer.monster.getLegendaryActionIntro(mon)}</p>` : ""}
-		${ptHeader ? `<p>${ptHeader}</p>` : ""}
+		${key === "mythic" && mon.mythic ? `<p>${Renderer.monster.getMythicActionIntro(mon)}</p>` : ""}
 		${toRender.map(it => it.rendered || renderer.render(it, depth)).join("")}
 		</td></tr>`;
 	},

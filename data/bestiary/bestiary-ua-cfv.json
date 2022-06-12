@@ -83,8 +83,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Beast of the Earth",
@@ -179,8 +178,7 @@
 			],
 			"conditionInflict": [
 				"prone"
-			],
-			"hasToken": true
+			]
 		}
 	]
 }

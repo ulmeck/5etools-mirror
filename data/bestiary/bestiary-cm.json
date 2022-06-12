@@ -2465,7 +2465,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3231,7 +3230,6 @@
 				"grappled",
 				"restrained"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
