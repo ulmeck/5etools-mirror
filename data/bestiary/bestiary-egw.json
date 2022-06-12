@@ -2402,8 +2402,7 @@
 				"P",
 				"S"
 			],
-			"damageTagsLegendary": [],
-			"hasToken": true
+			"damageTagsLegendary": []
 		},
 		{
 			"name": "Kobold Underling",
@@ -2976,8 +2975,7 @@
 				"Legendary Resistances",
 				"Magic Resistance"
 			],
-			"damageTagsLegendary": [],
-			"hasToken": true
+			"damageTagsLegendary": []
 		},
 		{
 			"name": "Parson Pellinost",

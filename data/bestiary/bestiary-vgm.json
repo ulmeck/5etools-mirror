@@ -3625,7 +3625,6 @@
 					}
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3648,7 +3647,6 @@
 			"spellcastingTags": [
 				"CW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3678,7 +3676,6 @@
 					]
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3708,7 +3705,6 @@
 					]
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3738,7 +3734,6 @@
 					]
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3760,7 +3755,6 @@
 					}
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -3782,7 +3776,6 @@
 					}
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{

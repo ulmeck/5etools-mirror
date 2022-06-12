@@ -223,8 +223,7 @@
 				"charmed",
 				"paralyzed",
 				"restrained"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Fhenimore",
@@ -317,8 +316,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Gar Shatterkeel",
@@ -569,8 +567,7 @@
 				"paralyzed",
 				"prone",
 				"restrained"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Shoalar Quanderil",
@@ -733,8 +730,7 @@
 				"MW",
 				"RW",
 				"THW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Whymsee",
@@ -814,8 +810,7 @@
 			],
 			"miscTags": [
 				"AOE"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Young Kraken",
@@ -967,8 +962,7 @@
 				"grappled",
 				"prone",
 				"restrained"
-			],
-			"hasToken": true
+			]
 		}
 	]
 }

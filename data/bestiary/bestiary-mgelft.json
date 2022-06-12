@@ -95,7 +95,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -203,7 +202,6 @@
 				"RW",
 				"THW"
 			],
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -319,7 +317,6 @@
 				"RW",
 				"THW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -432,7 +429,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -522,7 +518,6 @@
 				"grappled",
 				"restrained"
 			],
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -610,7 +605,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		}

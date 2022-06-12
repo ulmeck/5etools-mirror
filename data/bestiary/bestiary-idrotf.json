@@ -130,7 +130,6 @@
 				"RW",
 				"THW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1103,8 +1102,7 @@
 				"RNG",
 				"RW",
 				"THW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Bjornhild Solvigsdottir",
@@ -1526,8 +1524,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Chimeric Cat",
@@ -1597,7 +1594,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1666,7 +1662,6 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1713,7 +1708,6 @@
 					]
 				}
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1734,8 +1728,7 @@
 						}
 					}
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "Chimeric Weasel",
@@ -1802,8 +1795,7 @@
 			"miscTags": [
 				"AOE",
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Chwinga",
@@ -2366,8 +2358,7 @@
 			"spellcastingTags": [],
 			"miscTags": [],
 			"conditionInflict": [],
-			"conditionInflictSpell": [],
-			"hasToken": true
+			"conditionInflictSpell": []
 		},
 		{
 			"name": "Fox",
@@ -4171,7 +4162,6 @@
 			"conditionInflict": [
 				"prone"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -5251,7 +5241,6 @@
 				"paralyzed",
 				"prone"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -6003,7 +5992,6 @@
 			"conditionInflictSpell": [
 				"restrained"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -6500,7 +6488,6 @@
 			"conditionInflict": [
 				"prone"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -6828,7 +6815,6 @@
 					}
 				}
 			},
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -7705,7 +7691,6 @@
 				"MW",
 				"RCH"
 			],
-			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -7904,8 +7889,7 @@
 				"MW",
 				"RW",
 				"THW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Vellynne Harpell",

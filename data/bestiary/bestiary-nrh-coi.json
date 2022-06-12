@@ -68,8 +68,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Imelda",
@@ -146,8 +145,7 @@
 			],
 			"miscTags": [
 				"MW"
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Magnifico",
@@ -230,8 +228,7 @@
 				"MW",
 				"RNG",
 				"RW"
-			],
-			"hasToken": true
+			]
 		}
 	]
 }
