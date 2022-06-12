@@ -43,7 +43,6 @@ const BLACKLIST_SOURCES = new Set([
 	"DC",
 	"SLW",
 	"SDW",
-	"VD",
 ]);
 
 const SUB_KEYS = {};

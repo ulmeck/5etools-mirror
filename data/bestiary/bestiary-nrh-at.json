@@ -122,8 +122,7 @@
 						}
 					]
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "Maude",
@@ -142,8 +141,7 @@
 						"flags": "i"
 					}
 				}
-			},
-			"hasToken": true
+			}
 		},
 		{
 			"name": "Mr. Greystone",
@@ -252,8 +250,7 @@
 				"MW",
 				"RNG",
 				"RW"
-			],
-			"hasToken": true
+			]
 		}
 	]
 }

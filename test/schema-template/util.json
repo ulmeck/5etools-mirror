@@ -4,7 +4,7 @@
 
 	"title": "Util",
 	"description": "Utility definitions to be used in other schemas.",
-	"version": "1.11.20",
+	"version": "1.11.19",
 
 	"definitions" : {
 		"metaBlock": {
@@ -106,6 +106,8 @@
 			"enum": [
 				"spell",
 				"item",
+				"class",
+				"subclass",
 				"creature",
 				"condition",
 				"disease",
@@ -123,16 +125,17 @@
 				"hazard",
 				"deity",
 				"variantrule",
-				"charoption",
 				"vehicle",
 				"vehupgrade",
-				"class",
 				"action",
-				"language",
 				"classFeature",
 				"subclassFeature",
 				"table",
-				"recipe"
+				"language",
+				"charoption",
+				"recipe",
+				"itemEntry",
+				"quickref"
 			]
 		},
 

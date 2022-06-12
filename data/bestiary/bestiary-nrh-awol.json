@@ -30,8 +30,7 @@
 					}
 				}
 			},
-			"int": 8,
-			"hasToken": true
+			"int": 8
 		}
 	]
 }

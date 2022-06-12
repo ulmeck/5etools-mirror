@@ -966,7 +966,6 @@
 				}
 			},
 			"cr": "6",
-			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -1766,8 +1765,7 @@
 			},
 			"ac": [
 				11
-			],
-			"hasToken": true
+			]
 		},
 		{
 			"name": "Rath Modar",

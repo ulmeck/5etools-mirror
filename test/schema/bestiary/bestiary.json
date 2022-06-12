@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"version": "1.21.5",
+	"version": "1.21.4",
 	"title": "Bestiary Schema",
 	"$id": "bestiary.json",
 	"type": "object",
@@ -560,12 +560,6 @@
 				"actionNote": {
 					"type": "string"
 				},
-				"actionHeader": {
-					"type": "array",
-					"items": {
-						"$ref": "../entry.json"
-					}
-				},
 				"action": {
 					"oneOf": [
 						{
@@ -595,15 +589,6 @@
 						}
 					]
 				},
-				"bonusNote": {
-					"type": "string"
-				},
-				"bonusHeader": {
-					"type": "array",
-					"items": {
-						"$ref": "../entry.json"
-					}
-				},
 				"bonus": {
 					"type": "array",
 					"items": {
@@ -624,15 +609,6 @@
 							"entries"
 						],
 						"additionalProperties": false
-					}
-				},
-				"reactionNote": {
-					"type": "string"
-				},
-				"reactionHeader": {
-					"type": "array",
-					"items": {
-						"$ref": "../entry.json"
 					}
 				},
 				"reaction": {
@@ -1532,12 +1508,6 @@
 						"actionNote": {
 							"type": "string"
 						},
-						"actionHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
-							}
-						},
 						"action": {
 							"oneOf": [
 								{
@@ -1567,15 +1537,6 @@
 								}
 							]
 						},
-						"bonusNote": {
-							"type": "string"
-						},
-						"bonusHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
-							}
-						},
 						"bonus": {
 							"type": "array",
 							"items": {
@@ -1596,15 +1557,6 @@
 									"entries"
 								],
 								"additionalProperties": false
-							}
-						},
-						"reactionNote": {
-							"type": "string"
-						},
-						"reactionHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
 							}
 						},
 						"reaction": {
@@ -2519,12 +2471,6 @@
 						"actionNote": {
 							"type": "string"
 						},
-						"actionHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
-							}
-						},
 						"action": {
 							"oneOf": [
 								{
@@ -2554,15 +2500,6 @@
 								}
 							]
 						},
-						"bonusNote": {
-							"type": "string"
-						},
-						"bonusHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
-							}
-						},
 						"bonus": {
 							"type": "array",
 							"items": {
@@ -2583,15 +2520,6 @@
 									"entries"
 								],
 								"additionalProperties": false
-							}
-						},
-						"reactionNote": {
-							"type": "string"
-						},
-						"reactionHeader": {
-							"type": "array",
-							"items": {
-								"$ref": "../entry.json"
 							}
 						},
 						"reaction": {

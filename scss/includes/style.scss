@@ -982,8 +982,6 @@ th {
 .stats table {
 	width: 100%;
 	margin-bottom: 5px;
-	// Avoid outer `white-space: pre` inflating cells
-	white-space: initial;
 }
 
 .stats table.statsDataInset {
@@ -3193,7 +3191,7 @@ th.border {
 
 		&token-footer {
 			color: #ddd;
-			background: $rgb-bg--night;
+			background: rgba(255, 255, 255, 0.15);
 		}
 	}
 
