@@ -12284,6 +12284,46 @@
 			"hasFluffImages": true
 		},
 		{
+			"name": "Faerie Dust",
+			"source": "SKT",
+			"page": 35,
+			"type": "OTH",
+			"rarity": "unknown (magic)",
+			"entries": [
+				"A pinch of this dust can substitute for the material components of any enchantment spell of 3rd level or lower. If a pinch of faerie dust is sprinkled on a creature, roll percentile dice and consult the Faerie Dust table to determine the effect.",
+				{
+					"type": "table",
+					"caption": "Faerie Dust",
+					"colLabels": [
+						"d100",
+						"Magical Effect"
+					],
+					"colStyles": [
+						"col-2 text-center",
+						"col-10"
+					],
+					"rows": [
+						[
+							"01-70",
+							"The creature sprinkled with dust gains a flying speed of 60 feet for 10 minutes."
+						],
+						[
+							"71-80 ",
+							"The creature sprinkled with dust must succeed on a DC 11 Constitution saving throw or fall {@condition unconscious} for 1 minute. The creature awakens if it takes damage or if it is shaken or slapped as an action."
+						],
+						[
+							"81-90",
+							"The creature sprinkled with dust must succeed on a DC 11 Wisdom saving throw or be affected by a {@spell confusion} spell."
+						],
+						[
+							"91-00",
+							"The creature sprinkled with dust becomes {@condition invisible} for 1 hour. Any equipment it is wearing or carrying is {@condition invisible} as long as it is on the creature's person. The effect on the creature ends if it attacks, deals any damage, or casts a spell."
+						]
+					]
+				}
+			]
+		},
+		{
 			"name": "Failed Experiment Wand",
 			"source": "AI",
 			"page": 162,
@@ -20155,7 +20195,7 @@
 					"type": "entries",
 					"name": "Enduring Vision",
 					"entries": [
-						"While holding the deck, you automatically succeed on Constitution saving throws made to maintain your concentration on {@spell divination} spells."
+						"While holding the deck, you automatically succeed on Constitution saving throws made to maintain your concentration on divination spells."
 					]
 				},
 				{
@@ -21816,17 +21856,15 @@
 				{
 					"race": "elf",
 					"alignment": [
-						"NX",
-						"NY",
+						"N",
 						"N"
 					]
 				},
 				{
 					"race": "half-elf",
 					"alignment": [
-						"NX",
-						"NY",
-						"N"
+						"N",
+						"G"
 					]
 				}
 			],
@@ -24319,46 +24357,6 @@
 			"entries": [
 				"This dark spider-silk cloak is made by {@creature drow}. It is a {@item cloak of elvenkind}. It also grants resistance to fire damage while you wear it. It loses its magic if exposed to sunlight for 1 hour without interruption.",
 				"While you wear this cloak with its hood up, Wisdom ({@skill Perception}) checks made to see you have disadvantage. and you have advantage on Dexterity ({@skill Stealth}) checks made to hide, as the cloak's color shifts to camouflage you. Pulling the hood up or down requires an action."
-			]
-		},
-		{
-			"name": "Pixie Dust",
-			"source": "SKT",
-			"page": 35,
-			"type": "OTH",
-			"rarity": "unknown (magic)",
-			"entries": [
-				"A pinch of this dust can substitute for the material components of any enchantment spell of 3rd level or lower. If a pinch of pixie dust is sprinkled on a creature, roll percentile dice and consult the Pixie Dust table to determine the effect.",
-				{
-					"type": "table",
-					"caption": "Pixie Dust",
-					"colLabels": [
-						"d100",
-						"Magical Effect"
-					],
-					"colStyles": [
-						"col-2 text-center",
-						"col-10"
-					],
-					"rows": [
-						[
-							"01-70",
-							"The creature sprinkled with dust gains a flying speed of 60 feet for 10 minutes."
-						],
-						[
-							"71-80 ",
-							"The creature sprinkled with dust must succeed on a DC 11 Constitution saving throw or fall {@condition unconscious} for 1 minute. The creature awakens if it takes damage or if it is shaken or slapped as an action."
-						],
-						[
-							"81-90",
-							"The creature sprinkled with dust must succeed on a DC 11 Wisdom saving throw or be affected by a {@spell confusion} spell."
-						],
-						[
-							"91-00",
-							"The creature sprinkled with dust becomes {@condition invisible} for 1 hour. Any equipment it is wearing or carrying is {@condition invisible} as long as it is on the creature's person. The effect on the creature ends if it attacks, deals any damage, or casts a spell."
-						]
-					]
-				}
 			]
 		},
 		{
@@ -30387,7 +30385,6 @@
 			"rarity": "uncommon",
 			"reqAttune": true,
 			"wondrous": true,
-			"bonusAc": "+1",
 			"modifySpeed": {
 				"equal": {
 					"fly": "walk"
@@ -32711,6 +32708,7 @@
 				}
 			},
 			"rarity": "rare",
+			"bonusAc": "+1",
 			"entries": [
 				"This ornament can be jewelry, a cloak, or another wearable accessory. It appears to be fashioned from a dragon's scale, tooth, or claw, or it incorporates images in those shapes.",
 				"You gain a +1 bonus to AC, and you can't be {@condition charmed} or {@condition frightened}. Moreover, each creature of your choice within 30 feet of you has advantage on saving throws it makes to avoid being {@condition charmed} or {@condition frightened} or to end those conditions on itself."
@@ -33228,7 +33226,8 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"C"
+						"C",
+						"G"
 					]
 				}
 			],
@@ -33259,6 +33258,7 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
+						"C",
 						"E"
 					]
 				}
@@ -33290,8 +33290,7 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"NX",
-						"NY",
+						"L",
 						"N"
 					]
 				}
@@ -33323,8 +33322,7 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"NX",
-						"NY",
+						"C",
 						"N"
 					]
 				}
@@ -33356,9 +33354,8 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"NX",
-						"NY",
-						"N"
+						"N",
+						"G"
 					]
 				}
 			],
@@ -33389,8 +33386,6 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"NX",
-						"NY",
 						"N"
 					]
 				}
@@ -33422,7 +33417,8 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"L"
+						"L",
+						"G"
 					]
 				}
 			],
@@ -33453,6 +33449,7 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
+						"L",
 						"E"
 					]
 				}
@@ -33484,9 +33481,8 @@
 			"reqAttuneTags": [
 				{
 					"alignment": [
-						"NX",
-						"NY",
-						"N"
+						"N",
+						"E"
 					]
 				}
 			],

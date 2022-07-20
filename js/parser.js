@@ -2509,6 +2509,7 @@ SRC_UA2021TotM = `${SRC_UA_PREFIX}2021TravelersOfTheMultiverse`;
 SRC_UA2022HoK = `${SRC_UA_PREFIX}2022HeroesOfKrynn`;
 SRC_UA2022HoKR = `${SRC_UA_PREFIX}2022HeroesOfKrynnRevisited`;
 SRC_UA2022GO = `${SRC_UA_PREFIX}2022GiantOptions`;
+SRC_UA2022WotM = `${SRC_UA_PREFIX}2022WondersOfTheMultiverse`;
 SRC_MCV1SC = `${SRC_MCVX_PREFIX}1SC`;
 
 SRC_3PP_SUFFIX = " 3pp";
@@ -2708,6 +2709,7 @@ Parser.SOURCE_JSON_TO_FULL[SRC_UA2021TotM] = `${UA_PREFIX}2021 Travelers of the 
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2022HoK] = `${UA_PREFIX}2022 Heroes of Krynn`;
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2022HoKR] = `${UA_PREFIX}2022 Heroes of Krynn Revisited`;
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2022GO] = `${UA_PREFIX}2022 Giant Options`;
+Parser.SOURCE_JSON_TO_FULL[SRC_UA2022WotM] = `${UA_PREFIX}2022 Wonders of the Multiverse`;
 Parser.SOURCE_JSON_TO_FULL[SRC_MCV1SC] = `${MCVX_PREFIX}1: Spelljammer Creatures`;
 
 Parser.SOURCE_JSON_TO_ABV = {};
@@ -2894,6 +2896,7 @@ Parser.SOURCE_JSON_TO_ABV[SRC_UA2021TotM] = "UA21TotM";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2022HoK] = "UA22HoK";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2022HoKR] = "UA22HoKR";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2022GO] = "UA22GO";
+Parser.SOURCE_JSON_TO_ABV[SRC_UA2022WotM] = "UA22WotM";
 Parser.SOURCE_JSON_TO_ABV[SRC_MCV1SC] = "MCV1SC";
 
 Parser.SOURCE_JSON_TO_DATE = {};
@@ -3079,6 +3082,7 @@ Parser.SOURCE_JSON_TO_DATE[SRC_UA2021TotM] = "2021-10-08";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2022HoK] = "2022-03-08";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2022HoKR] = "2022-04-25";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2022GO] = "2022-05-26";
+Parser.SOURCE_JSON_TO_DATE[SRC_UA2022WotM] = "2022-07-18";
 Parser.SOURCE_JSON_TO_DATE[SRC_MCV1SC] = "2022-04-21";
 
 Parser.SOURCES_ADVENTURES = new Set([
@@ -3403,7 +3407,7 @@ Parser.PROP_TO_TAG = {
 	"vehicleUpgrade": "vehupgrade",
 	"baseitem": "item",
 	"itemGroup": "item",
-	"variant": "item",
+	"magicvariant": "item",
 };
 Parser.getPropTag = function (prop) {
 	if (Parser.PROP_TO_TAG[prop]) return Parser.PROP_TO_TAG[prop];
@@ -3413,7 +3417,7 @@ Parser.getPropTag = function (prop) {
 Parser.PROP_TO_DISPLAY_NAME = {
 	"variantrule": "Variant Rule",
 	"optionalfeature": "Optional Feature",
-	"variant": "Magic Item Variant",
+	"magicvariant": "Magic Item Variant",
 	"baseitem": "Item (Base)",
 	"item": "Item",
 	"adventure": "Adventure",
@@ -3422,6 +3426,12 @@ Parser.PROP_TO_DISPLAY_NAME = {
 	"bookData": "Book Text",
 	"makebrewCreatureTrait": "Homebrew Builder Creature Trait",
 	"charoption": "Other Character Creation Option",
+
+	"bonus": "Bonus Action",
+	"legendary": "Legendary Action",
+	"mythic": "Mythic Action",
+	"lairActions": "Lair Action",
+	"regionalEffects": "Regional Effect",
 };
 Parser.getPropDisplayName = function (prop, {suffix = ""} = {}) {
 	if (Parser.PROP_TO_DISPLAY_NAME[prop]) return `${Parser.PROP_TO_DISPLAY_NAME[prop]}${suffix}`;
