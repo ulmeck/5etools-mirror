@@ -1,15 +1,22 @@
-name: Build and Deploy
+name: Build and Upload Release
 
 on:
     push:
         branches: [ "frankenbranch" ]
 
+   # Allow running manually from the actions tab
+   workflow_dispatch:
+
 env:
    # See: https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio
    IMAGE_NAME: 5etools
 
+concurrency:
+   group: "release"
+   cancel-in-progress: true
+
 jobs:
-   build-and-deploy:
+   create-release:
       runs-on: ubuntu-latest
       steps:
          -  uses: actions/checkout@master

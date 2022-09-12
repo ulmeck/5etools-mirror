@@ -42,6 +42,7 @@ function Renderer () {
 	this._depthTrackerAdditionalPropsInherited = [];
 	this._lastDepthTrackerInheritedProps = {};
 	this._isInternalLinksDisabled = false;
+	this._isPartPageExpandCollapseDisabled = false;
 	this._fnsGetStyleClasses = {};
 
 	/**
@@ -146,14 +147,10 @@ function Renderer () {
 	};
 
 	/** Used by Foundry config. */
-	this.setInternalLinksDisabled = function (bool) {
-		this._isInternalLinksDisabled = bool;
-		return this;
-	};
+	this.setInternalLinksDisabled = function (val) { this._isInternalLinksDisabled = !!val; return this; };
+	this.isInternalLinksDisabled = function () { return !!this._isInternalLinksDisabled; };
 
-	this.isInternalLinksDisabled = function () {
-		return !!this._isInternalLinksDisabled;
-	};
+	this.setPartPageExpandCollapseDisabled = function (val) { this._isPartPageExpandCollapseDisabled = !!val; return this; };
 
 	/** Bind function which apply exta CSS classes to entry/list renders.  */
 	this.setFnGetStyleClasses = function (identifier, fn) {
@@ -740,9 +737,13 @@ function Renderer () {
 		const type = entry.type || "entries";
 		const isInlineTitle = meta.depth >= 2;
 		const isAddPeriod = isInlineTitle && entry.name && !Renderer._INLINE_HEADER_TERMINATORS.has(entry.name[entry.name.length - 1]);
-		const pagePart = !isInlineTitle ? this._getPagePart(entry) : "";
-		const partExpandCollapse = !isInlineTitle ? `<span class="rd__h-toggle ml-2 clickable" data-rd-h-toggle-button="true">[\u2013]</span>` : "";
-		const partPageExpandCollapse = pagePart || partExpandCollapse
+		const pagePart = !this._isPartPageExpandCollapseDisabled && !isInlineTitle
+			? this._getPagePart(entry)
+			: "";
+		const partExpandCollapse = !this._isPartPageExpandCollapseDisabled && !isInlineTitle
+			? `<span class="rd__h-toggle ml-2 clickable" data-rd-h-toggle-button="true">[\u2013]</span>`
+			: "";
+		const partPageExpandCollapse = !this._isPartPageExpandCollapseDisabled && (pagePart || partExpandCollapse)
 			? `<span class="ve-flex-vh-center">${[pagePart, partExpandCollapse].filter(Boolean).join("")}</span>`
 			: "";
 		const nextDepth = incDepth && meta.depth < 2 ? meta.depth + 1 : meta.depth;
@@ -750,7 +751,7 @@ function Renderer () {
 		const dataString = this._renderEntriesSubtypes_getDataString(entry);
 		if (entry.name != null && Renderer.ENTRIES_WITH_ENUMERATED_TITLES_LOOKUP[entry.type]) this._handleTrackTitles(entry.name);
 
-		const headerTag = isInlineTitle ? "span" : `h${Math.min(Math.max(meta.depth + 1, 1), 6)}`;
+		const headerTag = isInlineTitle ? "span" : `h${Math.min(Math.max(meta.depth + 2, 1), 6)}`;
 		const headerClass = `rd__h--${meta.depth + 1}`; // adjust as the CSS is 0..4 rather than -1..3
 
 		const cachedLastDepthTrackerProps = MiscUtil.copy(this._lastDepthTrackerInheritedProps);
@@ -5122,6 +5123,7 @@ Renderer.race = {
 				};
 
 				Renderer.race._mutBaseRaceEntries(baseRace, lst);
+				baseRace._subraces = r.subraces.map(sr => ({name: Renderer.race.getSubraceName(r.name, sr.name), source: sr.source}));
 
 				delete baseRace.subraces;
 
@@ -7732,22 +7734,25 @@ Renderer.item = {
 	isMundane (item) { return item.rarity === "none" || item.rarity === "unknown" || item._category === "basic"; },
 
 	isExcluded (item, {hash = null} = {}) {
-		hash = hash || UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS](item);
+		const name = item.name;
+		const source = item.source || item.inherits?.source;
 
-		if (ExcludeUtil.isExcluded(hash, "item", item.source)) return true;
+		hash = hash || UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name, source});
 
-		if (item._isBaseItem) return ExcludeUtil.isExcluded(hash, "baseitem", item.source);
-		if (item._isItemGroup) return ExcludeUtil.isExcluded(hash, "itemGroup", item.source);
+		if (ExcludeUtil.isExcluded(hash, "item", source)) return true;
+
+		if (item._isBaseItem) return ExcludeUtil.isExcluded(hash, "baseitem", source);
+		if (item._isItemGroup) return ExcludeUtil.isExcluded(hash, "itemGroup", source);
 		if (item._variantName) {
-			if (ExcludeUtil.isExcluded(hash, "_specificVariant", item.source)) return true;
+			if (ExcludeUtil.isExcluded(hash, "_specificVariant", source)) return true;
 
-			const baseHash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name: item._baseName, source: item._baseSource || item.source});
-			if (ExcludeUtil.isExcluded(baseHash, "baseitem", item._baseSource || item.source)) return true;
+			const baseHash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name: item._baseName, source: item._baseSource || source});
+			if (ExcludeUtil.isExcluded(baseHash, "baseitem", item._baseSource || source)) return true;
 
-			const variantHash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name: item._variantName, source: item.source});
-			return ExcludeUtil.isExcluded(variantHash, "magicvariant", item.source);
+			const variantHash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name: item._variantName, source: source});
+			return ExcludeUtil.isExcluded(variantHash, "magicvariant", source);
 		}
-		if (item.type === "GV") return ExcludeUtil.isExcluded(hash, "magicvariant", item.source);
+		if (item.type === "GV") return ExcludeUtil.isExcluded(hash, "magicvariant", source);
 
 		return false;
 	},
@@ -9632,6 +9637,7 @@ Renderer.hover = {
 
 		function adjustPosition () {
 			const eleHov = $hov[0];
+			const wrpContent = $wrpContent[0];
 
 			const bcr = MiscUtil.copy(eleHov.getBoundingClientRect());
 			const screenHeight = position.window.innerHeight;
@@ -9667,10 +9673,10 @@ Renderer.hover = {
 			) {
 				if (position.isFromBottom) {
 					bcr.height = position.bcr.top - 5;
-					eleHov.style.height = `${bcr.height}px`;
+					wrpContent.style.height = `${bcr.height}px`;
 				} else {
 					bcr.height = screenHeight - position.bcr.bottom - 5;
-					eleHov.style.height = `${bcr.height}px`;
+					wrpContent.style.height = `${bcr.height}px`;
 				}
 			}
 		}
@@ -9993,6 +9999,8 @@ Renderer.hover = {
 			await Renderer.hover._psCacheLoading[loadKey];
 		}
 
+		// FIXME this isn't completely thread-safe; if another thread is loading the same brew and has not yet
+		//    completed the load, we will always fail to find
 		if (!Renderer.hover.isCached(page, source, hash) && !Renderer.hover._hasBrewSourceBeenAttempted(source)) {
 			Renderer.hover._setHasBrewSourceBeenAttempted(source);
 			return Renderer.hover._pDoLoadFromBrew(page, source, hash);
