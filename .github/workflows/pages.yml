@@ -1,8 +1,9 @@
 name: Build and Deploy Pages
 
 on:
-    push:
-        branches: [ "frankenbranch" ]
+   push:
+      tags:
+         - 'v**'
 
    # Allow running manually from the actions tab
    workflow_dispatch:
@@ -52,7 +53,7 @@ jobs:
          -  name: Build SEO Pages
             env:
                VET_SEO_IS_DEV_MODE: true
-               VET_BASE_SITE_URL: https://ulmeck.github.io/
+               VET_BASE_SITE_URL: https://5etools-mirror-1.github.io/
                VET_SEO_IS_SKIP_UA_ETC: true
             run: |
                npm run build:seo -- ${{ env.RELEASE_VERSION }}
