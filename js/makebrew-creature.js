@@ -41,7 +41,7 @@ class CreatureBuilder extends Builder {
 	async pHandleSidebarLoadExistingClick () {
 		const result = await SearchWidget.pGetUserCreatureSearch();
 		if (result) {
-			const creature = MiscUtil.copy(await Renderer.hover.pCacheAndGet(result.page, result.source, result.hash));
+			const creature = MiscUtil.copy(await DataLoader.pCacheAndGet(result.page, result.source, result.hash));
 			return this.pHandleSidebarLoadExistingData(creature);
 		}
 	}
@@ -181,13 +181,16 @@ class CreatureBuilder extends Builder {
 			DataUtil.loadJSON("data/makebrew-creature.json"),
 			DataUtil.monster.pPreloadMeta(),
 		]);
-		const brew = await BrewUtil2.pGetBrewProcessed();
 
 		this._bestiaryFluffIndex = bestiaryFluffIndex;
 
-		await this._pBuildLegendaryGroupCache({brew});
+		await this._pBuildLegendaryGroupCache();
 
-		this._jsonCreatureTraits = [...jsonCreature.makebrewCreatureTrait, ...(brew.makebrewCreatureTrait || [])];
+		this._jsonCreatureTraits = [
+			...jsonCreature.makebrewCreatureTrait,
+			...((await PrereleaseUtil.pGetBrewProcessed()).makebrewCreatureTrait || []),
+			...((await BrewUtil2.pGetBrewProcessed()).makebrewCreatureTrait || []),
+		];
 		this._indexedTraits = elasticlunr(function () {
 			this.addField("n");
 			this.setRef("id");
@@ -531,7 +534,7 @@ class CreatureBuilder extends Builder {
 				cb();
 			});
 
-		const $initialSizeRows = (initial ? [initial].flat() : [SZ_MEDIUM]).map(tag => this.__$getSizeInput__getSizeRow(tag, rows, setState));
+		const $initialSizeRows = (initial ? [initial].flat() : [Parser.SZ_MEDIUM]).map(tag => this.__$getSizeInput__getSizeRow(tag, rows, setState));
 
 		const $wrpTagRows = $$`<div>${$initialSizeRows ? $initialSizeRows.map(it => it.$wrp) : ""}</div>`;
 		$$`<div>
@@ -546,7 +549,7 @@ class CreatureBuilder extends Builder {
 		const $selSize = $(`<select class="form-control input-xs">
 			${Parser.SIZE_ABVS.map(sz => `<option value="${sz}">${Parser.sizeAbvToFull(sz)}</option>`)}
 		</select>`)
-			.val(size || SZ_MEDIUM)
+			.val(size || Parser.SZ_MEDIUM)
 			.change(() => {
 				setState();
 			});
@@ -1060,7 +1063,7 @@ class CreatureBuilder extends Builder {
 				const searchWidget = new SearchWidget(
 					{Item: SearchWidget.CONTENT_INDICES.Item},
 					(doc) => {
-						$iptFrom.val(`{@item ${doc.n}${doc.s !== SRC_DMG ? `|${doc.s}` : ""}}`.toLowerCase());
+						$iptFrom.val(`{@item ${doc.n}${doc.s !== Parser.SRC_DMG ? `|${doc.s}` : ""}}`.toLowerCase());
 						doUpdateState();
 						doClose();
 					},
@@ -1326,7 +1329,10 @@ class CreatureBuilder extends Builder {
 					const speed = UiUtil.strToInt(speedRaw);
 					const condition = $iptCond.val().trim();
 					this._state.speed[prop] = (condition ? {number: speed, condition: condition} : speed);
-					if (prop === "fly") this._state.speed.canHover = !!(condition && /(^|[^a-zA-Z])hover([^a-zA-Z]|$)/i.exec(condition));
+					if (prop === "fly") {
+						this._state.speed.canHover = !!(condition && /(^|[^a-zA-Z])hover([^a-zA-Z]|$)/i.exec(condition));
+						if (!this._state.speed.canHover) delete this._state.speed.canHover;
+					}
 				}
 				cb();
 			};
@@ -2939,17 +2945,17 @@ class CreatureBuilder extends Builder {
 			})
 			.appendTo($rowInner);
 
-		this._legendaryGroupCache.filter(it => it.source).forEach((g, i) => this._$selLegendaryGroup.append(`<option value="${i}">${g.name}${g.source === SRC_MM ? "" : ` [${Parser.sourceJsonToAbv(g.source)}]`}</option>`));
+		this._legendaryGroupCache.filter(it => it.source).forEach((g, i) => this._$selLegendaryGroup.append(`<option value="${i}">${g.name}${g.source === Parser.SRC_MM ? "" : ` [${Parser.sourceJsonToAbv(g.source)}]`}</option>`));
 
 		this._handleLegendaryGroupChange();
 
 		return $row;
 	}
 
-	async _pBuildLegendaryGroupCache ({brew} = {}) {
-		brew = brew || await BrewUtil2.pGetBrewProcessed();
+	async _pBuildLegendaryGroupCache () {
+		DataUtil.monster.populateMetaReference({legendaryGroup: (await BrewUtil2.pGetBrewProcessed()).legendaryGroup || []});
+		DataUtil.monster.populateMetaReference({legendaryGroup: (await BrewUtil2.pGetBrewProcessed()).legendaryGroup || []});
 
-		DataUtil.monster.populateMetaReference({legendaryGroup: brew.legendaryGroup || []});
 		const baseLegendaryGroups = Object.values(DataUtil.monster.metaGroupMap).map(obj => Object.values(obj)).flat();
 		this._legendaryGroups = [...baseLegendaryGroups];
 

@@ -599,7 +599,7 @@ function onJsonLoad (lifeData, nameData) {
 	].forEach(age => $selAge.append(`<option value="${age.val}" ${age.style ? `style="${age.style}"` : ""} ${age.class ? `class="${age.class}"` : ""}>${age.text}</option>`));
 
 	nameTables = {};
-	nameData.name.filter(it => it.source === SRC_XGE)
+	nameData.name.filter(it => it.source === Parser.SRC_XGE)
 		.forEach(nameMeta => {
 			nameTables[Parser.stringToSlug(nameMeta.name)] = nameMeta;
 
@@ -894,6 +894,7 @@ function roll () {
 }
 
 window.addEventListener("load", async () => {
+	await PrereleaseUtil.pInit();
 	await BrewUtil2.pInit();
 	ExcludeUtil.pInitialise().then(null); // don't await, as this is only used for search
 	const [lifeData, nameData] = await Promise.all([

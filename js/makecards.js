@@ -2,6 +2,7 @@
 
 class MakeCards extends BaseComponent {
 	static async pInit () {
+		await PrereleaseUtil.pInit();
 		await BrewUtil2.pInit();
 		await ExcludeUtil.pInitialise();
 
@@ -303,7 +304,7 @@ class MakeCards extends BaseComponent {
 		}
 		cardMeta.count = cardMeta.count || 1;
 
-		const loaded = await Renderer.hover.pCacheAndGet(cardMeta.page, cardMeta.source, cardMeta.hash);
+		const loaded = await DataLoader.pCacheAndGet(cardMeta.page, cardMeta.source, cardMeta.hash);
 
 		const $cbSel = $(`<input type="checkbox">`);
 
@@ -378,7 +379,7 @@ class MakeCards extends BaseComponent {
 		const $ele = $$`<label class="ve-flex-v-center my-1 w-100 lst__row lst--border lst__row-inner">
 			<div class="col-1 mr-2 ve-flex-vh-center">${$cbSel}</div>
 			<div class="col-3 mr-2 ve-flex-v-center">${loaded.name}</div>
-			<div class="col-1-5 mr-2 ve-flex-vh-center ${Parser.sourceJsonToColor(loaded.source)}" title="${Parser.sourceJsonToFull(loaded.source)}" ${BrewUtil2.sourceJsonToStyle(loaded.source)}>${Parser.sourceJsonToAbv(loaded.source)}</div>
+			<div class="col-1-5 mr-2 ve-flex-vh-center ${Parser.sourceJsonToColor(loaded.source)}" title="${Parser.sourceJsonToFull(loaded.source)}" ${Parser.sourceJsonToStyle(loaded.source)}>${Parser.sourceJsonToAbv(loaded.source)}</div>
 			<div class="col-1-5 mr-2 ve-flex-vh-center">${Parser.getPropDisplayName(cardMeta.entityType)}</div>
 			<div class="col-1-1 mr-2 ve-flex-vh-center">${$iptRgb}</div>
 			<div class="col-1-1 mr-2 ve-flex-vh-center">${$btnIcon}</div>
@@ -537,7 +538,7 @@ class MakeCards extends BaseComponent {
 	static _getCardContents_race (race) {
 		return [
 			this._ct_property("Ability Scores", Renderer.getAbilityData(race.ability).asText),
-			this._ct_property("Size", (race.size || [SZ_VARIES]).map(sz => Parser.sizeAbvToFull(sz)).join("/")),
+			this._ct_property("Size", (race.size || [Parser.SZ_VARIES]).map(sz => Parser.sizeAbvToFull(sz)).join("/")),
 			this._ct_property("Speed", Parser.getSpeedString(race)),
 			this._ct_rule(),
 			...this._ct_renderEntries(race.entries, 2),

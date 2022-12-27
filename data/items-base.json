@@ -593,6 +593,7 @@
 		{
 			"name": "Hoopak",
 			"source": "DSotDQ",
+			"page": 188,
 			"type": "M",
 			"rarity": "none",
 			"weight": 2,
@@ -1600,7 +1601,7 @@
 					]
 				}
 			],
-			"template": "{{prop_name}} ({{item.range}} ft.)"
+			"template": "{{prop_name}} ({{item.range}}\u00A0ft.)"
 		},
 		{
 			"abbreviation": "AF",
@@ -1616,7 +1617,7 @@
 					]
 				}
 			],
-			"template": "{{prop_name}} ({{item.range}} ft.)"
+			"template": "{{prop_name}} ({{item.range}}\u00A0ft.)"
 		},
 		{
 			"abbreviation": "BF",
@@ -1736,7 +1737,7 @@
 					]
 				}
 			],
-			"template": "{{prop_name}} ({{item.range}} ft.)"
+			"template": "{{prop_name}} ({{item.range}}\u00A0ft.)"
 		},
 		{
 			"abbreviation": "2H",

@@ -1,5 +1,4 @@
-"use strict";
-const fs = require("fs");
+import * as fs from "fs";
 
 function dataRecurse (file, obj, primitiveHandlers, lastType, lastKey) {
 	const to = typeof obj;
@@ -85,7 +84,6 @@ const FILE_EXTENSION_ALLOWLIST = [
 
 const FILE_PREFIX_BLOCKLIST = [
 	"bookref-",
-	"roll20-",
 	"foundry-",
 	"gendata-",
 ];
@@ -138,27 +136,29 @@ class PatchLoadJson {
 	static _CACHE_BREW_LOAD_SOURCE_INDEX = null;
 
 	static patchLoadJson () {
-		PatchLoadJson._CACHED = PatchLoadJson._CACHED || DataUtil.loadJSON;
+		PatchLoadJson._CACHED = PatchLoadJson._CACHED || DataUtil.loadJSON.bind(DataUtil);
+
 		const loadJsonCache = {};
 		DataUtil.loadJSON = async (url) => {
 			if (!loadJsonCache[url]) {
 				const data = readJson(url);
-				await DataUtil.pDoMetaMerge(url, data);
+				await DataUtil.pDoMetaMerge(url, data, {isSkipMetaMergeCache: true});
 				loadJsonCache[url] = data;
 			}
 			return loadJsonCache[url];
 		};
 
-		PatchLoadJson._CACHED_RAW = PatchLoadJson._CACHED_RAW || DataUtil.loadRawJSON;
+		PatchLoadJson._CACHED_RAW = PatchLoadJson._CACHED_RAW || DataUtil.loadRawJSON.bind(DataUtil);
 		DataUtil.loadRawJSON = async (url) => readJson(url);
 
-		PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX = PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX || DataUtil.brew.pLoadSourceIndex;
+		PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX = PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX || DataUtil.brew.pLoadSourceIndex.bind(DataUtil.brew);
 		DataUtil.brew.pLoadSourceIndex = async () => null;
 	}
 
 	static unpatchLoadJson () {
 		if (PatchLoadJson._CACHED) DataUtil.loadJSON = PatchLoadJson._CACHED;
 		if (PatchLoadJson._CACHED_RAW) DataUtil.loadRawJSON = PatchLoadJson._CACHED_RAW;
+		if (PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX) DataUtil.brew.pLoadSourceIndex = PatchLoadJson._CACHE_BREW_LOAD_SOURCE_INDEX;
 	}
 }
 
@@ -183,13 +183,37 @@ class ArgParser {
 }
 ArgParser.ARGS = {};
 
-module.exports = {
+class Timer {
+	static _ID = 0;
+	static _RUNNING = {};
+
+	static start () {
+		const id = this._ID++;
+		this._RUNNING[id] = this._getSecs();
+		return id;
+	}
+
+	static stop (id, {isFormat = true} = {}) {
+		const out = this._getSecs() - this._RUNNING[id];
+		delete this._RUNNING[id];
+		return isFormat ? `${out.toFixed(3)}s` : out;
+	}
+
+	static _getSecs () {
+		const [s, ns] = process.hrtime();
+		return s + (ns / 1000000000);
+	}
+}
+
+export const patchLoadJson = PatchLoadJson.patchLoadJson;
+export const unpatchLoadJson = PatchLoadJson.unpatchLoadJson;
+
+export {
 	dataRecurse,
 	readJson,
 	listFiles,
 	FILE_PREFIX_BLOCKLIST,
-	patchLoadJson: PatchLoadJson.patchLoadJson,
-	unpatchLoadJson: PatchLoadJson.unpatchLoadJson,
 	ArgParser,
 	rmDirRecursiveSync,
+	Timer,
 };

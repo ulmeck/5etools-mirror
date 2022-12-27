@@ -1073,6 +1073,7 @@ ConverterUi._DEFAULT_STATE = {
 };
 
 async function doPageInit () {
+	await PrereleaseUtil.pInit();
 	await BrewUtil2.pInit();
 	ExcludeUtil.pInitialise().then(null); // don't await, as this is only used for search
 	const [spells, items, itemsRaw, legendaryGroups, classes] = await Promise.all([
@@ -1083,9 +1084,10 @@ async function doPageInit () {
 		DataUtil.class.loadJSON(),
 		BrewUtil2.pGetBrewProcessed(), // init homebrew
 	]);
+	const itemsNoGroups = items.filter(it => !it._isItemGroup);
 	SpellcastingTraitConvert.init(spells);
-	ItemParser.init(items, classes);
-	AcConvert.init(items);
+	ItemParser.init(itemsNoGroups, classes);
+	AcConvert.init(itemsNoGroups);
 	TaggerUtils.init({legendaryGroups, spells});
 	await TagJsons.pInit({spells});
 	RaceTraitTag.init({itemsRaw});
