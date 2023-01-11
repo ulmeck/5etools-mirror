@@ -2,7 +2,7 @@
 
 // in deployment, `IS_DEPLOYED = "<version number>";` should be set below.
 globalThis.IS_DEPLOYED = undefined;
-globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.173.1"/* 5ETOOLS_VERSION__CLOSE */;
+globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.174.3"/* 5ETOOLS_VERSION__CLOSE */;
 globalThis.DEPLOYED_STATIC_ROOT = ""; // "https://static.5etools.com/"; // FIXME re-enable this when we have a CDN again
 // for the roll20 script to set
 globalThis.IS_VTT = false;
@@ -27,7 +27,8 @@ globalThis.VeCt = {
 
 	FILTER_BOX_SUB_HASH_SEARCH_PREFIX: "fbsr",
 
-	JSON_HOMEBREW_INDEX: `homebrew/index.json`,
+	JSON_PRERELEASE_INDEX: `prerelease/index.json`,
+	JSON_BREW_INDEX: `homebrew/index.json`,
 
 	STORAGE_HOMEBREW: "HOMEBREW_STORAGE",
 	STORAGE_HOMEBREW_META: "HOMEBREW_META_STORAGE",
@@ -430,10 +431,12 @@ globalThis.SourceUtil = {
 	},
 
 	isNonstandardSource (source) {
-		return source != null
-			&& (typeof PrereleaseUtil === "undefined" || !PrereleaseUtil.hasSourceJson(source))
-			&& (typeof BrewUtil2 === "undefined" || !BrewUtil2.hasSourceJson(source))
-			&& SourceUtil.isNonstandardSourceWotc(source);
+		if (source == null) return false;
+		return (
+			(typeof BrewUtil2 === "undefined" || !BrewUtil2.hasSourceJson(source))
+				&& SourceUtil.isNonstandardSourceWotc(source)
+		)
+			|| SourceUtil.isPrereleaseSource(source);
 	},
 
 	// TODO(Future) remove this in favor of simply checking existence in `PrereleaseUtil`
@@ -441,11 +444,12 @@ globalThis.SourceUtil = {
 	isPrereleaseSource (source) {
 		if (source == null) return false;
 		if (typeof PrereleaseUtil !== "undefined" && PrereleaseUtil.hasSourceJson(source)) return true;
-		return source.startsWith(Parser.SRC_UA_PREFIX);
+		return source.startsWith(Parser.SRC_UA_PREFIX)
+			|| source.startsWith(Parser.SRC_UA_ONE_PREFIX);
 	},
 
 	isNonstandardSourceWotc (source) {
-		return source.startsWith(Parser.SRC_UA_PREFIX) || source.startsWith(Parser.SRC_PS_PREFIX) || source.startsWith(Parser.SRC_AL_PREFIX) || source.startsWith(Parser.SRC_MCVX_PREFIX) || Parser.SOURCES_NON_STANDARD_WOTC.has(source);
+		return source.startsWith(Parser.SRC_UA_PREFIX) || source.startsWith(Parser.SRC_UA_ONE_PREFIX) || source.startsWith(Parser.SRC_PS_PREFIX) || source.startsWith(Parser.SRC_AL_PREFIX) || source.startsWith(Parser.SRC_MCVX_PREFIX) || Parser.SOURCES_NON_STANDARD_WOTC.has(source);
 	},
 
 	getFilterGroup (source) {
@@ -580,6 +584,31 @@ globalThis.CurrencyUtil = {
 		return Parser.FULL_CURRENCY_CONVERSION_TABLE
 			.map(currencyMeta => (obj[currencyMeta.coin] || 0) * (1 / currencyMeta.mult))
 			.reduce((a, b) => a + b, 0);
+	},
+
+	/**
+	 * Convert a collection of coins into an equivalent number of coins of the highest denomination.
+	 * @param obj Object of the form {cp: 123, sp: 456, ...} (values optional)
+	 */
+	getAsSingleCurrency (obj) {
+		const simplified = CurrencyUtil.doSimplifyCoins({...obj});
+
+		if (Object.keys(simplified).length === 1) return simplified;
+
+		const out = {};
+
+		const targetDemonination = Parser.FULL_CURRENCY_CONVERSION_TABLE.find(it => simplified[it.coin]);
+
+		out[targetDemonination.coin] = simplified[targetDemonination.coin];
+		delete simplified[targetDemonination.coin];
+
+		Object.entries(simplified)
+			.forEach(([coin, amt]) => {
+				const denom = Parser.FULL_CURRENCY_CONVERSION_TABLE.find(it => it.coin === coin);
+				out[targetDemonination.coin] = (out[targetDemonination.coin] || 0) + (amt / denom.mult) * targetDemonination.mult;
+			});
+
+		return out;
 	},
 };
 
@@ -1324,59 +1353,49 @@ globalThis.MiscUtil = {
 	},
 
 	parseNumberRange (input, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER) {
-		function errInvalid (input) {
-			throw new Error(`Could not parse range input "${input}"`);
-		}
+		if (!input || !input.trim()) return null;
 
-		function errOutOfRange () {
-			throw new Error(`Number was out of range! Range was ${min}-${max} (inclusive).`);
-		}
+		const errInvalid = input => { throw new Error(`Could not parse range input "${input}"`); };
 
-		function isOutOfRange (num) {
-			return num < min || num > max;
-		}
+		const errOutOfRange = () => { throw new Error(`Number was out of range! Range was ${min}-${max} (inclusive).`); };
 
-		function addToRangeVal (range, num) {
-			range.add(num);
-		}
+		const isOutOfRange = (num) => num < min || num > max;
 
-		function addToRangeLoHi (range, lo, hi) {
+		const addToRangeVal = (range, num) => range.add(num);
+
+		const addToRangeLoHi = (range, lo, hi) => {
 			for (let i = lo; i <= hi; ++i) range.add(i);
+		};
+
+		const clean = input.replace(/\s*/g, "");
+		if (!/^((\d+-\d+|\d+),)*(\d+-\d+|\d+)$/.exec(clean)) errInvalid();
+
+		const parts = clean.split(",");
+		const out = new Set();
+
+		for (const part of parts) {
+			if (part.includes("-")) {
+				const spl = part.split("-");
+				const numLo = Number(spl[0]);
+				const numHi = Number(spl[1]);
+
+				if (isNaN(numLo) || isNaN(numHi) || numLo === 0 || numHi === 0 || numLo > numHi) errInvalid();
+
+				if (isOutOfRange(numLo) || isOutOfRange(numHi)) errOutOfRange();
+
+				if (numLo === numHi) addToRangeVal(out, numLo);
+				else addToRangeLoHi(out, numLo, numHi);
+				continue;
+			}
+
+			const num = Number(part);
+			if (isNaN(num) || num === 0) errInvalid();
+
+			if (isOutOfRange(num)) errOutOfRange();
+			addToRangeVal(out, num);
 		}
 
-		while (true) {
-			if (input && input.trim()) {
-				const clean = input.replace(/\s*/g, "");
-				if (/^((\d+-\d+|\d+),)*(\d+-\d+|\d+)$/.exec(clean)) {
-					const parts = clean.split(",");
-					const out = new Set();
-
-					for (const part of parts) {
-						if (part.includes("-")) {
-							const spl = part.split("-");
-							const numLo = Number(spl[0]);
-							const numHi = Number(spl[1]);
-
-							if (isNaN(numLo) || isNaN(numHi) || numLo === 0 || numHi === 0 || numLo > numHi) errInvalid();
-
-							if (isOutOfRange(numLo) || isOutOfRange(numHi)) errOutOfRange();
-
-							if (numLo === numHi) addToRangeVal(out, numLo);
-							else addToRangeLoHi(out, numLo, numHi);
-						} else {
-							const num = Number(part);
-							if (isNaN(num) || num === 0) errInvalid();
-							else {
-								if (isOutOfRange(num)) errOutOfRange();
-								addToRangeVal(out, num);
-							}
-						}
-					}
-
-					return out;
-				} else errInvalid();
-			} else return null;
-		}
+		return out;
 	},
 
 	findCommonPrefix (strArr, {isRespectWordBoundaries} = {}) {
@@ -2485,6 +2504,7 @@ UrlUtil.URL_TO_HASH_BUILDER["legendaryGroup"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["itemEntry"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["itemProperty"] = (it) => UrlUtil.encodeArrayForHash(it.abbreviation, it.source);
 UrlUtil.URL_TO_HASH_BUILDER["itemType"] = (it) => UrlUtil.encodeArrayForHash(it.abbreviation, it.source);
+UrlUtil.URL_TO_HASH_BUILDER["itemTypeAdditionalEntries"] = (it) => UrlUtil.encodeArrayForHash(it.appliesTo, it.source);
 UrlUtil.URL_TO_HASH_BUILDER["skill"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["sense"] = UrlUtil.URL_TO_HASH_GENERIC;
 
@@ -2969,7 +2989,7 @@ class _DataUtilPropConfigMultiSource extends _DataUtilPropConfig {
 
 	static async _pInitPreData_ () { /* Implement as required */ }
 
-	static _mutEntity (ent) { /* Implement as required */ }
+	static _mutEntity (ent) { return ent; }
 }
 
 class _DataUtilPropConfigCustom extends _DataUtilPropConfig {
@@ -4059,41 +4079,7 @@ globalThis.DataUtil = {
 			if (copyMeta._mod) {
 				// pre-convert any dynamic text
 				Object.entries(copyMeta._mod).forEach(([k, v]) => {
-					copyMeta._mod[k] = JSON.parse(
-						JSON.stringify(v)
-							.replace(/<\$([^$]+)\$>/g, (...m) => {
-								const parts = m[1].split("__");
-
-								switch (parts[0]) {
-									case "name": return copyTo.name;
-									case "short_name":
-									case "title_short_name": {
-										return Renderer.monster.getShortName(copyTo, {isTitleCase: parts[0] === "title_short_name"});
-									}
-									case "spell_dc": {
-										if (!Parser.ABIL_ABVS.includes(parts[1])) throw new Error(`${msgPtFailed} Unknown ability score "${parts[1]}"`);
-										return 8 + Parser.getAbilityModNumber(Number(copyTo[parts[1]])) + Parser.crToPb(copyTo.cr);
-									}
-									case "to_hit": {
-										if (!Parser.ABIL_ABVS.includes(parts[1])) throw new Error(`${msgPtFailed} Unknown ability score "${parts[1]}"`);
-										const total = Parser.crToPb(copyTo.cr) + Parser.getAbilityModNumber(Number(copyTo[parts[1]]));
-										return total >= 0 ? `+${total}` : total;
-									}
-									case "damage_mod": {
-										if (!Parser.ABIL_ABVS.includes(parts[1])) throw new Error(`${msgPtFailed} Unknown ability score "${parts[1]}"`);
-										const total = Parser.getAbilityModNumber(Number(copyTo[parts[1]]));
-										return total === 0 ? "" : total > 0 ? ` +${total}` : ` ${total}`;
-									}
-									case "damage_avg": {
-										const replaced = parts[1].replace(/(str|dex|con|int|wis|cha)/gi, (...m2) => Parser.getAbilityModNumber(Number(copyTo[m2[0]])));
-										const clean = replaced.replace(/[^-+/*0-9.,]+/g, "");
-										// eslint-disable-next-line no-eval
-										return Math.floor(eval(clean));
-									}
-									default: return m[0];
-								}
-							}),
-					);
+					copyMeta._mod[k] = DataUtil.generic.variableResolver.resolve({obj: v, ent: copyTo});
 				});
 
 				Object.entries(copyMeta._mod).forEach(([prop, modInfos]) => {
@@ -4108,6 +4094,75 @@ globalThis.DataUtil = {
 
 			// cleanup
 			delete copyTo._copy;
+		},
+
+		variableResolver: class {
+			static _getSize ({ent}) { return ent.size?.[0] || Parser.SZ_MEDIUM; }
+
+			static _SIZE_TO_MULT = {
+				[Parser.SZ_LARGE]: 2,
+				[Parser.SZ_HUGE]: 3,
+				[Parser.SZ_GARGANTUAN]: 4,
+			};
+
+			static _getSizeMult (size) { return this._SIZE_TO_MULT[size] ?? 1; }
+
+			static _getCleanMathExpression (str) { return str.replace(/[^-+/*0-9.,]+/g, ""); }
+
+			static resolve ({obj, ent, msgPtFailed = null}) {
+				return JSON.parse(
+					JSON.stringify(obj)
+						.replace(/<\$(?<variable>[^$]+)\$>/g, (...m) => {
+							const [mode, detail] = m.last().variable.split("__");
+
+							switch (mode) {
+								case "name": return ent.name;
+								case "short_name":
+								case "title_short_name": {
+									return Renderer.monster.getShortName(ent, {isTitleCase: mode === "title_short_name"});
+								}
+
+								case "dc":
+								case "spell_dc": {
+									if (!Parser.ABIL_ABVS.includes(detail)) throw new Error(`${msgPtFailed ? `${msgPtFailed} ` : ""} Unknown ability score "${detail}"`);
+									return 8 + Parser.getAbilityModNumber(Number(ent[detail])) + Parser.crToPb(ent.cr);
+								}
+
+								case "to_hit": {
+									if (!Parser.ABIL_ABVS.includes(detail)) throw new Error(`${msgPtFailed ? `${msgPtFailed} ` : ""} Unknown ability score "${detail}"`);
+									const total = Parser.crToPb(ent.cr) + Parser.getAbilityModNumber(Number(ent[detail]));
+									return total >= 0 ? `+${total}` : total;
+								}
+
+								case "damage_mod": {
+									if (!Parser.ABIL_ABVS.includes(detail)) throw new Error(`${msgPtFailed ? `${msgPtFailed} ` : ""} Unknown ability score "${detail}"`);
+									const total = Parser.getAbilityModNumber(Number(ent[detail]));
+									return total === 0 ? "" : total > 0 ? ` + ${total}` : ` - ${Math.abs(total)}`;
+								}
+
+								case "damage_avg": {
+									const replaced = detail
+										.replace(/\b(?<abil>str|dex|con|int|wis|cha)\b/gi, (...m) => Parser.getAbilityModNumber(Number(ent[m.last().abil])))
+										.replace(/\bsize_mult\b/g, () => this._getSizeMult(this._getSize({ent})));
+
+									// eslint-disable-next-line no-eval
+									return Math.floor(eval(this._getCleanMathExpression(replaced)));
+								}
+
+								case "size_mult": {
+									const mult = this._getSizeMult(this._getSize({ent}));
+
+									if (!detail) return mult;
+
+									// eslint-disable-next-line no-eval
+									return Math.floor(eval(`${mult} * ${this._getCleanMathExpression(detail)}`));
+								}
+
+								default: return m[0];
+							}
+						}),
+				);
+			}
 		},
 
 		getVersions (parent) {
@@ -4347,6 +4402,7 @@ globalThis.DataUtil = {
 			delete sp.feats;
 			delete sp.charoptions;
 			delete sp.rewards;
+			delete sp._isMutEntity;
 		}
 		// endregion
 
@@ -4355,6 +4411,8 @@ globalThis.DataUtil = {
 		}
 
 		static _mutEntity (sp) {
+			if (sp._isMutEntity) return sp;
+
 			const spSources = this._SPELL_SOURCE_LOOKUP[sp.source.toLowerCase()]?.[sp.name.toLowerCase()];
 			if (!spSources) return;
 
@@ -4367,6 +4425,8 @@ globalThis.DataUtil = {
 			this._mutSpell_feat({sp, spSources});
 			this._mutSpell_charoption({sp, spSources});
 			this._mutSpell_reward({sp, spSources});
+
+			sp._isMutEntity = true;
 
 			return sp;
 		}
@@ -6404,7 +6464,7 @@ globalThis.ExcludeUtil = {
 	_getCacheUids (hash, category, source, isExact) {
 		hash = (hash || "").toLowerCase();
 		category = (category || "").toLowerCase();
-		source = (source.source || source || "").toLowerCase();
+		source = (source?.source || source || "").toLowerCase();
 
 		const exact = `${hash}__${category}__${source}`;
 		if (isExact) return [exact];
@@ -6704,6 +6764,22 @@ globalThis.EditorUtil = {
 
 // MISC WEBPAGE ONLOADS ================================================================================================
 if (!IS_VTT && typeof window !== "undefined") {
+	window.addEventListener("load", () => {
+		const docRoot = document.querySelector(":root");
+
+		if (CSS?.supports("top: constant(safe-area-inset-top)")) {
+			docRoot.style.setProperty("--safe-area-inset-top", "constant(safe-area-inset-top, 0)");
+			docRoot.style.setProperty("--safe-area-inset-right", "constant(safe-area-inset-right, 0)");
+			docRoot.style.setProperty("--safe-area-inset-bottom", "constant(safe-area-inset-bottom, 0)");
+			docRoot.style.setProperty("--safe-area-inset-left", "constant(safe-area-inset-left, 0)");
+		} else if (CSS?.supports("top: env(safe-area-inset-top)")) {
+			docRoot.style.setProperty("--safe-area-inset-top", "env(safe-area-inset-top, 0)");
+			docRoot.style.setProperty("--safe-area-inset-right", "env(safe-area-inset-right, 0)");
+			docRoot.style.setProperty("--safe-area-inset-bottom", "env(safe-area-inset-bottom, 0)");
+			docRoot.style.setProperty("--safe-area-inset-left", "env(safe-area-inset-left, 0)");
+		}
+	});
+
 	window.addEventListener("load", () => {
 		$(document.body)
 			.on("click", `[data-packed-dice]`, evt => {

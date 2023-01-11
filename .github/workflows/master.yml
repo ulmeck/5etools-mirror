@@ -13,7 +13,7 @@ env:
    IMAGE_NAME: 5etools
 
    # Used to force a clean (i.e., non-incremental) Docker build
-   # DO_CLEAN_BUILD: 1
+   DO_CLEAN_BUILD: 1
 
 concurrency:
    group: "release"
@@ -121,7 +121,7 @@ jobs:
                   docker logs -f $CONTAINER_ID
 
                   # Commit the changes
-                  docker commit -c 'CMD $SAVE_CMD' $CONTAINER_ID $IMAGE_NAME
+                  docker commit -c "CMD $SAVE_CMD" $CONTAINER_ID $IMAGE_NAME
                fi
 
          -  name: Log In to Registry

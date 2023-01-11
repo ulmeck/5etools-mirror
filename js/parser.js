@@ -585,6 +585,7 @@ Parser.sourceJsonToFull = function (source) {
 Parser.sourceJsonToFullCompactPrefix = function (source) {
 	return Parser.sourceJsonToFull(source)
 		.replace(Parser.UA_PREFIX, Parser.UA_PREFIX_SHORT)
+		.replace(/^Unearthed Arcana (\d+): /, "UA$1: ")
 		.replace(Parser.AL_PREFIX, Parser.AL_PREFIX_SHORT)
 		.replace(Parser.PS_PREFIX, Parser.PS_PREFIX_SHORT);
 };
@@ -2523,6 +2524,7 @@ Parser.SRC_DSotDQ = "DSotDQ";
 Parser.SRC_SCREEN = "Screen";
 Parser.SRC_SCREEN_WILDERNESS_KIT = "ScreenWildernessKit";
 Parser.SRC_SCREEN_DUNGEON_KIT = "ScreenDungeonKit";
+Parser.SRC_SCREEN_SPELLJAMMER = "ScreenSpelljammer";
 Parser.SRC_HEROES_FEAST = "HF";
 Parser.SRC_CM = "CM";
 Parser.SRC_NRH = "NRH";
@@ -2553,6 +2555,7 @@ Parser.SRC_PSX = `${Parser.SRC_PS_PREFIX}X`;
 Parser.SRC_PSD = `${Parser.SRC_PS_PREFIX}D`;
 
 Parser.SRC_UA_PREFIX = "UA";
+Parser.SRC_UA_ONE_PREFIX = "XUA";
 Parser.SRC_MCVX_PREFIX = "MCV";
 
 Parser.SRC_UAA = `${Parser.SRC_UA_PREFIX}Artificer`;
@@ -2739,6 +2742,7 @@ Parser.SOURCE_JSON_TO_FULL[Parser.SRC_DSotDQ] = "Dragonlance: Shadow of the Drag
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_SCREEN] = "Dungeon Master's Screen";
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_SCREEN_WILDERNESS_KIT] = "Dungeon Master's Screen: Wilderness Kit";
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_SCREEN_DUNGEON_KIT] = "Dungeon Master's Screen: Dungeon Kit";
+Parser.SOURCE_JSON_TO_FULL[Parser.SRC_SCREEN_SPELLJAMMER] = "Dungeon Master's Screen: Spelljammer";
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_HEROES_FEAST] = "Heroes' Feast";
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_CM] = "Candlekeep Mysteries";
 Parser.SOURCE_JSON_TO_FULL[Parser.SRC_NRH] = Parser.NRH_NAME;
@@ -2935,6 +2939,7 @@ Parser.SOURCE_JSON_TO_ABV[Parser.SRC_DSotDQ] = "DSotDQ";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_SCREEN] = "Screen";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_SCREEN_WILDERNESS_KIT] = "ScWild";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_SCREEN_DUNGEON_KIT] = "ScDun";
+Parser.SOURCE_JSON_TO_ABV[Parser.SRC_SCREEN_SPELLJAMMER] = "ScSJ";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_HEROES_FEAST] = "HF";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_CM] = "CM";
 Parser.SOURCE_JSON_TO_ABV[Parser.SRC_NRH] = "NRH";
@@ -3130,6 +3135,7 @@ Parser.SOURCE_JSON_TO_DATE[Parser.SRC_DSotDQ] = "2022-11-22";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_SCREEN] = "2015-01-20";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_SCREEN_WILDERNESS_KIT] = "2020-11-17";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_SCREEN_DUNGEON_KIT] = "2020-09-21";
+Parser.SOURCE_JSON_TO_DATE[Parser.SRC_SCREEN_SPELLJAMMER] = "2022-08-16";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_HEROES_FEAST] = "2020-10-27";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_CM] = "2021-03-16";
 Parser.SOURCE_JSON_TO_DATE[Parser.SRC_NRH] = "2021-09-01";

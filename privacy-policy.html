@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 
 	<title>Privacy Policy - 5etools</title>
@@ -104,8 +104,10 @@
 <script type="text/javascript" src="lib/elasticlunr.js"></script>
 <script>
 	(async () => {
-		await PrereleaseUtil.pInit();
-		await BrewUtil2.pInit();
+		await Promise.all([
+			PrereleaseUtil.pInit(),
+			BrewUtil2.pInit(),
+		]);
 		ExcludeUtil.pInitialise().then(null); // don't await, as this is only used for search
 	})();
 </script>
