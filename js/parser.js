@@ -1849,6 +1849,8 @@ Parser.CAT_ID_RECIPES = 48;
 Parser.CAT_ID_STATUS = 49;
 Parser.CAT_ID_SKILLS = 50;
 Parser.CAT_ID_SENSES = 51;
+Parser.CAT_ID_DECK = 52;
+Parser.CAT_ID_CARD = 53;
 
 Parser.CAT_ID_TO_FULL = {};
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_CREATURE] = "Bestiary";
@@ -1901,6 +1903,8 @@ Parser.CAT_ID_TO_FULL[Parser.CAT_ID_LEGENDARY_GROUP] = "Legendary Group";
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_CHAR_CREATION_OPTIONS] = "Character Creation Option";
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_RECIPES] = "Recipe";
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_STATUS] = "Status";
+Parser.CAT_ID_TO_FULL[Parser.CAT_ID_DECK] = "Deck";
+Parser.CAT_ID_TO_FULL[Parser.CAT_ID_CARD] = "Card";
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_SKILLS] = "Skill";
 Parser.CAT_ID_TO_FULL[Parser.CAT_ID_SENSES] = "Sense";
 
@@ -1959,6 +1963,8 @@ Parser.CAT_ID_TO_PROP[Parser.CAT_ID_LEGENDARY_GROUP] = null;
 Parser.CAT_ID_TO_PROP[Parser.CAT_ID_CHAR_CREATION_OPTIONS] = "charoption";
 Parser.CAT_ID_TO_PROP[Parser.CAT_ID_RECIPES] = "recipe";
 Parser.CAT_ID_TO_PROP[Parser.CAT_ID_STATUS] = "status";
+Parser.CAT_ID_TO_PROP[Parser.CAT_ID_DECK] = "deck";
+Parser.CAT_ID_TO_PROP[Parser.CAT_ID_CARD] = "card";
 Parser.CAT_ID_TO_PROP[Parser.CAT_ID_SKILLS] = "skill";
 Parser.CAT_ID_TO_PROP[Parser.CAT_ID_SENSES] = "sense";
 
@@ -3442,6 +3448,10 @@ Parser.SOURCES_AVAILABLE_DOCS_BOOK = {};
 	Parser.SRC_MPMM,
 	Parser.SRC_AAG,
 	Parser.SRC_BAM,
+	Parser.SRC_SCREEN,
+	Parser.SRC_SCREEN_WILDERNESS_KIT,
+	Parser.SRC_SCREEN_DUNGEON_KIT,
+	Parser.SRC_SCREEN_SPELLJAMMER,
 ].forEach(src => {
 	Parser.SOURCES_AVAILABLE_DOCS_BOOK[src] = src;
 	Parser.SOURCES_AVAILABLE_DOCS_BOOK[src.toLowerCase()] = src;
@@ -3530,50 +3540,15 @@ Parser.SOURCES_AVAILABLE_DOCS_ADVENTURE = {};
 	Parser.SOURCES_AVAILABLE_DOCS_ADVENTURE[src.toLowerCase()] = src;
 });
 
-Parser.TAG_TO_DEFAULT_SOURCE = {
-	"spell": Parser.SRC_PHB,
-	"item": Parser.SRC_DMG,
-	"class": Parser.SRC_PHB,
-	"subclass": Parser.SRC_PHB,
-	"creature": Parser.SRC_MM,
-	"condition": Parser.SRC_PHB,
-	"disease": Parser.SRC_DMG,
-	"status": Parser.SRC_DMG,
-	"background": Parser.SRC_PHB,
-	"race": Parser.SRC_PHB,
-	"optfeature": Parser.SRC_PHB,
-	"reward": Parser.SRC_DMG,
-	"feat": Parser.SRC_PHB,
-	"psionic": Parser.SRC_UATMC,
-	"object": Parser.SRC_DMG,
-	"cult": Parser.SRC_MTF,
-	"boon": Parser.SRC_MTF,
-	"trap": Parser.SRC_DMG,
-	"hazard": Parser.SRC_DMG,
-	"deity": Parser.SRC_PHB,
-	"variantrule": Parser.SRC_DMG,
-	"vehicle": Parser.SRC_GoS,
-	"vehupgrade": Parser.SRC_GoS,
-	"action": Parser.SRC_PHB,
-	"classFeature": Parser.SRC_PHB,
-	"subclassFeature": Parser.SRC_PHB,
-	"table": Parser.SRC_DMG,
-	"language": Parser.SRC_PHB,
-	"charoption": Parser.SRC_MOT,
-	"recipe": Parser.SRC_HEROES_FEAST,
-	"itemEntry": Parser.SRC_DMG,
-	"quickref": Parser.SRC_PHB,
-	"skill": Parser.SRC_PHB,
-	"sense": Parser.SRC_PHB,
-};
 Parser.getTagSource = function (tag, source) {
 	if (source && source.trim()) return source;
 
 	tag = tag.trim();
-	if (tag.startsWith("@")) tag = tag.slice(1);
 
-	if (!Parser.TAG_TO_DEFAULT_SOURCE[tag]) throw new Error(`Unhandled tag "${tag}"`);
-	return Parser.TAG_TO_DEFAULT_SOURCE[tag];
+	const tagMeta = Renderer.tag.TAG_LOOKUP[tag];
+
+	if (!tagMeta) throw new Error(`Unhandled tag "${tag}"`);
+	return tagMeta.defaultSource;
 };
 
 Parser.PROP_TO_TAG = {
