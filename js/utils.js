@@ -2,7 +2,7 @@
 
 // in deployment, `IS_DEPLOYED = "<version number>";` should be set below.
 globalThis.IS_DEPLOYED = undefined;
-globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.181.3"/* 5ETOOLS_VERSION__CLOSE */;
+globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.181.6"/* 5ETOOLS_VERSION__CLOSE */;
 globalThis.DEPLOYED_STATIC_ROOT = ""; // "https://static.5etools.com/"; // FIXME re-enable this when we have a CDN again
 globalThis.DEPLOYED_IMG_ROOT = undefined;
 // for the roll20 script to set
@@ -979,6 +979,7 @@ globalThis.ElementUtil = {
 		type,
 		tabindex,
 		value,
+		placeholder,
 		attrs,
 		data,
 	}) {
@@ -1005,6 +1006,7 @@ globalThis.ElementUtil = {
 		if (type != null) ele.setAttribute("type", type);
 		if (tabindex != null) ele.setAttribute("tabindex", tabindex);
 		if (value != null) ele.setAttribute("value", value);
+		if (placeholder != null) ele.setAttribute("placeholder", placeholder);
 
 		if (attrs != null) {
 			for (const k in attrs) {
@@ -1021,6 +1023,7 @@ globalThis.ElementUtil = {
 		ele.appends = ele.appends || ElementUtil._appends.bind(ele);
 		ele.appendTo = ele.appendTo || ElementUtil._appendTo.bind(ele);
 		ele.prependTo = ele.prependTo || ElementUtil._prependTo.bind(ele);
+		ele.insertAfter = ele.insertAfter || ElementUtil._insertAfter.bind(ele);
 		ele.addClass = ele.addClass || ElementUtil._addClass.bind(ele);
 		ele.removeClass = ele.removeClass || ElementUtil._removeClass.bind(ele);
 		ele.toggleClass = ele.toggleClass || ElementUtil._toggleClass.bind(ele);
@@ -1034,9 +1037,12 @@ globalThis.ElementUtil = {
 		ele.html = ele.html || ElementUtil._html.bind(ele);
 		ele.txt = ele.txt || ElementUtil._txt.bind(ele);
 		ele.tooltip = ele.tooltip || ElementUtil._tooltip.bind(ele);
-		ele.onClick = ele.onClick || ElementUtil._onClick.bind(ele);
-		ele.onContextmenu = ele.onContextmenu || ElementUtil._onContextmenu.bind(ele);
-		ele.onChange = ele.onChange || ElementUtil._onChange.bind(ele);
+		ele.disableSpellcheck = ele.disableSpellcheck || ElementUtil._disableSpellcheck.bind(ele);
+		ele.onClick = ele.onClick || ElementUtil._onX.bind(ele, "click");
+		ele.onContextmenu = ele.onContextmenu || ElementUtil._onX.bind(ele, "contextmenu");
+		ele.onChange = ele.onChange || ElementUtil._onX.bind(ele, "change");
+		ele.onKeydown = ele.onKeydown || ElementUtil._onX.bind(ele, "keydown");
+		ele.onKeyup = ele.onKeyup || ElementUtil._onX.bind(ele, "keyup");
 
 		return ele;
 	},
@@ -1053,6 +1059,11 @@ globalThis.ElementUtil = {
 
 	_prependTo (parent) {
 		parent.prepend(this);
+		return this;
+	},
+
+	_insertAfter (parent) {
+		parent.after(this);
 		return this;
 	},
 
@@ -1119,11 +1130,18 @@ globalThis.ElementUtil = {
 		return this.attr("title", title);
 	},
 
-	_onClick (fn) { return ElementUtil._onX(this, "click", fn); },
-	_onContextmenu (fn) { return ElementUtil._onX(this, "contextmenu", fn); },
-	_onChange (fn) { return ElementUtil._onX(this, "change", fn); },
+	_disableSpellcheck () {
+		// avoid setting input type to "search" as it visually offsets the contents of the input
+		return this
+			.attr("autocomplete", "new-password")
+			.attr("autocapitalize", "off")
+			.attr("spellcheck", "false");
+	},
 
-	_onX (ele, evtName, fn) { ele.addEventListener(evtName, fn); return ele; },
+	_onX (evtName, fn) {
+		this.addEventListener(evtName, fn);
+		return this;
+	},
 
 	_val (val) {
 		if (val !== undefined) {
@@ -2882,6 +2900,7 @@ UrlUtil.SUBLIST_PAGES = {
 UrlUtil.PAGE_TO_PROPS = {};
 UrlUtil.PAGE_TO_PROPS[UrlUtil.PG_SPELLS] = ["spell"];
 UrlUtil.PAGE_TO_PROPS[UrlUtil.PG_ITEMS] = ["item", "itemGroup", "itemType", "itemEntry", "itemProperty", "itemTypeAdditionalEntries", "itemMastery", "baseitem", "magicvariant"];
+UrlUtil.PAGE_TO_PROPS[UrlUtil.PG_RACES] = ["race", "subrace"];
 
 if (!IS_DEPLOYED && !IS_VTT && typeof window !== "undefined") {
 	// for local testing, hotkey to get a link to the current page on the main site
@@ -3351,6 +3370,8 @@ globalThis.DataUtil = {
 		return data;
 	},
 
+	/* -------------------------------------------- */
+
 	async pDoMetaMerge (ident, data, options) {
 		DataUtil._mutAddProps(data);
 		DataUtil._merging[ident] = DataUtil._merging[ident] || DataUtil._pDoMetaMerge(ident, data, options);
@@ -3446,6 +3467,23 @@ globalThis.DataUtil = {
 
 		DataUtil._merged[ident] = data;
 	},
+
+	/* -------------------------------------------- */
+
+	async pDoMetaMergeSingle (prop, meta, ent) {
+		return (await DataUtil.pDoMetaMerge(
+			CryptUtil.uid(),
+			{
+				_meta: meta,
+				[prop]: [ent],
+			},
+			{
+				isSkipMetaMergeCache: true,
+			},
+		))[prop][0];
+	},
+
+	/* -------------------------------------------- */
 
 	getCleanFilename (filename) {
 		return filename.replace(/[^-_a-zA-Z0-9]/g, "_");
@@ -3617,7 +3655,7 @@ globalThis.DataUtil = {
 				const data = await DataUtil[prop].pLoadSingleSource(source);
 				if (data) return data;
 
-				return DataUtil._pLoadByMeta_pGetPrereleaseBrewUrl(source);
+				return DataUtil._pLoadByMeta_pGetPrereleaseBrew(source);
 			}
 			// endregion
 
@@ -3630,21 +3668,22 @@ globalThis.DataUtil = {
 				const index = await DataUtil.loadJSON(`${baseUrlPart}/${DataUtil._MULTI_SOURCE_PROP_TO_INDEX_NAME[prop]}`);
 				if (index[source]) return DataUtil.loadJSON(`${baseUrlPart}/${index[source]}`);
 
-				return DataUtil._pLoadByMeta_pGetPrereleaseBrewUrl(source);
+				return DataUtil._pLoadByMeta_pGetPrereleaseBrew(source);
 			}
 			// endregion
 
 			// region Special
 			case "item":
-			case "itemGroup": {
+			case "itemGroup":
+			case "baseitem": {
 				const data = await DataUtil.item.loadRawJSON();
 				if (data[prop] && data[prop].some(it => it.source === source)) return data;
-				return DataUtil._pLoadByMeta_pGetPrereleaseBrewUrl(source);
+				return DataUtil._pLoadByMeta_pGetPrereleaseBrew(source);
 			}
 			case "race": {
 				const data = await DataUtil.race.loadJSON({isAddBaseRaces: true});
 				if (data[prop] && data[prop].some(it => it.source === source)) return data;
-				return DataUtil._pLoadByMeta_pGetPrereleaseBrewUrl(source);
+				return DataUtil._pLoadByMeta_pGetPrereleaseBrew(source);
 			}
 			// endregion
 
@@ -3655,7 +3694,7 @@ globalThis.DataUtil = {
 					const data = await (impl.loadJSON ? impl.loadJSON() : DataUtil.loadJSON(impl.getDataUrl()));
 					if (data[prop] && data[prop].some(it => it.source === source)) return data;
 
-					return DataUtil._pLoadByMeta_pGetPrereleaseBrewUrl(source);
+					return DataUtil._pLoadByMeta_pGetPrereleaseBrew(source);
 				}
 
 				throw new Error(`Could not get loadable URL for \`${JSON.stringify({key: prop, value: source})}\``);
@@ -3664,7 +3703,7 @@ globalThis.DataUtil = {
 		}
 	},
 
-	async _pLoadByMeta_pGetPrereleaseBrewUrl (source) {
+	async _pLoadByMeta_pGetPrereleaseBrew (source) {
 		const fromPrerelease = await DataUtil.pLoadPrereleaseBySource(source);
 		if (fromPrerelease) return fromPrerelease;
 
@@ -3674,19 +3713,31 @@ globalThis.DataUtil = {
 		throw new Error(`Could not find prerelease/brew URL for source "${source}"`);
 	},
 
+	/* -------------------------------------------- */
+
 	async pLoadPrereleaseBySource (source) {
 		if (typeof PrereleaseUtil === "undefined") return null;
-		const url = await PrereleaseUtil.pGetSourceUrl(source);
-		if (!url) return null;
-		return DataUtil.loadJSON(url);
+		return this._pLoadPrereleaseBrewBySource({source, brewUtil: PrereleaseUtil});
 	},
 
 	async pLoadBrewBySource (source) {
 		if (typeof BrewUtil2 === "undefined") return null;
-		const url = await BrewUtil2.pGetSourceUrl(source);
+		return this._pLoadPrereleaseBrewBySource({source, brewUtil: BrewUtil2});
+	},
+
+	async _pLoadPrereleaseBrewBySource ({source, brewUtil}) {
+		// Load from existing first
+		const fromExisting = await brewUtil.pGetBrewBySource(source);
+		if (fromExisting) return MiscUtil.copyFast(fromExisting.body);
+
+		// Load from remote
+		const url = await brewUtil.pGetSourceUrl(source);
 		if (!url) return null;
+
 		return DataUtil.loadJSON(url);
 	},
+
+	/* -------------------------------------------- */
 
 	// region Dbg
 	dbg: {
@@ -3718,7 +3769,7 @@ globalThis.DataUtil = {
 		unpackUid (uid, tag, opts) {
 			opts = opts || {};
 			if (opts.isLower) uid = uid.toLowerCase();
-			let [name, source, displayText, ...others] = uid.split("|").map(it => it.trim());
+			let [name, source, displayText, ...others] = uid.split("|").map(Function.prototype.call.bind(String.prototype.trim));
 
 			source = source || Parser.getTagSource(tag, source);
 			if (opts.isLower) source = source.toLowerCase();
@@ -4895,6 +4946,13 @@ globalThis.DataUtil = {
 			lootTables: true,
 			tier: true,
 		};
+		static _PAGE = UrlUtil.PG_ITEMS;
+
+		static async pMergeCopy (...args) { return DataUtil.item.pMergeCopy(...args); }
+		static async loadRawJSON (...args) { return DataUtil.item.loadRawJSON(...args); }
+	},
+
+	baseitem: class extends _DataUtilPropConfig {
 		static _PAGE = UrlUtil.PG_ITEMS;
 
 		static async pMergeCopy (...args) { return DataUtil.item.pMergeCopy(...args); }

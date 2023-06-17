@@ -1,4 +1,4 @@
-"use strict";
+import {InitiativeTracker} from "./dmscreen/dmscreen-initiativetracker.js";
 
 const UP = "UP";
 const RIGHT = "RIGHT";
@@ -36,16 +36,6 @@ const PANEL_TYP_ADVENTURE_DYNAMIC_MAP = 21;
 const PANEL_TYP_GENERIC_EMBED = 90;
 const PANEL_TYP_ERROR = 98;
 const PANEL_TYP_BLANK = 99;
-
-const TIME_TRACKER_MOON_SPRITE = new Image();
-const TIME_TRACKER_MOON_SPRITE_LOADER = new Promise(resolve => {
-	TIME_TRACKER_MOON_SPRITE.onload = resolve;
-	TIME_TRACKER_MOON_SPRITE.onerror = () => {
-		TIME_TRACKER_MOON_SPRITE.hasError = true;
-		resolve();
-	};
-});
-TIME_TRACKER_MOON_SPRITE.src = "img/dmscreen/moon.png";
 
 class Board {
 	constructor () {
