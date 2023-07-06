@@ -60,8 +60,7 @@ class OptionalFeaturesPage extends ListPage {
 			dataProps: ["optionalfeature"],
 
 			bookViewOptions: {
-				$btnOpen: $(`#btn-book`),
-				$eleNoneVisible: $(`<span class="initial-message">If you wish to view multiple optional features, please first make a list</span>`),
+				namePlural: "optional features",
 				pageTitle: "Optional Features Book View",
 			},
 
@@ -133,11 +132,6 @@ class OptionalFeaturesPage extends ListPage {
 		});
 
 		this._$pgContent.empty().append(RenderOptionalFeatures.$getRenderedOptionalFeature(ent));
-	}
-
-	async pDoLoadSubHash (sub) {
-		sub = await super.pDoLoadSubHash(sub);
-		await this._bookView.pHandleSub(sub);
 	}
 }
 

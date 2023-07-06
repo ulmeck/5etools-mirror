@@ -164,10 +164,9 @@ class ItemsPage extends ListPage {
 			dataProps: ["item"],
 
 			bookViewOptions: {
-				$btnOpen: $(`#btn-book`),
-				$eleNoneVisible: $(`<span class="initial-message">If you wish to view multiple items, please first make a list</span>`),
+				namePlural: "items",
 				pageTitle: "Items Book View",
-				fnGetMd: it => RendererMarkdown.get().render({entries: [{type: "statblockInline", dataType: "item", data: it}]}),
+				propMarkdown: "item",
 			},
 
 			tableViewOptions: {
@@ -321,11 +320,6 @@ class ItemsPage extends ListPage {
 
 	_renderStats_doBuildStatsTab ({ent}) {
 		this._$pgContent.empty().append(RenderItems.$getRenderedItem(ent));
-	}
-
-	async pDoLoadSubHash (sub) {
-		sub = await super.pDoLoadSubHash(sub);
-		await this._bookView.pHandleSub(sub);
 	}
 
 	async _pOnLoad_pInitPrimaryLists () {

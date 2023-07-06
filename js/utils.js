@@ -2,7 +2,7 @@
 
 // in deployment, `IS_DEPLOYED = "<version number>";` should be set below.
 globalThis.IS_DEPLOYED = undefined;
-globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.181.6"/* 5ETOOLS_VERSION__CLOSE */;
+globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.181.8"/* 5ETOOLS_VERSION__CLOSE */;
 globalThis.DEPLOYED_STATIC_ROOT = ""; // "https://static.5etools.com/"; // FIXME re-enable this when we have a CDN again
 globalThis.DEPLOYED_IMG_ROOT = undefined;
 // for the roll20 script to set
@@ -2478,7 +2478,8 @@ globalThis.UrlUtil = {
 	mini: {
 		compress (primitive) {
 			const type = typeof primitive;
-			if (primitive == null) return `x`;
+			if (primitive === undefined) return "u";
+			if (primitive === null) return "x";
 			switch (type) {
 				case "boolean": return `b${Number(primitive)}`;
 				case "number": return `n${primitive}`;
@@ -2490,6 +2491,7 @@ globalThis.UrlUtil = {
 		decompress (raw) {
 			const [type, data] = [raw.slice(0, 1), raw.slice(1)];
 			switch (type) {
+				case "u": return undefined;
 				case "x": return null;
 				case "b": return !!Number(data);
 				case "n": return Number(data);
@@ -6578,172 +6580,180 @@ Map.prototype.getOrSet || Object.defineProperty(Map.prototype, "getOrSet", {
  *
  * @param opts Options object.
  * @param opts.hashKey to use in the URL so that forward/back can open/close the view
- * @param opts.$openBtn jQuery-selected button to bind click open/close
- * @param opts.$eleNoneVisible "error" message to display if user has not selected any viewable content
+ * @param opts.$btnOpen jQuery-selected button to bind click open/close
+ * @param [opts.$eleNoneVisible] "error" message to display if user has not selected any viewable content
  * @param opts.pageTitle Title.
  * @param opts.state State to modify when opening/closing.
  * @param opts.stateKey Key in state to set true/false when opening/closing.
- * @param opts.popTblGetNumShown function which should populate the view with HTML content and return the number of items displayed
  * @param [opts.hasPrintColumns] True if the overlay should contain a dropdown for adjusting print columns.
  * @param [opts.isHideContentOnNoneShown]
  * @param [opts.isHideButtonCloseNone]
  * @constructor
+ *
+ * @abstract
  */
-function BookModeView (opts) {
-	opts = opts || {};
-	const {hashKey, $openBtn, $eleNoneVisible, pageTitle, popTblGetNumShown, isFlex, state, stateKey, isHideContentOnNoneShown, isHideButtonCloseNone} = opts;
+class BookModeViewBase {
+	static _BOOK_VIEW_COLUMNS_K = "bookViewColumns";
 
-	if (hashKey && stateKey) throw new Error();
+	_hashKey;
+	_stateKey;
+	_pageTitle;
+	_isColumns = true;
+	_hasPrintColumns = false;
 
-	this.hashKey = hashKey;
-	this.stateKey = stateKey;
-	this.state = state;
-	this.$openBtn = $openBtn;
-	this.$eleNoneVisible = $eleNoneVisible;
-	this.popTblGetNumShown = popTblGetNumShown;
-	this.isHideContentOnNoneShown = isHideContentOnNoneShown;
-	this.isHideButtonCloseNone = isHideButtonCloseNone;
+	constructor (opts) {
+		opts = opts || {};
+		const {$btnOpen, state} = opts;
 
-	this.active = false;
-	this._$body = null;
-	this._$wrpBook = null;
+		if (this._hashKey && this._stateKey) throw new Error(`Only one of "hashKey" and "stateKey" may be specified!`);
 
-	this._$wrpRenderedContent = null;
-	this._$wrpNoneShown = null;
-	this._doRenderContent = null; // N.B. currently unused, but can be used to refresh the contents of the view
+		this._state = state;
+		this._$btnOpen = $btnOpen;
 
-	this.$openBtn.off("click").on("click", () => {
-		if (this.stateKey) {
-			this.state[this.stateKey] = true;
-		} else {
-			Hist.cleanSetHash(`${window.location.hash}${HASH_PART_SEP}${this.hashKey}${HASH_SUB_KV_SEP}true`);
+		this._isActive = false;
+		this._$wrpBook = null;
+
+		this._$btnOpen.off("click").on("click", () => this.setStateOpen());
+	}
+
+	/* -------------------------------------------- */
+
+	setStateOpen () {
+		if (this._stateKey) return this._state[this._stateKey] = true;
+		Hist.cleanSetHash(`${window.location.hash}${HASH_PART_SEP}${this._hashKey}${HASH_SUB_KV_SEP}true`);
+	}
+
+	setStateClosed () {
+		if (this._stateKey) return this._state[this._stateKey] = false;
+		Hist.cleanSetHash(window.location.hash.replace(`${this._hashKey}${HASH_SUB_KV_SEP}true`, ""));
+	}
+
+	/* -------------------------------------------- */
+
+	_$getDispName () {
+		return $(`<div></div>`);
+	}
+
+	_$getBtnWindowClose () {
+		return $(`<button class="btn btn-xs btn-danger br-0 bt-0 bb-0 btl-0 bbl-0 h-20p" title="Close"><span class="glyphicon glyphicon-remove"></span></button>`)
+			.click(() => this.setStateClosed());
+	}
+
+	/* -------------------------------------------- */
+
+	_$getWrpControls ({$wrpContent}) {
+		const $wrp = $(`<div class="w-100 ve-flex-col no-shrink no-print"></div>`);
+
+		if (!this._hasPrintColumns) return $wrp;
+
+		$wrp.addClass("px-2 mt-2 bb-1p pb-1");
+
+		const onChangeColumnCount = (cols) => {
+			$wrpContent.toggleClass(`bkmv__wrp--columns-1`, cols === 1);
+			$wrpContent.toggleClass(`bkmv__wrp--columns-2`, cols === 2);
+		};
+
+		const lastColumns = StorageUtil.syncGetForPage(BookModeViewBase._BOOK_VIEW_COLUMNS_K);
+
+		const $selColumns = $(`<select class="form-control input-sm">
+			<option value="0">Two (book style)</option>
+			<option value="1">One</option>
+		</select>`)
+			.change(() => {
+				const val = Number($selColumns.val());
+				if (val === 0) onChangeColumnCount(2);
+				else onChangeColumnCount(1);
+
+				StorageUtil.syncSetForPage(BookModeViewBase._BOOK_VIEW_COLUMNS_K, val);
+			});
+		if (lastColumns != null) $selColumns.val(lastColumns);
+		$selColumns.change();
+
+		const $wrpPrint = $$`<div class="w-100 ve-flex">
+			<div class="ve-flex-vh-center"><div class="mr-2 no-wrap help-subtle" title="Applied when printing the page.">Print columns:</div>${$selColumns}</div>
+		</div>`.appendTo($wrp);
+
+		return {$wrp, $wrpPrint};
+	}
+
+	/* -------------------------------------------- */
+
+	_$getEleNoneVisible () { return null; }
+
+	_$getBtnNoneVisibleClose () {
+		return $(`<button class="btn btn-default">Close</button>`)
+			.click(() => this.setStateClosed());
+	}
+
+	/** @abstract */
+	async _pGetRenderContentMeta ({$wrpContent, $wrpContentOuter}) {
+		return {cntSelectedEnts: 0, isAnyEntityRendered: false};
+	}
+
+	/* -------------------------------------------- */
+
+	async pOpen () {
+		if (this._isActive) return;
+		this._isActive = true;
+
+		document.title = `${this._pageTitle} - 5etools`;
+		document.body.style.overflow = "hidden";
+		document.body.classList.add("bkmv-active");
+
+		const {$wrpContentOuter, $wrpContent} = await this._pGetContentElementMetas();
+
+		this._$wrpBook = $$`<div class="bkmv print__h-initial ve-flex-col print__ve-block">
+			<div class="bkmv__spacer-name no-print split-v-center no-shrink no-print">${this._$getDispName()}${this._$getBtnWindowClose()}</div>
+			${this._$getWrpControls({$wrpContent}).$wrp}
+			${$wrpContentOuter}
+		</div>`
+			.appendTo(document.body);
+	}
+
+	async _pGetContentElementMetas () {
+		const $wrpContent = $(`<div class="bkmv__scroller smooth-scroll overflow-y-auto print__overflow-visible ${this._isColumns ? "bkmv__wrp" : "ve-flex-col"} w-100 min-h-0"></div>`);
+
+		const $wrpContentOuter = $$`<div class="h-100 print__h-initial w-100 min-h-0 ve-flex-col print__ve-block">${$wrpContent}</div>`;
+
+		const out = {
+			$wrpContentOuter,
+			$wrpContent,
+		};
+
+		const {cntSelectedEnts, isAnyEntityRendered} = await this._pGetRenderContentMeta({$wrpContent, $wrpContentOuter});
+
+		if (isAnyEntityRendered) $wrpContentOuter.append($wrpContent);
+
+		if (cntSelectedEnts) return out;
+
+		$wrpContentOuter.append(this._$getEleNoneVisible());
+
+		return out;
+	}
+
+	teardown () {
+		if (!this._isActive) return;
+
+		document.body.style.overflow = "";
+		document.body.classList.remove("bkmv-active");
+
+		this._$wrpBook.remove();
+		this._isActive = false;
+	}
+
+	async pHandleSub (sub) {
+		if (this._stateKey) return sub; // Assume anything with state will handle this itself.
+
+		const bookViewHash = sub.find(it => it.startsWith(this._hashKey));
+		if (!bookViewHash) {
+			this.teardown();
+			return sub;
 		}
-	});
 
-	this.close = () => { return this._doHashTeardown(); };
-
-	this._doHashTeardown = () => {
-		if (this.stateKey) {
-			this.state[this.stateKey] = false;
-		} else {
-			Hist.cleanSetHash(window.location.hash.replace(`${this.hashKey}${HASH_SUB_KV_SEP}true`, ""));
-		}
-	};
-
-	this._renderContent = async ($wrpContent, $dispName, $wrpControlsToPass) => {
-		this._$wrpRenderedContent = this._$wrpRenderedContent
-			? this._$wrpRenderedContent.empty().append($wrpContent)
-			: $$`<div class="bkmv__scroller smooth-scroll h-100 overflow-y-auto ${isFlex ? "ve-flex" : ""}">${this.isHideContentOnNoneShown ? null : $wrpContent}</div>`;
-		this._$wrpRenderedContent.appendTo(this._$wrpBook);
-
-		const numShown = await this.popTblGetNumShown({$wrpContent, $dispName, $wrpControls: $wrpControlsToPass});
-
-		if (numShown) {
-			if (this.isHideContentOnNoneShown) this._$wrpRenderedContent.append($wrpContent);
-			if (this._$wrpNoneShown) {
-				this._$wrpNoneShown.detach();
-			}
-		} else {
-			if (this.isHideContentOnNoneShown) $wrpContent.detach();
-			if (!this._$wrpNoneShown) {
-				const $btnClose = $(`<button class="btn btn-default">Close</button>`)
-					.click(() => this.close());
-
-				this._$wrpNoneShown = $$`<div class="w-100 ve-flex-col ve-flex-h-center no-shrink bkmv__footer mb-3">
-					<div class="mb-2 ve-flex-vh-center min-h-0">${this.$eleNoneVisible}</div>
-					${this.isHideButtonCloseNone ? null : $$`<div class="ve-flex-vh-center">${$btnClose}</div>`}
-				</div>`;
-			}
-			this._$wrpNoneShown.appendTo(this.isHideContentOnNoneShown ? this._$wrpRenderedContent : this._$wrpBook);
-		}
-	};
-
-	// NOTE: Avoid using `ve-flex` css, as it doesn't play nice with printing
-	this.pOpen = async () => {
-		if (this.active) return;
-		this.active = true;
-		document.title = `${pageTitle} - 5etools`;
-
-		this._$body = $(`body`);
-		this._$wrpBook = $(`<div class="bkmv"></div>`);
-
-		this._$body.css("overflow", "hidden");
-		this._$body.addClass("bkmv-active");
-
-		const $btnClose = $(`<button class="btn btn-xs btn-danger br-0 bt-0 bb-0 btl-0 bbl-0 h-20p" title="Close"><span class="glyphicon glyphicon-remove"></span></button>`)
-			.click(() => this._doHashTeardown());
-		const $dispName = $(`<div></div>`); // pass this to the content function to allow it to set a main header
-		$$`<div class="bkmv__spacer-name split-v-center no-shrink">${$dispName}${$btnClose}</div>`.appendTo(this._$wrpBook);
-
-		// region controls
-		// Optionally usable "controls" section at the top of the pane
-		const $wrpControls = $(`<div class="w-100 ve-flex-col bkmv__wrp-controls"></div>`)
-			.appendTo(this._$wrpBook);
-
-		let $wrpControlsToPass = $wrpControls;
-		if (opts.hasPrintColumns) {
-			$wrpControls.addClass("px-2 mt-2");
-
-			const injectPrintCss = (cols) => {
-				$(`#bkmv__print-style`).remove();
-				$(`<style media="print" id="bkmv__print-style">.bkmv__wrp { column-count: ${cols}; }</style>`)
-					.appendTo($(document.body));
-			};
-
-			const lastColumns = StorageUtil.syncGetForPage(BookModeView._BOOK_VIEW_COLUMNS_K);
-
-			const $selColumns = $(`<select class="form-control input-sm">
-				<option value="0">Two (book style)</option>
-				<option value="1">One</option>
-			</select>`)
-				.change(() => {
-					const val = Number($selColumns.val());
-					if (val === 0) injectPrintCss(2);
-					else injectPrintCss(1);
-
-					StorageUtil.syncSetForPage(BookModeView._BOOK_VIEW_COLUMNS_K, val);
-				});
-			if (lastColumns != null) $selColumns.val(lastColumns);
-			$selColumns.change();
-
-			$wrpControlsToPass = $$`<div class="w-100 ve-flex">
-				<div class="ve-flex-vh-center"><div class="mr-2 no-wrap help-subtle" title="Applied when printing the page.">Print columns:</div>${$selColumns}</div>
-			</div>`.appendTo($wrpControls);
-		}
-		// endregion
-
-		const $wrpContent = $(`<div class="bkmv__wrp p-2"></div>`);
-
-		await this._renderContent($wrpContent, $dispName, $wrpControlsToPass);
-
-		this._pRenderContent = () => this._renderContent($wrpContent, $dispName, $wrpControlsToPass);
-
-		this._$body.append(this._$wrpBook);
-	};
-
-	this.teardown = () => {
-		if (this.active) {
-			if (this._$wrpRenderedContent) this._$wrpRenderedContent.detach();
-			if (this._$wrpNoneShown) this._$wrpNoneShown.detach();
-
-			this._$body.css("overflow", "");
-			this._$body.removeClass("bkmv-active");
-			this._$wrpBook.remove();
-			this.active = false;
-
-			this._pRenderContent = null;
-		}
-	};
-
-	this.pHandleSub = (sub) => {
-		if (this.stateKey) return; // Assume anything with state will handle this itself.
-
-		const bookViewHash = sub.find(it => it.startsWith(this.hashKey));
-		if (bookViewHash && UrlUtil.unpackSubHash(bookViewHash)[this.hashKey][0] === "true") return this.pOpen();
-		else this.teardown();
-	};
+		if (UrlUtil.unpackSubHash(bookViewHash)[this._hashKey][0] === "true") await this.pOpen();
+		return sub.filter(it => !it.startsWith(this._hashKey));
+	}
 }
-BookModeView._BOOK_VIEW_COLUMNS_K = "bookViewColumns";
 
 // CONTENT EXCLUSION ===================================================================================================
 globalThis.ExcludeUtil = {
