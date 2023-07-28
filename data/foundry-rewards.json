@@ -1,0 +1,21 @@
+{
+	"reward": [
+		{
+			"name": "Boon of Fortitude",
+			"source": "DMG",
+			"effects": [
+				{
+					"name": "HP Increase",
+					"transfer": true,
+					"changes": [
+						{
+							"key": "data.attributes.hp.max",
+							"mode": "ADD",
+							"value": "40"
+						}
+					]
+				}
+			]
+		}
+	]
+}
