@@ -2613,7 +2613,7 @@ class SearchableFilter extends Filter {
 						const visibleRowMetas = rowMetas.filter(it => it.isVisible);
 						if (!visibleRowMetas.length) return;
 						if (evt.shiftKey) this._doSetPillsClear();
-						this._state[visibleRowMetas[0].item.item] = (evt.ctrlKey || evt.metaKey) ? 2 : 1;
+						this._state[visibleRowMetas[0].item.item] = (EventUtil.isCtrlMetaKey(evt)) ? 2 : 1;
 						$iptSearch.blur();
 						break;
 					}
@@ -2711,7 +2711,7 @@ class SearchableFilter extends Filter {
 
 					case "Enter": {
 						if (evt.shiftKey) this._doSetPillsClear();
-						this._state[item.item] = (evt.ctrlKey || evt.metaKey) ? 2 : 1;
+						this._state[item.item] = (EventUtil.isCtrlMetaKey(evt)) ? 2 : 1;
 						row.blur();
 						break;
 					}
@@ -4364,7 +4364,7 @@ class RangeFilter extends FilterBase {
 			$wrpDropdowns.addClass("ve-grow");
 
 			return this.__$wrpFilter = $$`<div class="ve-flex">
-				<div class="fltr__range-inline-label">${this._getRenderedHeader()}</div>
+				<div class="fltr__range-inline-label mr-2">${this._getRenderedHeader()}</div>
 				${$wrpSlider}
 				${$wrpDropdowns}
 			</div>`;
@@ -4775,7 +4775,7 @@ class OptionsFilter extends FilterBase {
 
 		if (opts.isMulti) {
 			return this.__$wrpFilter = $$`<div class="ve-flex">
-				<div class="fltr__range-inline-label">${this._getRenderedHeader()}</div>
+				<div class="fltr__range-inline-label mr-2">${this._getRenderedHeader()}</div>
 				${$wrpButtons}
 			</div>`;
 		} else {

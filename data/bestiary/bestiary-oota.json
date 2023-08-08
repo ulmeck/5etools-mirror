@@ -246,9 +246,42 @@
 						"replace": "the orog",
 						"with": "Blurg",
 						"flags": "i"
+					},
+					"languages": [
+						{
+							"mode": "appendIfNotExistsArr",
+							"items": [
+								"Dwarvish",
+								"Elvish",
+								"Undercommon"
+							]
+						}
+					],
+					"spellcasting": {
+						"mode": "appendArr",
+						"items": [
+							{
+								"name": "Innate Spellcasting",
+								"headerEntries": [
+									"Blurg can innately cast can cast the {@spell teleport} spell once per day, but the intended destination must be within 30 feet of another {@adventure society member|OotA|1|Society of Brilliance}. This teleport effect can be disrupted (see \"{@adventure Faerzress|OotA|1|Faerzress}\"), which is how society members sometimes end up in far corners of the Underdark, separated from their fellows."
+								],
+								"daily": {
+									"1e": [
+										"{@spell teleport}"
+									]
+								},
+								"hidden": [
+									"daily"
+								]
+							}
+						]
 					}
 				}
 			},
+			"alignment": [
+				"N"
+			],
+			"int": 18,
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -328,6 +361,9 @@
 			"conditionInflict": [
 				"incapacitated",
 				"poisoned"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true
 		},
@@ -496,6 +532,9 @@
 			],
 			"conditionInflict": [
 				"poisoned"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true
 		},
@@ -846,6 +885,9 @@
 			"conditionInflict": [
 				"prone"
 			],
+			"savingThrowForced": [
+				"strength"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -910,6 +952,9 @@
 			],
 			"spellcastingTags": [
 				"CS"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -1077,6 +1122,13 @@
 			],
 			"conditionInflictSpell": [
 				"frightened"
+			],
+			"savingThrowForced": [
+				"constitution"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -1676,6 +1728,11 @@
 			"conditionInflictSpell": [
 				"prone"
 			],
+			"savingThrowForcedSpell": [
+				"charisma",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true
 		},
@@ -2171,9 +2228,42 @@
 						"replace": "the mind flayer",
 						"with": "Grazilaxx",
 						"flags": "i"
+					},
+					"languages": [
+						{
+							"mode": "appendIfNotExistsArr",
+							"items": [
+								"Dwarvish",
+								"Elvish",
+								"Undercommon"
+							]
+						}
+					],
+					"spellcasting": {
+						"mode": "appendArr",
+						"items": [
+							{
+								"name": "Innate Spellcasting",
+								"headerEntries": [
+									"Grazilaxx can innately cast can cast the {@spell teleport} spell once per day, but the intended destination must be within 30 feet of another {@adventure society member|OotA|1|Society of Brilliance}. This teleport effect can be disrupted (see \"{@adventure Faerzress|OotA|1|Faerzress}\"), which is how society members sometimes end up in far corners of the Underdark, separated from their fellows."
+								],
+								"daily": {
+									"1e": [
+										"{@spell teleport}"
+									]
+								},
+								"hidden": [
+									"daily"
+								]
+							}
+						]
 					}
 				}
 			},
+			"alignment": [
+				"N"
+			],
+			"int": 18,
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -2318,6 +2408,10 @@
 			],
 			"miscTags": [
 				"MW"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
 			],
 			"hasToken": true
 		},
@@ -2757,6 +2851,9 @@
 			],
 			"miscTags": [
 				"MW"
+			],
+			"savingThrowForcedSpell": [
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -3256,7 +3353,7 @@
 			"source": "OotA",
 			"page": 103,
 			"_copy": {
-				"name": "Priest",
+				"name": "Veteran",
 				"source": "MM",
 				"_trait": {
 					"name": "Deep Gnome",
@@ -3432,6 +3529,10 @@
 			"conditionInflictSpell": [
 				"charmed",
 				"paralyzed"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"wisdom"
 			],
 			"hasToken": true
 		},
@@ -3678,6 +3779,11 @@
 					"ability": "wis"
 				}
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true
 		},
 		{
@@ -3877,9 +3983,42 @@
 						"replace": "the troglodyte",
 						"with": "Skriss",
 						"flags": "i"
+					},
+					"languages": [
+						{
+							"mode": "appendIfNotExistsArr",
+							"items": [
+								"Dwarvish",
+								"Elvish",
+								"Undercommon"
+							]
+						}
+					],
+					"spellcasting": {
+						"mode": "appendArr",
+						"items": [
+							{
+								"name": "Innate Spellcasting",
+								"headerEntries": [
+									"Skriss can innately cast can cast the {@spell teleport} spell once per day, but the intended destination must be within 30 feet of another {@adventure society member|OotA|1|Society of Brilliance}. This teleport effect can be disrupted (see \"{@adventure Faerzress|OotA|1|Faerzress}\"), which is how society members sometimes end up in far corners of the Underdark, separated from their fellows."
+								],
+								"daily": {
+									"1e": [
+										"{@spell teleport}"
+									]
+								},
+								"hidden": [
+									"daily"
+								]
+							}
+						]
 					}
 				}
 			},
+			"alignment": [
+				"N"
+			],
+			"int": 18,
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -3934,9 +4073,42 @@
 						"replace": "the kuo-toa",
 						"with": "Sloopidoop",
 						"flags": "i"
+					},
+					"languages": [
+						{
+							"mode": "appendIfNotExistsArr",
+							"items": [
+								"Dwarvish",
+								"Elvish",
+								"Undercommon"
+							]
+						}
+					],
+					"spellcasting": {
+						"mode": "appendArr",
+						"items": [
+							{
+								"name": "Innate Spellcasting",
+								"headerEntries": [
+									"Sloopidoop can innately cast can cast the {@spell teleport} spell once per day, but the intended destination must be within 30 feet of another {@adventure society member|OotA|1|Society of Brilliance}. This teleport effect can be disrupted (see \"{@adventure Faerzress|OotA|1|Faerzress}\"), which is how society members sometimes end up in far corners of the Underdark, separated from their fellows."
+								],
+								"daily": {
+									"1e": [
+										"{@spell teleport}"
+									]
+								},
+								"hidden": [
+									"daily"
+								]
+							}
+						]
 					}
 				}
 			},
+			"alignment": [
+				"N"
+			],
+			"int": 18,
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -4299,6 +4471,11 @@
 				"deafened",
 				"poisoned"
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -4484,6 +4661,10 @@
 			"conditionInflict": [
 				"poisoned"
 			],
+			"savingThrowForced": [
+				"constitution",
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true
 		},
@@ -4590,6 +4771,9 @@
 			"miscTags": [
 				"HPR",
 				"MW"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -4708,6 +4892,12 @@
 			"miscTags": [
 				"HPR",
 				"MW"
+			],
+			"savingThrowForced": [
+				"constitution"
+			],
+			"savingThrowForcedSpell": [
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -4981,9 +5171,42 @@
 						"replace": "the derro savant",
 						"with": "Y",
 						"flags": "i"
+					},
+					"languages": [
+						{
+							"mode": "appendIfNotExistsArr",
+							"items": [
+								"Dwarvish",
+								"Elvish",
+								"Undercommon"
+							]
+						}
+					],
+					"spellcasting": {
+						"mode": "appendArr",
+						"items": [
+							{
+								"name": "Innate Spellcasting",
+								"headerEntries": [
+									"Y can innately cast can cast the {@spell teleport} spell once per day, but the intended destination must be within 30 feet of another {@adventure society member|OotA|1|Society of Brilliance}. This teleport effect can be disrupted (see \"{@adventure Faerzress|OotA|1|Faerzress}\"), which is how society members sometimes end up in far corners of the Underdark, separated from their fellows."
+								],
+								"daily": {
+									"1e": [
+										"{@spell teleport}"
+									]
+								},
+								"hidden": [
+									"daily"
+								]
+							}
+						]
 					}
 				}
 			},
+			"alignment": [
+				"N"
+			],
+			"int": 18,
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -5099,6 +5322,10 @@
 				"AOE",
 				"MW"
 			],
+			"savingThrowForced": [
+				"constitution",
+				"dexterity"
+			],
 			"hasToken": true
 		},
 		{
@@ -5150,6 +5377,9 @@
 			"conditionInflict": [
 				"petrified",
 				"restrained"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true
 		},

@@ -109,11 +109,15 @@ class CreatureBuilder extends Builder {
 		const meta = {...(opts.meta || {}), ...this._getInitialMetaState()};
 
 		if (ScaleCreature.isCrInScaleRange(creature) && !opts.isForce) {
-			const ixDefault = Parser.CRS.indexOf(creature.cr.cr || creature.cr);
-			const scaleTo = await InputUiUtil.pGetUserEnum({values: Parser.CRS, title: "At Challenge Rating...", default: ixDefault});
+			const crDefault = creature.cr.cr || creature.cr;
 
-			if (scaleTo != null && scaleTo !== ixDefault) {
-				const scaled = await ScaleCreature.scale(creature, Parser.crToNumber(Parser.CRS[scaleTo]));
+			const scaleTo = await InputUiUtil.pGetUserScaleCr({
+				title: "At Challenge Rating...",
+				default: crDefault,
+			});
+
+			if (scaleTo != null && scaleTo !== crDefault) {
+				const scaled = await ScaleCreature.scale(creature, Parser.crToNumber(scaleTo));
 				delete scaled._displayName;
 				this.setStateFromLoaded({s: scaled, m: meta});
 			} else this.setStateFromLoaded({s: creature, m: meta});
@@ -188,6 +192,8 @@ class CreatureBuilder extends Builder {
 		]);
 
 		this._bestiaryFluffIndex = bestiaryFluffIndex;
+
+		AttachedItemTag.init({items});
 
 		await this._pBuildLegendaryGroupCache();
 
@@ -411,6 +417,9 @@ class CreatureBuilder extends Builder {
 			DamageTypeTag.tryRun(this._state);
 			DamageTypeTag.tryRunSpells(this._state);
 			DamageTypeTag.tryRunRegionalsLairs(this._state);
+			CreatureSavingThrowTagger.tryRun(this._state);
+			CreatureSavingThrowTagger.tryRunSpells(this._state);
+			CreatureSavingThrowTagger.tryRunRegionalsLairs(this._state);
 			MiscTag.tryRun(this._state);
 			TagImmResVulnConditional.tryRun(this._state);
 			DragonAgeTag.tryRun(this._state);
@@ -622,7 +631,7 @@ class CreatureBuilder extends Builder {
 
 		const setState = () => {
 			const types = chooseTypeRows
-				.map(rowMeta => rowMeta.$selType.val());
+				.map(rowMeta => rowMeta.cbGetType());
 
 			const isSwarm = $selMode.val() === "1";
 
@@ -682,15 +691,15 @@ class CreatureBuilder extends Builder {
 
 		const $btnAddChooseType = $(`<button class="btn btn-xs btn-default">Add Type</button>`)
 			.click(() => {
-				const $typeRow = this.__$getTypeInput__getChooseTypeRow(null, chooseTypeRows, setState);
-				$wrpChooseTypeRows.append($typeRow.$wrp);
+				const metaTypeRow = this.__$getTypeInput__getChooseTypeRow(null, chooseTypeRows, setState);
+				$wrpChooseTypeRows.append(metaTypeRow.$wrp);
 			});
 
-		const $initialChooseTypeRows = initial.type?.choose
+		const initialChooseTypeRowsMetas = initial.type?.choose
 			? initial.type.choose.map(type => this.__$getTypeInput__getChooseTypeRow(type, chooseTypeRows, setState))
 			: [this.__$getTypeInput__getChooseTypeRow(initial.type || initial, chooseTypeRows, setState)];
 
-		const $wrpChooseTypeRows = $$`<div>${$initialChooseTypeRows.map(it => it.$wrp)}</div>`;
+		const $wrpChooseTypeRows = $$`<div>${initialChooseTypeRowsMetas.map(it => it.$wrp)}</div>`;
 		const $stageType = $$`<div class="mt-2">
 		${$wrpChooseTypeRows}
 		<div>${$btnAddChooseType}</div>
@@ -741,11 +750,39 @@ class CreatureBuilder extends Builder {
 	}
 
 	__$getTypeInput__getChooseTypeRow (type, chooseTypeRows, setState) {
-		const $selType = $(`<select class="form-control input-xs">${Parser.MON_TYPES.map(tp => `<option value="${tp}">${tp.uppercaseFirst()}</option>`).join("")}</select>`)
+		const isInitialCustom = type && !Parser.MON_TYPES.includes(type);
+
+		const $selType = $(`<select class="form-control input-xs mr-2">${Parser.MON_TYPES.map(tp => `<option value="${tp}">${tp.uppercaseFirst()}</option>`).join("")}</select>`)
 			.change(() => {
 				setState();
+			});
+		if (!isInitialCustom) $selType.val(type || Parser.TP_HUMANOID);
+
+		const $iptTypeCustom = $(`<input class="form-control input-xs form-control--minimal mr-2" placeholder="Custom Type">`)
+			.on("change", () => {
+				setState();
+			});
+		if (isInitialCustom) $selType.val(type || "");
+
+		const $cbIsCustomType = $(`<input type="checkbox">`)
+			.on("change", () => {
+				renderIsCustom();
+				setState();
 			})
-			.val(type || Parser.TP_HUMANOID);
+			.prop("checked", isInitialCustom);
+
+		const renderIsCustom = () => {
+			const isChecked = $cbIsCustomType.prop("checked");
+			$iptTypeCustom.toggleVe(isChecked);
+			$selType.toggleVe(!isChecked);
+		};
+
+		renderIsCustom();
+
+		const cbGetType = () => {
+			if ($cbIsCustomType.prop("checked")) return $iptTypeCustom.val();
+			return $selType.val();
+		};
 
 		const $btnRemove = $(`<button class="btn btn-xs btn-danger" title="Remove Row"><span class="glyphicon glyphicon-trash"/></button>`)
 			.click(() => {
@@ -754,8 +791,16 @@ class CreatureBuilder extends Builder {
 				setState();
 			});
 
-		const $wrp = $$`<div class="ve-flex mb-2">${$selType}${$btnRemove}</div>`;
-		const out = {$wrp, $selType};
+		const $wrp = $$`<div class="ve-flex mb-2">
+			${$selType}
+			${$iptTypeCustom}
+			<label class="ve-flex-v-center mr-2">
+				<span class="mr-2">Custom</span>
+				${$cbIsCustomType}
+			</label>
+			${$btnRemove}
+		</div>`;
+		const out = {$wrp, cbGetType};
 		chooseTypeRows.push(out);
 		return out;
 	}
@@ -1478,7 +1523,7 @@ class CreatureBuilder extends Builder {
 				? this._state[prop].special
 				: this._state[prop];
 
-			const $iptAbil = $(`<input class="form-control form-control--minimal input-xs text-center">`)
+			const $iptAbil = $(`<input class="form-control form-control--minimal input-xs ve-text-center">`)
 				.val(valInitial)
 				.change(() => {
 					const val = $iptAbil.val().trim();
@@ -1511,7 +1556,7 @@ class CreatureBuilder extends Builder {
 		const [$row, $rowInner] = BuilderUi.getLabelledRowTuple("Saving Throws", {isMarked: true, isRow: true});
 
 		const $getRow = (name, prop) => {
-			const $iptVal = $(`<input class="form-control form-control--minimal input-xs mb-2 text-center">`)
+			const $iptVal = $(`<input class="form-control form-control--minimal input-xs mb-2 ve-text-center">`)
 				.change(() => {
 					$btnProf.removeClass("active");
 					delete this._meta.profSave[prop];
@@ -1564,7 +1609,7 @@ class CreatureBuilder extends Builder {
 		const $getRow = (name, prop) => {
 			const abilProp = Parser.skillToAbilityAbv(prop);
 
-			const $iptVal = $(`<input class="form-control form-control--minimal input-xs mr-2 text-center">`)
+			const $iptVal = $(`<input class="form-control form-control--minimal input-xs mr-2 ve-text-center">`)
 				.change(() => {
 					if (this._meta.profSkill[prop]) {
 						$btnProf.removeClass("active");

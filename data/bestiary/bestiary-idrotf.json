@@ -250,6 +250,10 @@
 			"miscTags": [
 				"MW"
 			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -441,6 +445,11 @@
 				"RW",
 				"THW"
 			],
+			"savingThrowForced": [
+				"charisma",
+				"constitution",
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -624,6 +633,9 @@
 			],
 			"conditionInflict": [
 				"blinded"
+			],
+			"savingThrowForced": [
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -811,6 +823,13 @@
 			"conditionInflictSpell": [
 				"incapacitated"
 			],
+			"savingThrowForced": [
+				"charisma"
+			],
+			"savingThrowForcedSpell": [
+				"charisma",
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -906,13 +925,15 @@
 			"conditionInflict": [
 				"prone"
 			],
+			"savingThrowForced": [
+				"strength"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
 		{
 			"name": "Battlehammer Dwarf",
-			"isNamedCreature": true,
 			"source": "IDRotF",
 			"page": 107,
 			"_copy": {
@@ -1173,6 +1194,9 @@
 			"conditionInflict": [
 				"poisoned"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -1336,6 +1360,10 @@
 			],
 			"conditionInflict": [
 				"charmed"
+			],
+			"savingThrowForced": [
+				"dexterity",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -1601,6 +1629,9 @@
 			"conditionInflict": [
 				"blinded"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -1846,6 +1877,14 @@
 			],
 			"conditionInflictSpell": [
 				"invisible"
+			],
+			"savingThrowForced": [
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"intelligence"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -2145,6 +2184,12 @@
 				"charmed",
 				"prone"
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"strength",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2256,6 +2301,9 @@
 			"conditionInflict": [
 				"paralyzed"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2363,6 +2411,9 @@
 			],
 			"miscTags": [
 				"AOE"
+			],
+			"savingThrowForced": [
+				"dexterity"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -2619,6 +2670,10 @@
 				"frightened",
 				"poisoned"
 			],
+			"savingThrowForced": [
+				"constitution",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2771,6 +2826,14 @@
 			"conditionInflictSpell": [
 				"charmed"
 			],
+			"savingThrowForced": [
+				"intelligence"
+			],
+			"savingThrowForcedSpell": [
+				"charisma",
+				"constitution",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2884,6 +2947,12 @@
 			"conditionInflict": [
 				"grappled",
 				"stunned"
+			],
+			"savingThrowForced": [
+				"intelligence"
+			],
+			"savingThrowForcedSpell": [
+				"constitution"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -3163,6 +3232,9 @@
 			"miscTags": [
 				"MW"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -3285,6 +3357,14 @@
 			"conditionInflictSpell": [
 				"invisible"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -3400,6 +3480,9 @@
 			],
 			"conditionInflict": [
 				"frightened"
+			],
+			"savingThrowForced": [
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -3614,6 +3697,9 @@
 			"damageTags": [
 				"Y"
 			],
+			"savingThrowForced": [
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -3756,6 +3842,9 @@
 			],
 			"miscTags": [
 				"MW"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -4655,6 +4744,9 @@
 			"conditionInflict": [
 				"grappled"
 			],
+			"savingThrowForced": [
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -4865,6 +4957,9 @@
 			"senseTags": [
 				"D"
 			],
+			"savingThrowForced": [
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -4996,6 +5091,9 @@
 			],
 			"conditionInflict": [
 				"prone"
+			],
+			"savingThrowForced": [
+				"strength"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -5180,6 +5278,13 @@
 				"frightened",
 				"incapacitated"
 			],
+			"savingThrowForced": [
+				"charisma",
+				"wisdom"
+			],
+			"savingThrowForcedSpell": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -5305,6 +5410,10 @@
 			],
 			"conditionInflictSpell": [
 				"unconscious"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -5919,6 +6028,9 @@
 			"conditionInflictSpell": [
 				"charmed"
 			],
+			"savingThrowForcedSpell": [
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluffImages": true
 		},
@@ -6019,6 +6131,9 @@
 			"miscTags": [
 				"MW",
 				"RCH"
+			],
+			"savingThrowForced": [
+				"dexterity"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -6155,6 +6270,9 @@
 			],
 			"conditionInflict": [
 				"grappled"
+			],
+			"savingThrowForced": [
+				"dexterity"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -6529,6 +6647,11 @@
 				"poisoned",
 				"prone"
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -6657,6 +6780,9 @@
 			],
 			"conditionInflictSpell": [
 				"deafened"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -6978,6 +7104,12 @@
 			],
 			"conditionInflictSpell": [
 				"paralyzed"
+			],
+			"savingThrowForced": [
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,

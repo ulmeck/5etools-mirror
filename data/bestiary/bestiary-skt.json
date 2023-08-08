@@ -266,7 +266,7 @@
 				"name": "Veteran",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				},
 				"_mod": {
@@ -707,6 +707,10 @@
 			"spellcastingTags": [
 				"O"
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"strength"
+			],
 			"hasToken": true
 		},
 		{
@@ -1069,6 +1073,14 @@
 				"charmed",
 				"incapacitated",
 				"invisible"
+			],
+			"savingThrowForced": [
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"strength",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -1649,6 +1661,9 @@
 			"conditionInflict": [
 				"prone"
 			],
+			"savingThrowForced": [
+				"strength"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -1886,6 +1901,10 @@
 				"O",
 				"R"
 			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true
 		},
 		{
@@ -1896,7 +1915,7 @@
 				"name": "Guard",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				}
 			},
@@ -2755,6 +2774,17 @@
 				"prone",
 				"restrained"
 			],
+			"savingThrowForced": [
+				"dexterity",
+				"wisdom"
+			],
+			"savingThrowForcedLegendary": [
+				"constitution",
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2899,7 +2929,7 @@
 				"name": "Veteran",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				},
 				"_mod": {
@@ -3215,6 +3245,14 @@
 			"conditionInflict": [
 				"deafened"
 			],
+			"savingThrowForced": [
+				"constitution",
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -3457,6 +3495,20 @@
 				"petrified",
 				"restrained"
 			],
+			"savingThrowForced": [
+				"dexterity",
+				"wisdom"
+			],
+			"savingThrowForcedLegendary": [
+				"constitution",
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"charisma",
+				"constitution",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true
 		},
@@ -3468,7 +3520,7 @@
 				"name": "Knight",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				},
 				"_mod": {
@@ -3790,6 +3842,9 @@
 				"MW",
 				"RCH"
 			],
+			"savingThrowForcedSpell": [
+				"dexterity"
+			],
 			"hasToken": true,
 			"hasFluff": true
 		},
@@ -4045,7 +4100,7 @@
 				"name": "Commoner",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				}
 			},
@@ -4073,7 +4128,7 @@
 				"name": "Knight",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				},
 				"_mod": {
@@ -4322,6 +4377,10 @@
 			"miscTags": [
 				"MW"
 			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -4393,6 +4452,10 @@
 			],
 			"spellcastingTags": [
 				"O"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity"
 			],
 			"hasToken": true
 		},
@@ -4674,6 +4737,10 @@
 			"spellcastingTags": [
 				"O"
 			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity"
+			],
 			"hasToken": true
 		},
 		{
@@ -4847,6 +4914,9 @@
 			"miscTags": [
 				"MW"
 			],
+			"savingThrowForcedSpell": [
+				"constitution"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -4976,6 +5046,11 @@
 				"D",
 				"DR",
 				"E"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluffImages": true
@@ -5117,6 +5192,10 @@
 			"conditionInflict": [
 				"blinded",
 				"restrained"
+			],
+			"savingThrowForced": [
+				"constitution",
+				"dexterity"
 			],
 			"hasToken": true,
 			"hasFluff": true
@@ -5279,6 +5358,10 @@
 			],
 			"spellcastingTags": [
 				"O"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity"
 			],
 			"hasToken": true
 		},
@@ -5502,7 +5585,7 @@
 				"name": "Guard",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				}
 			},
@@ -5545,7 +5628,7 @@
 				"name": "Noble",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				}
 			},
@@ -6047,6 +6130,19 @@
 				"restrained",
 				"unconscious"
 			],
+			"savingThrowForced": [
+				"constitution",
+				"dexterity"
+			],
+			"savingThrowForcedLegendary": [
+				"constitution",
+				"strength"
+			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"intelligence",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -6326,6 +6422,10 @@
 			"conditionInflictSpell": [
 				"prone"
 			],
+			"savingThrowForced": [
+				"dexterity",
+				"strength"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -6341,7 +6441,7 @@
 				"name": "Bandit Captain",
 				"source": "MM",
 				"_trait": {
-					"name": "Mountain Dwarf",
+					"name": "Shield Dwarf",
 					"source": "PHB"
 				},
 				"_mod": {
@@ -6686,6 +6786,9 @@
 			"spellcastingTags": [
 				"O"
 			],
+			"savingThrowForcedSpell": [
+				"strength"
+			],
 			"hasToken": true
 		},
 		{
@@ -6977,6 +7080,10 @@
 				"RW",
 				"THW"
 			],
+			"savingThrowForcedSpell": [
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true,
@@ -7237,6 +7344,10 @@
 			],
 			"spellcastingTags": [
 				"O"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity"
 			],
 			"hasToken": true
 		},
@@ -7510,6 +7621,14 @@
 				"paralyzed",
 				"prone"
 			],
+			"savingThrowForced": [
+				"constitution"
+			],
+			"savingThrowForcedSpell": [
+				"charisma",
+				"dexterity",
+				"wisdom"
+			],
 			"hasToken": true,
 			"hasFluff": true
 		},
@@ -7607,6 +7726,9 @@
 			],
 			"conditionInflict": [
 				"incapacitated"
+			],
+			"savingThrowForced": [
+				"constitution"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -7902,6 +8024,16 @@
 				"charmed",
 				"invisible",
 				"restrained"
+			],
+			"savingThrowForced": [
+				"dexterity"
+			],
+			"savingThrowForcedSpell": [
+				"constitution",
+				"dexterity",
+				"intelligence",
+				"strength",
+				"wisdom"
 			],
 			"hasToken": true,
 			"hasFluff": true,

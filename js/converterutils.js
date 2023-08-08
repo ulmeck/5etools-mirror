@@ -14,6 +14,7 @@
 class ConverterConst {}
 ConverterConst.STR_RE_DAMAGE_TYPE = "(acid|bludgeoning|cold|fire|force|lightning|necrotic|piercing|poison|psychic|radiant|slashing|thunder)";
 ConverterConst.RE_DAMAGE_TYPE = new RegExp(`\\b${ConverterConst.STR_RE_DAMAGE_TYPE}\\b`, "g");
+ConverterConst.STR_RE_CLASS = `(?<name>artificer|barbarian|bard|cleric|druid|fighter|monk|paladin|ranger|rogue|sorcerer|warlock|wizard)`;
 
 class BaseParser {
 	static _getValidOptions (options) {
@@ -59,14 +60,20 @@ class BaseParser {
 		iptClean = iptClean
 			// Connect together e.g. `5d10\nForce damage`
 			.replace(new RegExp(`(?<start>\\d+) *\\n+(?<end>${ConverterConst.STR_RE_DAMAGE_TYPE} damage)\\b`, "gi"), (...m) => `${m.last().start} ${m.last().end}`)
-			// Connect together likely determiners/conjunctions
-			.replace(/(?<start>\b(the|a|an|this|that|these|those|its|his|her|their|have|extra|and|or) *)\n+\s*/g, (...m) => `${m.last().start} `)
+			// Connect together likely determiners/conjunctions/etc.
+			.replace(/(?<start>\b(the|a|a cumulative|an|this|that|these|those|its|his|her|their|have|extra|and|or|as|on|uses|to|at|using) *)\n+\s*/g, (...m) => `${m.last().start} `)
 			// Connect together e.g.:
 			//  - `+5\nto hit`, `your Spell Attack Modifier\nto hit`
 			//  - `your Wisdom\nmodifier`
 			.replace(/(?<start>[a-z0-9]) *\n+ *(?<end>to hit|modifier)\b/g, (...m) => `${m.last().start} ${m.last().end}`)
 			// Connect together `<ability> (<skill>)`
 			.replace(new RegExp(`\\b(?<start>${Object.values(Parser.ATB_ABV_TO_FULL).join("|")}) *\\n+ *(?<end>\\((?:${Object.keys(Parser.SKILL_TO_ATB_ABV).join("|")})\\))`, "gi"), (...m) => `${m.last().start.trim()} ${m.last().end.trim()}`)
+			// Connect together e.g. `increases by\n1d6 when`
+			.replace(/(?<start>[a-z0-9]) *\n+ *(?<end>\d+d\d+ [a-z]+)/g, (...m) => `${m.last().start} ${m.last().end}`)
+			// Connect together e.g. `2d4\n+PB`
+			.replace(/(?<start>(?:\d+)?d\d+) *\n *(?<end>[-+] *(?:\d+|PB) [a-z]+)/g, (...m) => `${m.last().start} ${m.last().end}`)
+			// Connect together likely word pairs
+			.replace(/\b(?<start>hit) *\n* *(?<end>points)\b/gi, (...m) => `${m.last().start} ${m.last().end}`)
 		;
 
 		if (options) {
@@ -573,7 +580,7 @@ class DiceConvert {
 		}
 
 		// re-tag + format dice
-		str = str.replace(/\b(\s*[-+]\s*)?(([1-9]\d*)?d([1-9]\d*)(\s*?[-+×x*÷/]\s*?(\d,\d|\d)+(\.\d+)?)?)+(?:\s*\+\s*\bPB\b)?\b/gi, (...m) => {
+		str = str.replace(/\b(\s*[-+]\s*)?(([1-9]\d*|PB)?d([1-9]\d*)(\s*?[-+×x*÷/]\s*?(\d,\d|\d)+(\.\d+)?)?)+(?:\s*\+\s*\bPB\b)?\b/gi, (...m) => {
 			const expanded = m[0].replace(/([^0-9d.,PB])/gi, " $1 ").replace(/\s+/g, " ");
 			return `{@dice ${expanded}}`;
 		});
@@ -923,6 +930,13 @@ class ConvertUtil {
 		const spl = this._getMergedSplitName({line, splitterPunc});
 		if (spl.map(it => it.trim()).filter(Boolean).length === 1) return false;
 
+		if (
+			// Heuristic: single-column text is generally 50-60 characters; shorter lines with no other text are likely not name lines
+			spl.join("").length <= 40
+			&& spl.map(it => it.trim()).filter(Boolean).length === 2
+			&& /^[.!?:]$/.test(spl[1])
+		) return false;
+
 		// ignore everything inside parentheses
 		const namePart = ConvertUtil.getWithoutParens(spl[0]);
 		if (!namePart) return false; // (If this is _everything_ cancel)
@@ -985,10 +999,12 @@ class ConvertUtil {
 				|| /^\d+-\d+:?$/.test(spl[0])
 				// Handle e.g. "Action 1: Close In. ...
 				|| /^Action \d+$/.test(spl[0])
+				// Handle e.g. "5th Level: Lay Low (3/Day). ..."
+				|| /^\d+(?:st|nd|rd|th) Level$/.test(spl[0])
 			)
 		) {
 			spl = [
-				`${spl[0]}${spl[1]}${spl[2]}`,
+				spl.slice(0, 3).join(""),
 				...spl.slice(3),
 			];
 		}
@@ -999,6 +1015,21 @@ class ConvertUtil {
 			if (!toCheck.split(" ").some(it => ConvertUtil._CONTRACTIONS.has(it))) continue;
 			spl[i] = `${spl[i]}${spl[i + 1]}${spl[i + 2]}`;
 			spl.splice(i + 1, 2);
+		}
+
+		// Handle e.g. "3rd Level: Death from Above! (3/Day). ..."
+		if (
+			spl.length > 3
+			&& (
+				/^[.!?:]$/.test(spl[1])
+				&& /^\s*\([^)]+\)\s*$/.test(spl[2])
+				&& /^[.!?:]$/.test(spl[3])
+			)
+		) {
+			spl = [
+				spl.slice(0, 3).join(""),
+				...spl.slice(3),
+			];
 		}
 
 		if (spl.length >= 3 && spl[0].includes(`"`) && spl[2].startsWith(`"`)) {

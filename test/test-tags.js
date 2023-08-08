@@ -517,7 +517,7 @@ class StripTagTest extends DataTesterBase {
 	}
 
 	static _checkString (str, {filePath}) {
-		if (filePath === "./data/bestiary/traits.json") return;
+		if (filePath === "./data/bestiary/template.json") return;
 
 		try {
 			Renderer.stripTags(str);
@@ -953,7 +953,7 @@ class DuplicateEntityCheck extends DataTesterBase {
 
 					if (!ent._versions) return;
 
-					isSkipVersionCheck || DataUtil.proxy.getVersions(prop, ent)
+					isSkipVersionCheck || DataUtil.proxy.getVersions(prop, ent, {isExternalApplicationIdentityOnly: true})
 						.forEach((entVer, j) => {
 							this._doAddPosition({prop, ent: entVer, ixArray: i, ixVersion: j, positions});
 						});
