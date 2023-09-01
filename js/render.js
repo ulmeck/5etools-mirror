@@ -2108,7 +2108,7 @@ Renderer.applyAllProperties = function (entries, object = null) {
 
 Renderer.attackTagToFull = function (tagStr) {
 	function renderTag (tags) {
-		return `${tags.includes("m") ? "Melee " : tags.includes("r") ? "Ranged " : tags.includes("g") ? "Magical " : tags.includes("a") ? "Area " : ""}${tags.includes("w") ? "Weapon " : tags.includes("s") ? "Spell " : ""}`;
+		return `${tags.includes("m") ? "Melee " : tags.includes("r") ? "Ranged " : tags.includes("g") ? "Magical " : tags.includes("a") ? "Area " : ""}${tags.includes("w") ? "Weapon " : tags.includes("s") ? "Spell " : tags.includes("p") ? "Power " : ""}`;
 	}
 
 	const tagGroups = tagStr.toLowerCase().split(",").map(it => it.trim()).filter(it => it).map(it => it.split(""));
@@ -3043,6 +3043,8 @@ Renderer.utils = {
 			"proficiency",
 			"spellcasting",
 			"spellcasting2020",
+			"spellcastingFeature",
+			"spellcastingPrepared",
 			"psionics",
 			"feature",
 			"feat",
@@ -3120,6 +3122,8 @@ Renderer.utils = {
 								case "proficiency": return this._getHtml_proficiency({v, isListMode, isTextOnly});
 								case "spellcasting": return this._getHtml_spellcasting({v, isListMode, isTextOnly});
 								case "spellcasting2020": return this._getHtml_spellcasting2020({v, isListMode, isTextOnly});
+								case "spellcastingFeature": return this._getHtml_spellcastingFeature({v, isListMode, isTextOnly});
+								case "spellcastingPrepared": return this._getHtml_spellcastingPrepared({v, isListMode, isTextOnly});
 								case "psionics": return this._getHtml_psionics({v, isListMode, isTextOnly});
 								case "alignment": return this._getHtml_alignment({v, isListMode, isTextOnly});
 								case "campaign": return this._getHtml_campaign({v, isListMode, isTextOnly});
@@ -3344,6 +3348,9 @@ Renderer.utils = {
 						case "weapon": {
 							return isListMode ? `Prof ${Parser.weaponFullToAbv(prof)} weapon` : `Proficiency with a ${prof} weapon`;
 						}
+						case "weaponGroup": {
+							return isListMode ? `Prof ${Parser.weaponFullToAbv(prof)} weapons` : `${prof.toTitleCase()} Proficiency`;
+						}
 						default: throw new Error(`Unhandled proficiency type: "${profType}"`);
 					}
 				});
@@ -3357,6 +3364,14 @@ Renderer.utils = {
 
 		static _getHtml_spellcasting2020 ({v, isListMode}) {
 			return isListMode ? "Spellcasting" : "Spellcasting or Pact Magic feature";
+		}
+
+		static _getHtml_spellcastingFeature ({v, isListMode}) {
+			return isListMode ? "Spellcasting" : "Spellcasting Feature";
+		}
+
+		static _getHtml_spellcastingPrepared ({v, isListMode}) {
+			return isListMode ? "Spellcasting" : "Spellcasting feature from a class that prepares spells";
 		}
 
 		static _getHtml_psionics ({v, isListMode, isTextOnly}) {
@@ -5907,6 +5922,14 @@ Renderer.reward = {
 			${Renderer.utils.getNameTr(reward, {page: UrlUtil.PG_REWARDS})}
 			${Renderer.reward.getRenderedString(reward)}
 		`;
+	},
+
+	pGetFluff (ent) {
+		return Renderer.utils.pGetFluff({
+			entity: ent,
+			fnGetFluffData: DataUtil.rewardFluff.loadJSON.bind(DataUtil.rewardFluff),
+			fluffProp: "rewardFluff",
+		});
 	},
 };
 
@@ -9107,9 +9130,9 @@ Renderer.table = {
 				tableRaw.rollAttitude ? `Attitude` : null,
 			].filter(Boolean),
 			colStyles: [
-				"col-2 ve-text-center",
+				"col-2 text-center",
 				tableRaw.rollAttitude ? "col-8" : "col-10",
-				tableRaw.rollAttitude ? `col-2 ve-text-center` : null,
+				tableRaw.rollAttitude ? `col-2 text-center` : null,
 			].filter(Boolean),
 			rows: tableRaw.table.map(it => [
 				`${getPadded(it.min)}${it.max != null && it.max !== it.min ? `-${getPadded(it.max)}` : ""}`,

@@ -30,6 +30,19 @@
 			}
 		},
 		{
+			"name": "Fury of the Frost Giant",
+			"source": "BGG",
+			"images": [
+				{
+					"type": "image",
+					"href": {
+						"type": "internal",
+						"path": "feats/BGG/Fury of the Frost Giant.webp"
+					}
+				}
+			]
+		},
+		{
 			"name": "Initiate of High Sorcery",
 			"source": "DSotDQ",
 			"images": [
@@ -66,6 +79,21 @@
 						"type": "internal",
 						"path": "feats/PHB/Ritual Caster.webp"
 					}
+				}
+			]
+		},
+		{
+			"name": "Servo Crafting",
+			"source": "PSK",
+			"images": [
+				{
+					"type": "image",
+					"href": {
+						"type": "internal",
+						"path": "feats/PSK/Servo Crafting.webp"
+					},
+					"title": "Servo",
+					"credit": "Igor Kieryluk"
 				}
 			]
 		}

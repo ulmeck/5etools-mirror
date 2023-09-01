@@ -529,15 +529,16 @@ class FilterBox extends ProxyBase {
 
 	async pDoLoadState () {
 		const toLoad = await StorageUtil.pGetForPage(this._getNamespacedStorageKey());
-		if (toLoad != null) this._setStateFromLoaded(toLoad);
+		if (toLoad == null) return;
+		this._setStateFromLoaded(toLoad, {isUserSavedState: true});
 	}
 
-	_setStateFromLoaded (state) {
+	_setStateFromLoaded (state, {isUserSavedState = false} = {}) {
 		state.box = state.box || {};
 		this._proxyAssign("meta", "_meta", "__meta", state.box.meta || {}, true);
 		this._proxyAssign("minisHidden", "_minisHidden", "__minisHidden", state.box.minisHidden || {}, true);
 		this._proxyAssign("combineAs", "_combineAs", "__combineAs", state.box.combineAs || {}, true);
-		this._filters.forEach(it => it.setStateFromLoaded(state.filters));
+		this._filters.forEach(it => it.setStateFromLoaded(state.filters, {isUserSavedState}));
 	}
 
 	_getSaveableState () {
@@ -833,7 +834,7 @@ class FilterBox extends ProxyBase {
 					this._cachedState = null;
 					this.fireChangeEvent();
 					return;
-				} else this._setStateFromLoaded(this._cachedState);
+				} else this._setStateFromLoaded(this._cachedState, {isUserSavedState: true});
 			}
 		} else {
 			this.fireChangeEvent();
@@ -1094,8 +1095,12 @@ class FilterBox extends ProxyBase {
 		return out.length ? out : null;
 	}
 
-	getFilterTag () {
+	getFilterTag ({isAddSearchTerm = false} = {}) {
 		const parts = this._filters.map(f => f.getFilterTagPart()).filter(Boolean);
+		if (isAddSearchTerm && this._$iptSearch) {
+			const term = this._$iptSearch.val().trim();
+			if (term) parts.push(`search=${term}`);
+		}
 		return `{@filter |${UrlUtil.getCurrentPage().replace(/\.html$/, "")}|${parts.join("|")}}`;
 	}
 
@@ -1255,6 +1260,8 @@ class FilterBase extends BaseComponent {
 
 		this.__meta = {...this.getDefaultMeta()};
 		this._meta = this._getProxy("meta", this.__meta);
+
+		this._hasUserSavedState = false;
 	}
 
 	_getRenderedHeader () {
@@ -1486,7 +1493,7 @@ class Filter extends FilterBase {
 		Filter._validateItemNests(this._items, this._nests);
 
 		this._filterBox = null;
-		this._items.forEach(it => this._defaultItemState(it));
+		this._items.forEach(it => this._defaultItemState(it, {isForce: true}));
 		this.__$wrpFilter = null;
 		this.__wrpPills = null;
 		this.__wrpMiniPills = null;
@@ -1513,13 +1520,14 @@ class Filter extends FilterBase {
 		};
 	}
 
-	setStateFromLoaded (filterState) {
-		if (filterState && filterState[this.header]) {
-			const toLoad = filterState[this.header];
-			this.setBaseStateFromLoaded(toLoad);
-			Object.assign(this._state, toLoad.state);
-			Object.assign(this._nestsHidden, toLoad.nestsHidden);
-		}
+	setStateFromLoaded (filterState, {isUserSavedState = false} = {}) {
+		if (!filterState?.[this.header]) return;
+
+		const toLoad = filterState[this.header];
+		this._hasUserSavedState = this._hasUserSavedState || isUserSavedState;
+		this.setBaseStateFromLoaded(toLoad);
+		Object.assign(this._state, toLoad.state);
+		Object.assign(this._nestsHidden, toLoad.nestsHidden);
 	}
 
 	_getStateNotDefault ({nxtState = null} = {}) {
@@ -1706,7 +1714,13 @@ class Filter extends FilterBase {
 		Object.entries(this._nests).forEach(([nestName, nestMeta]) => tgt[nestName] = !!nestMeta.isHidden);
 	}
 
-	_defaultItemState (item) {
+	_defaultItemState (item, {isForce = false} = {}) {
+		// Avoid setting state for new items if the user already has filter state. This prevents the case where e.g.:
+		//   - The user has cleared their source filter;
+		//   - A new source is added to the site;
+		//   - The new source becomes the *only* selected item in their filter.
+		if (!isForce && this._hasUserSavedState) return this._state[item.item] = 0;
+
 		// if both a selFn and a deselFn are specified, we default to deselecting
 		this._state[item.item] = this._getDefaultState(item.item);
 	}
@@ -2889,6 +2903,10 @@ class SourceFilter extends Filter {
 				() => this._doSetPinsVanilla(),
 				{title: `Select a baseline set of sources suitable for any campaign.`},
 			),
+			new ContextUtil.Action(
+				"Select All Non-UA Sources",
+				() => this._doSetPinsNonUa(),
+			),
 			null,
 			new ContextUtil.Action(
 				"Select SRD Sources",
@@ -2942,11 +2960,11 @@ class SourceFilter extends Filter {
 	}
 
 	_doSetPinsStandard () {
-		Object.keys(this._state).forEach(k => this._state[k] = SourceUtil.getFilterGroup(k) === 0 ? 1 : 0);
+		Object.keys(this._state).forEach(k => this._state[k] = [SourceUtil.FILTER_GROUP_STANDARD, SourceUtil.FILTER_GROUP_PARTNERED].includes(SourceUtil.getFilterGroup(k)) ? 1 : 0);
 	}
 
 	_doSetPinsNonStandard () {
-		Object.keys(this._state).forEach(k => this._state[k] = SourceUtil.getFilterGroup(k) === 1 ? 1 : 0);
+		Object.keys(this._state).forEach(k => this._state[k] = SourceUtil.getFilterGroup(k) === SourceUtil.FILTER_GROUP_STANDARD ? 1 : 0);
 	}
 
 	_doSetPinsSupplements (isIncludeUnofficial) {
@@ -2958,11 +2976,15 @@ class SourceFilter extends Filter {
 	}
 
 	_doSetPinsHomebrew () {
-		Object.keys(this._state).forEach(k => this._state[k] = SourceUtil.getFilterGroup(k) === 2 ? 1 : 0);
+		Object.keys(this._state).forEach(k => this._state[k] = SourceUtil.getFilterGroup(k) === SourceUtil.FILTER_GROUP_HOMEBREW ? 1 : 0);
 	}
 
 	_doSetPinsVanilla () {
 		Object.keys(this._state).forEach(k => this._state[k] = Parser.SOURCES_VANILLA.has(k) ? 1 : 0);
+	}
+
+	_doSetPinsNonUa () {
+		Object.keys(this._state).forEach(k => this._state[k] = !SourceUtil.isPrereleaseSource(k) ? 1 : 0);
 	}
 
 	_doSetPinsSrd () {
@@ -3008,13 +3030,13 @@ class SourceFilter extends Filter {
 
 	_doRenderPills_doRenderWrpGroup_getHrDivider (group) {
 		switch (group) {
-			case 1: return this._doRenderPills_doRenderWrpGroup_getHrDivider_groupOne(group);
-			case 2: return this._doRenderPills_doRenderWrpGroup_getHrDivider_groupTwo(group);
+			case SourceUtil.FILTER_GROUP_NON_STANDARD: return this._doRenderPills_doRenderWrpGroup_getHrDivider_groupNonStandard(group);
+			case SourceUtil.FILTER_GROUP_HOMEBREW: return this._doRenderPills_doRenderWrpGroup_getHrDivider_groupBrew(group);
 			default: return super._doRenderPills_doRenderWrpGroup_getHrDivider(group);
 		}
 	}
 
-	_doRenderPills_doRenderWrpGroup_getHrDivider_groupOne (group) {
+	_doRenderPills_doRenderWrpGroup_getHrDivider_groupNonStandard (group) {
 		let dates = [];
 		const comp = BaseComponent.fromObject({
 			min: 0,
@@ -3154,7 +3176,7 @@ class SourceFilter extends Filter {
 		});
 	}
 
-	_doRenderPills_doRenderWrpGroup_getHrDivider_groupTwo (group) {
+	_doRenderPills_doRenderWrpGroup_getHrDivider_groupBrew (group) {
 		const btnClear = e_({
 			tag: "button",
 			clazz: `btn btn-xxs btn-default px-1`,
@@ -3775,9 +3797,11 @@ class AbilityScoreFilter extends FilterBase {
 		};
 	}
 
-	setStateFromLoaded (filterState) {
-		if (!filterState || !filterState[this.header]) return;
+	setStateFromLoaded (filterState, {isUserSavedState = false} = {}) {
+		if (!filterState?.[this.header]) return;
+
 		const toLoad = filterState[this.header];
+		this._hasUserSavedState = this._hasUserSavedState || isUserSavedState;
 		this.setBaseStateFromLoaded(toLoad);
 		Object.assign(this._state, toLoad.state);
 	}
@@ -4043,10 +4067,11 @@ class RangeFilter extends FilterBase {
 		};
 	}
 
-	setStateFromLoaded (filterState) {
+	setStateFromLoaded (filterState, {isUserSavedState = false} = {}) {
 		if (!filterState?.[this.header]) return;
 
 		const toLoad = filterState[this.header];
+		this._hasUserSavedState = this._hasUserSavedState || isUserSavedState;
 
 		// region Ensure to-be-loaded state is populated with sensible data
 		const tgt = (toLoad.state || {});
@@ -4656,10 +4681,11 @@ class OptionsFilter extends FilterBase {
 		};
 	}
 
-	setStateFromLoaded (filterState) {
-		if (!filterState || !filterState[this.header]) return;
+	setStateFromLoaded (filterState, {isUserSavedState = false} = {}) {
+		if (!filterState?.[this.header]) return;
 
 		const toLoad = filterState[this.header];
+		this._hasUserSavedState = this._hasUserSavedState || isUserSavedState;
 
 		this.setBaseStateFromLoaded(toLoad);
 
@@ -4958,13 +4984,14 @@ class MultiFilter extends FilterBase {
 		return out;
 	}
 
-	setStateFromLoaded (filterState) {
-		if (filterState && filterState[this.header]) {
-			const toLoad = filterState[this.header];
-			this.setBaseStateFromLoaded(toLoad);
-			Object.assign(this._state, toLoad.state);
-			this._filters.forEach(it => it.setStateFromLoaded(filterState));
-		}
+	setStateFromLoaded (filterState, {isUserSavedState = false} = {}) {
+		if (!filterState?.[this.header]) return;
+
+		const toLoad = filterState[this.header];
+		this._hasUserSavedState = this._hasUserSavedState || isUserSavedState;
+		this.setBaseStateFromLoaded(toLoad);
+		Object.assign(this._state, toLoad.state);
+		this._filters.forEach(it => it.setStateFromLoaded(filterState, {isUserSavedState}));
 	}
 
 	getSubHashes () {
