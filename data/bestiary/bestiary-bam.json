@@ -690,6 +690,10 @@
 					]
 				}
 			],
+			"legendaryGroup": {
+				"name": "Solar Dragon",
+				"source": "BAM"
+			},
 			"dragonAge": "adult",
 			"traitTags": [
 				"Flyby",
@@ -725,7 +729,8 @@
 				"wisdom"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Ancient Lunar Dragon",
@@ -1038,6 +1043,10 @@
 					]
 				}
 			],
+			"legendaryGroup": {
+				"name": "Solar Dragon",
+				"source": "BAM"
+			},
 			"dragonAge": "ancient",
 			"traitTags": [
 				"Flyby",
@@ -1238,6 +1247,7 @@
 				"O"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -1388,6 +1398,7 @@
 				"O"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -1509,6 +1520,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -1665,6 +1677,7 @@
 				"O"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -1794,6 +1807,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -2181,6 +2195,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -3255,6 +3270,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RW"
 			],
@@ -3384,6 +3400,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RW"
 			],
@@ -3517,6 +3534,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW"
 			],
@@ -3650,6 +3668,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -4125,6 +4144,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW"
 			],
@@ -4213,6 +4233,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -4325,6 +4346,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -5873,6 +5895,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -5992,6 +6015,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -6405,6 +6429,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -6576,6 +6601,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -7471,6 +7497,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -8799,7 +8826,8 @@
 				"constitution"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Zodar",

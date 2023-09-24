@@ -113,6 +113,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -141,6 +142,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -524,6 +528,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -621,6 +628,7 @@
 				"CC"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -7535,6 +7543,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -7944,6 +7955,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -8489,6 +8503,7 @@
 				"CW"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -8707,6 +8722,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -9114,6 +9130,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -9474,6 +9491,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -9557,6 +9575,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -9651,6 +9672,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -9839,6 +9861,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -9879,6 +9902,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -10241,6 +10267,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -10438,6 +10467,9 @@
 				},
 				{
 					"source": "PSZ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -10789,6 +10821,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -10822,6 +10855,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -10981,6 +11017,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -11484,6 +11523,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -11576,6 +11618,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -12453,6 +12496,9 @@
 				},
 				{
 					"source": "IDRotF"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -13803,6 +13849,12 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -13908,6 +13960,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -14047,6 +14100,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -14309,6 +14363,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -14545,6 +14600,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -15158,6 +15214,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RNG",
@@ -15178,6 +15235,9 @@
 				},
 				{
 					"source": "BGDIA"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -15646,6 +15706,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -15795,6 +15858,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -15962,6 +16028,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -16292,6 +16361,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -16492,6 +16562,9 @@
 				},
 				{
 					"source": "GotSF"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -16565,6 +16638,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -17469,6 +17543,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -17609,6 +17686,7 @@
 				"CC"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -17694,6 +17772,12 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -17787,6 +17871,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -17911,6 +17996,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -18118,6 +18204,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -18617,6 +18704,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -18858,6 +18946,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -19124,6 +19213,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -19247,6 +19339,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -19767,6 +19860,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -19797,6 +19891,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -20183,6 +20280,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -20305,6 +20403,12 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -20442,6 +20546,9 @@
 				},
 				{
 					"source": "BGDIA"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -20973,6 +21080,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -21070,6 +21178,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -21209,6 +21320,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -21294,6 +21406,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -21459,6 +21574,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -22209,6 +22325,7 @@
 				"CD"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -22390,6 +22507,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -22551,6 +22669,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -22676,6 +22795,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -22711,6 +22831,9 @@
 				},
 				{
 					"source": "ToA"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -22962,6 +23085,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -23273,6 +23399,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -23721,6 +23848,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -23924,6 +24052,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -24270,6 +24399,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -25726,6 +25856,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -25925,6 +26056,12 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -26293,6 +26430,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -26649,6 +26789,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -26671,6 +26812,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -26767,6 +26911,7 @@
 				"Y"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -27001,6 +27146,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -27031,6 +27177,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -27781,6 +27930,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -27993,6 +28145,12 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -28180,6 +28338,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -28587,6 +28748,9 @@
 				},
 				{
 					"source": "WBtW"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -29694,6 +29858,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -29934,6 +30101,9 @@
 				},
 				{
 					"source": "WBtW"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -30549,6 +30719,12 @@
 				},
 				{
 					"source": "PSX"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -31231,6 +31407,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -31342,6 +31521,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -31445,6 +31627,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -31467,6 +31650,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -31568,6 +31754,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -32185,6 +32372,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -32325,6 +32513,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW",
@@ -32588,6 +32777,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RNG",
@@ -32633,6 +32823,9 @@
 				},
 				{
 					"source": "WBtW"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -32766,6 +32959,12 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -32869,6 +33068,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -32908,6 +33108,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -33022,6 +33225,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -33573,6 +33777,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -33730,6 +33937,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -33921,6 +34131,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -34700,6 +34911,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -34838,6 +35052,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -34921,6 +35138,12 @@
 				"type": "internal",
 				"path": "bestiary/grick.mp3"
 			},
+			"altArt": [
+				{
+					"name": "Crystal Grick",
+					"source": "PaBTSO"
+				}
+			],
 			"senseTags": [
 				"D"
 			],
@@ -34952,6 +35175,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -35198,6 +35424,9 @@
 			"otherSources": [
 				{
 					"source": "WDMM"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -35294,6 +35523,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -35445,6 +35675,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -35989,6 +36220,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -36126,6 +36358,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -36254,6 +36487,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -36553,6 +36787,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -36674,6 +36911,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -36987,6 +37225,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -37150,6 +37389,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -37245,6 +37487,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -37384,6 +37627,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -37539,6 +37783,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -37576,6 +37821,9 @@
 				},
 				{
 					"source": "CM"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -37684,6 +37932,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -38113,6 +38364,9 @@
 				},
 				{
 					"source": "PSZ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -39068,6 +39322,9 @@
 				},
 				{
 					"source": "ERLW"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -39241,6 +39498,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -39758,6 +40018,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -39887,6 +40148,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -40183,6 +40445,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -40332,6 +40595,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -40357,6 +40621,9 @@
 				},
 				{
 					"source": "MOT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -40719,6 +40986,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -41407,6 +41675,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -42157,6 +42426,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -42294,6 +42564,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -42456,6 +42727,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -42737,6 +43009,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -42884,6 +43159,7 @@
 				"CW"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -43772,6 +44048,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -44035,6 +44312,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -44176,7 +44454,7 @@
 					"source": "IMR"
 				},
 				{
-					"source": "MOT"
+					"source": "CM"
 				}
 			],
 			"size": [
@@ -44283,6 +44561,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -44394,6 +44673,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -44561,6 +44841,9 @@
 				},
 				{
 					"source": "BGDIA"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -44747,6 +45030,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -44958,6 +45242,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -45475,6 +45762,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -45618,6 +45906,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -45745,6 +46034,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -46038,6 +46328,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -47071,6 +47364,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -47791,6 +48087,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -47838,6 +48135,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -47975,6 +48275,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -48158,6 +48461,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForced": [
@@ -48206,6 +48510,12 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -48491,6 +48801,12 @@
 				},
 				{
 					"source": "PSZ"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -48576,6 +48892,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -48613,6 +48930,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -48694,6 +49014,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"hasToken": true,
@@ -48890,6 +49211,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -48946,6 +49268,12 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -49054,6 +49382,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -49221,6 +49550,7 @@
 				"CC"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -49384,6 +49714,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -49528,6 +49859,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -49565,6 +49897,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -49831,6 +50166,12 @@
 				},
 				{
 					"source": "DoSI"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -50443,6 +50784,9 @@
 				},
 				{
 					"source": "IDRotF"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -50861,6 +51205,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -51201,6 +51546,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -51931,6 +52277,7 @@
 				"CC"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -52222,6 +52569,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -52493,6 +52843,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -52868,6 +53221,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -53699,6 +54055,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -53966,6 +54325,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -54096,6 +54458,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -54592,6 +54957,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -55218,6 +55586,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -55367,6 +55736,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -55704,6 +56074,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW",
@@ -55875,6 +56246,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -56285,6 +56657,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -57192,6 +57565,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -57325,6 +57701,9 @@
 				},
 				{
 					"source": "GoS"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -57678,6 +58057,12 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -57763,6 +58148,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -57790,6 +58176,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -58254,6 +58643,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -58305,6 +58695,9 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -58424,6 +58817,10 @@
 			},
 			"altArt": [
 				{
+					"name": "Forge of Spells Spectator",
+					"source": "PaBTSO"
+				},
+				{
 					"name": "Spectator",
 					"source": "RMBRE"
 				}
@@ -58526,6 +58923,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -58948,6 +59348,9 @@
 				},
 				{
 					"source": "JttRC"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -59239,6 +59642,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -59425,6 +59829,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -59634,6 +60039,12 @@
 				},
 				{
 					"source": "KftGV"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -59864,6 +60275,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -60251,6 +60663,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RW"
@@ -62298,6 +62711,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -62708,6 +63122,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -62922,6 +63337,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -62965,6 +63381,12 @@
 				},
 				{
 					"source": "WDMM"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -63430,6 +63852,12 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -63844,6 +64272,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -63885,6 +64314,9 @@
 				},
 				{
 					"source": "LoX"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -65144,6 +65576,7 @@
 			],
 			"miscTags": [
 				"HPR",
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -65337,6 +65770,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -66235,6 +66669,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -66400,6 +66837,9 @@
 				},
 				{
 					"source": "DSotDQ"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -66522,6 +66962,9 @@
 				},
 				{
 					"source": "WBtW"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -66743,6 +67186,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForced": [
@@ -66925,6 +67369,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -67107,6 +67552,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -67286,6 +67732,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -67484,6 +67931,7 @@
 				"S"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -67749,6 +68197,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -67879,6 +68330,7 @@
 			],
 			"miscTags": [
 				"HPR",
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -68208,6 +68660,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW"
 			],
@@ -68392,6 +68845,12 @@
 				},
 				{
 					"source": "CM"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -68661,6 +69120,9 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -68929,6 +69391,9 @@
 				},
 				{
 					"source": "WDMM"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -69207,6 +69672,9 @@
 				},
 				{
 					"source": "CRCotN"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -70880,6 +71348,12 @@
 				},
 				{
 					"source": "RMBRE"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -72314,6 +72788,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RNG",
@@ -72527,6 +73002,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -72920,6 +73396,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -73101,6 +73578,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RNG",
 				"RW"
@@ -73188,6 +73666,12 @@
 				},
 				{
 					"source": "PSI"
+				},
+				{
+					"source": "HftT"
+				},
+				{
+					"source": "PaBTSO"
 				}
 			],
 			"size": [
@@ -73254,6 +73738,12 @@
 				"type": "internal",
 				"path": "bestiary/zombie.mp3"
 			},
+			"altArt": [
+				{
+					"name": "Dwarf Zombie",
+					"source": "PaBTSO"
+				}
+			],
 			"traitTags": [
 				"Undead Fortitude"
 			],

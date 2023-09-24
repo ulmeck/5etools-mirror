@@ -493,6 +493,8 @@ class TagCondition {
 					);
 					return ptrStack._
 						.replace(/{@condition (prone)} (to)\b/gi, "$1 $2")
+						.replace(/{@condition (petrified)} (wood)\b/gi, "$1 $2")
+						.replace(/{@condition (invisible)} (stalker)/gi, "$1 $2")
 					;
 				},
 			},
@@ -765,7 +767,7 @@ class ActionTag {
 		}
 
 		strMod = strMod
-			.replace(/(Extra|Sneak) {@action Attack}/g, (...m) => `${m[1]} Attack`)
+			.replace(/(Extra|Sneak|Weapon|Spell) {@action Attack}/g, (...m) => `${m[1]} Attack`)
 		;
 
 		return strMod;
