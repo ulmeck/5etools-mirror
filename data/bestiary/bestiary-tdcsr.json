@@ -351,6 +351,7 @@
 				"CD"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -665,6 +666,7 @@
 				"CD"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -865,7 +867,8 @@
 				"Common"
 			],
 			"hasFluff": true,
-			"hasFluffImages": true
+			"hasFluffImages": true,
+			"hasToken": true
 		},
 		{
 			"name": "Blighted Sapling",
@@ -983,7 +986,8 @@
 			"miscTags": [
 				"AOE",
 				"MW"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Centaur Skeleton",
@@ -1117,6 +1121,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RCH",
 				"RNG",
@@ -1596,6 +1601,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -1695,6 +1701,7 @@
 				"B"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -2394,7 +2401,8 @@
 				"constitution"
 			],
 			"hasFluff": true,
-			"hasFluffImages": true
+			"hasFluffImages": true,
+			"hasToken": true
 		},
 		{
 			"name": "Doty X",
@@ -2529,7 +2537,8 @@
 				"Common"
 			],
 			"hasFluff": true,
-			"hasFluffImages": true
+			"hasFluffImages": true,
+			"hasToken": true
 		},
 		{
 			"name": "Ember Roc",
@@ -2753,6 +2762,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -3387,6 +3397,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -3801,6 +3812,7 @@
 				"CP"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -4782,6 +4794,7 @@
 				"CC"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -4876,7 +4889,8 @@
 			"conditionInflict": [
 				"prone"
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasToken": true
 		},
 		{
 			"name": "Platinum Golem",
@@ -5026,6 +5040,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW",
 				"RCH"
 			],
@@ -5214,6 +5229,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -5336,6 +5352,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -5711,6 +5728,7 @@
 				"CW"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"
@@ -5998,6 +6016,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"savingThrowForcedSpell": [
@@ -6037,7 +6056,8 @@
 				}
 			},
 			"hasFluff": true,
-			"hasFluffImages": true
+			"hasFluffImages": true,
+			"hasToken": true
 		},
 		{
 			"name": "Scanlan Shorthalt",
@@ -6504,6 +6524,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"MLW",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -7027,6 +7048,7 @@
 				"I"
 			],
 			"miscTags": [
+				"MLW",
 				"MW"
 			],
 			"conditionInflict": [
@@ -7192,6 +7214,7 @@
 				"P"
 			],
 			"miscTags": [
+				"MLW",
 				"MW",
 				"RW",
 				"THW"

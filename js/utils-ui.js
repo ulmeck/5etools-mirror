@@ -336,6 +336,7 @@ class UiUtil {
 	 * @param [opts.isHeight100] {boolean}
 	 * @param [opts.isWidth100] {boolean}
 	 * @param [opts.isMinHeight0] {boolean}
+	 * @param [opts.isMinWidth0] {boolean}
 	 * @param [opts.isMaxWidth640p] {boolean}
 	 * @param [opts.isFullscreenModal] {boolean} An alternate mode.
 	 * @param [opts.isHeaderBorder] {boolean}
@@ -409,6 +410,7 @@ class UiUtil {
 			opts.isUncappedHeight ? "ui-modal__inner--uncap-height" : "",
 			opts.isUncappedWidth ? "ui-modal__inner--uncap-width" : "",
 			opts.isMinHeight0 ? `ui-modal__inner--no-min-height` : "",
+			opts.isMinWidth0 ? `ui-modal__inner--no-min-width` : "",
 			opts.isMaxWidth640p ? `ui-modal__inner--max-width-640p` : "",
 			opts.isFullscreenModal ? `ui-modal__inner--mode-fullscreen my-0 pt-0` : "",
 			opts.hasFooter ? `pb-0` : "",
@@ -2456,6 +2458,7 @@ class InputUiUtil {
 	 * @param [opts.textNo] Text for "no" button.
 	 * @param [opts.textSkip] Text for "skip" button.
 	 * @param [opts.htmlDescription] Description HTML for the modal.
+	 * @param [opts.$eleDescription] Description element for the modal.
 	 * @param [opts.storageKey] Storage key to use when "remember" options are passed.
 	 * @param [opts.isGlobal] If the stored setting is global when "remember" options are passed.
 	 * @param [opts.fnRemember] Custom function to run when saving the "yes and remember" option.
@@ -2506,7 +2509,8 @@ class InputUiUtil {
 			isMinHeight0: true,
 		});
 
-		if (opts.htmlDescription && opts.htmlDescription.trim()) $$`<div class="ve-flex w-100 mb-1">${opts.htmlDescription}</div>`.appendTo($modalInner);
+		if (opts.$eleDescription?.length) $$`<div class="ve-flex w-100 mb-1">${opts.$eleDescription}</div>`.appendTo($modalInner);
+		else if (opts.htmlDescription && opts.htmlDescription.trim()) $$`<div class="ve-flex w-100 mb-1">${opts.htmlDescription}</div>`.appendTo($modalInner);
 		$$`<div class="ve-flex-v-center ve-flex-h-right py-1 px-1">${$btnTrueRemember}${$btnTrue}${$btnFalse}${$btnSkip}</div>`.appendTo($modalInner);
 
 		if (doAutoResizeModal) doAutoResizeModal();
@@ -3949,8 +3953,13 @@ class _RenderableCollectionGenericRowsSyncAsyncUtils {
 
 		const eleA = $eles.get(ixA);
 		const eleB = $eles.get(ixB);
+
+		const eleActive = document.activeElement;
+
 		$(eleA).insertAfter(eleB);
 		$(eleB).insertBefore($eles.get(ixA + 1));
+
+		if (eleActive) eleActive.focus();
 	}
 
 	doReorderExistingComponent (renderedMeta, entity, i) {

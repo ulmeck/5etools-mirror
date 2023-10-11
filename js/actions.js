@@ -1,12 +1,6 @@
 "use strict";
 
 class ActionsSublistManager extends SublistManager {
-	constructor () {
-		super({
-			sublistClass: "subactions",
-		});
-	}
-
 	pGetSublistItem (it, hash) {
 		const time = it.time ? it.time.map(tm => PageFilterActions.getTimeText(tm)).join("/") : "\u2014";
 
@@ -43,9 +37,9 @@ class ActionsPage extends ListPage {
 
 			pageFilter,
 
-			listClass: "actions",
-
 			dataProps: ["action"],
+
+			isMarkdownPopout: true,
 
 			isPreviewable: true,
 		});

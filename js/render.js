@@ -571,7 +571,7 @@ globalThis.Renderer = function () {
 	this._renderImage_getUrl = function (entry) {
 		let url = Renderer.utils.getMediaUrl(entry, "href", "img");
 		for (const plugin of this._getPlugins(`image_urlPostProcess`)) {
-			url = plugin(entry, url) || plugin(entry, url);
+			url = plugin(entry, url) || url;
 		}
 		return url;
 	};
@@ -579,7 +579,7 @@ globalThis.Renderer = function () {
 	this._renderImage_getUrlThumbnail = function (entry) {
 		let url = Renderer.utils.getMediaUrl(entry, "hrefThumbnail", "img");
 		for (const plugin of this._getPlugins(`image_urlThumbnailPostProcess`)) {
-			url = plugin(entry, url) || plugin(entry, url);
+			url = plugin(entry, url) || url;
 		}
 		return url;
 	};
@@ -774,7 +774,7 @@ globalThis.Renderer = function () {
 			? this._getPagePart(entry)
 			: "";
 		const partExpandCollapse = !this._isPartPageExpandCollapseDisabled && !isInlineTitle
-			? `<span class="rd__h-toggle ml-2 clickable" data-rd-h-toggle-button="true">[\u2013]</span>`
+			? `<span class="rd__h-toggle ml-2 clickable no-select" data-rd-h-toggle-button="true" title="Toggle Visibility (CTRL to Toggle All)">[\u2013]</span>`
 			: "";
 		const partPageExpandCollapse = !this._isPartPageExpandCollapseDisabled && (pagePart || partExpandCollapse)
 			? `<span class="ve-flex-vh-center">${[pagePart, partExpandCollapse].filter(Boolean).join("")}</span>`
@@ -895,6 +895,10 @@ globalThis.Renderer = function () {
 		}
 	};
 
+	this._getPtExpandCollapseSpecial = function () {
+		return `<span class="rd__h-toggle ml-2 clickable no-select" data-rd-h-special-toggle-button="true" title="Toggle Visibility (CTRL to Toggle All)">[\u2013]</span>`;
+	};
+
 	this._renderInset = function (entry, textStack, meta, options) {
 		const dataString = this._renderEntriesSubtypes_getDataString(entry);
 		textStack[0] += `<${this.wrapperTag} class="rd__b-special rd__b-inset ${this._getMutatedStyleString(entry.style || "")}" ${dataString}>`;
@@ -903,7 +907,7 @@ globalThis.Renderer = function () {
 		this._handleTrackDepth(entry, 1);
 
 		const pagePart = this._getPagePart(entry, true);
-		const partExpandCollapse = `<span class="rd__h-toggle ml-2 clickable" data-rd-h-special-toggle-button="true">[\u2013]</span>`;
+		const partExpandCollapse = this._getPtExpandCollapseSpecial();
 		const partPageExpandCollapse = `<span class="ve-flex-vh-center">${[pagePart, partExpandCollapse].filter(Boolean).join("")}</span>`;
 
 		if (entry.name != null) {
@@ -936,7 +940,7 @@ globalThis.Renderer = function () {
 		this._handleTrackDepth(entry, 1);
 
 		const pagePart = this._getPagePart(entry, true);
-		const partExpandCollapse = `<span class="rd__h-toggle ml-2 clickable" data-rd-h-special-toggle-button="true">[\u2013]</span>`;
+		const partExpandCollapse = this._getPtExpandCollapseSpecial();
 		const partPageExpandCollapse = `<span class="ve-flex-vh-center">${[pagePart, partExpandCollapse].filter(Boolean).join("")}</span>`;
 
 		if (entry.name != null) {
@@ -967,7 +971,7 @@ globalThis.Renderer = function () {
 		this._handleTrackDepth(entry, 1);
 
 		const pagePart = this._getPagePart(entry, true);
-		const partExpandCollapse = `<span class="rd__h-toggle ml-2 clickable" data-rd-h-special-toggle-button="true">[\u2013]</span>`;
+		const partExpandCollapse = this._getPtExpandCollapseSpecial();
 		const partPageExpandCollapse = `<span class="ve-flex-vh-center">${[pagePart, partExpandCollapse].filter(Boolean).join("")}</span>`;
 
 		textStack[0] += `<${this.wrapperTag} class="rd__b-special rd__b-inset" ${dataString}>`;
@@ -1042,7 +1046,12 @@ globalThis.Renderer = function () {
 
 		if (entry.spells && !hidden.has("spells")) {
 			const tempList = {type: "list", style: "list-hang-notitle", items: [], data: {isSpellList: true}};
-			for (let lvl = 0; lvl < 10; ++lvl) {
+
+			const lvls = Object.keys(entry.spells)
+				.map(lvl => Number(lvl))
+				.sort(SortUtil.ascSort);
+
+			for (const lvl of lvls) {
 				const spells = entry.spells[lvl];
 				if (spells) {
 					let levelCantrip = `${Parser.spLevelToFull(lvl)}${(lvl === 0 ? "s" : " level")}`;
@@ -1056,6 +1065,7 @@ globalThis.Renderer = function () {
 					tempList.items.push({type: "itemSpell", name: `${levelCantrip}${slotsAtWill}:`, entry: this._renderSpellcasting_getRenderableList(spells.spells).join(", ") || "\u2014"});
 				}
 			}
+
 			toRender[0].entries.push(tempList);
 		}
 
@@ -1271,7 +1281,7 @@ globalThis.Renderer = function () {
 	this._renderStatblockInline = function (entry, textStack, meta, options) {
 		const fnGetRenderCompact = Renderer.hover.getFnRenderCompact(entry.dataType);
 
-		const headerName = entry.data?.name;
+		const headerName = entry.displayName || entry.data?.name;
 		const headerStyle = entry.style;
 
 		if (!fnGetRenderCompact) {
@@ -1362,7 +1372,7 @@ globalThis.Renderer = function () {
 			return;
 		}
 
-		this._renderDataHeader(textStack, entry.name, entry.style, {isCollapsed: entry.collapsed});
+		this._renderDataHeader(textStack, entry.displayName || entry.name, entry.style, {isCollapsed: entry.collapsed});
 		textStack[0] += `<tr>
 			<td colspan="6" data-rd-tag="${(entry.tag || "").qq()}" data-rd-page="${(page || "").qq()}" data-rd-source="${(source || "").qq()}" data-rd-hash="${(hash || "").qq()}" data-rd-name="${(entry.name || "").qq()}" data-rd-display-name="${(entry.displayName || "").qq()}" data-rd-style="${(entry.style || "").qq()}">
 				<i>Loading ${entry.tag ? `${Renderer.get().render(asTag)}` : entry.displayName || entry.name}...</i>
@@ -1814,18 +1824,14 @@ globalThis.Renderer = function () {
 				break;
 			}
 			case "@area": {
-				const [compactText, areaId, flags, ...others] = Renderer.splitTagByPipe(text);
-
-				const renderText = flags && flags.includes("x")
-					? compactText
-					: `${flags && flags.includes("u") ? "A" : "a"}rea ${compactText}`;
+				const {areaId, displayText} = Renderer.tag.TAG_LOOKUP.area.getMeta(tag, text);
 
 				if (typeof BookUtil === "undefined") { // for the roll20 script
-					textStack[0] += renderText;
+					textStack[0] += displayText;
 				} else {
 					const area = BookUtil.curRender.headerMap[areaId] || {entry: {name: ""}}; // default to prevent rendering crash on bad tag
 					const hoverMeta = Renderer.hover.getMakePredefinedHover(area.entry, {isLargeBookContent: true, depth: area.depth});
-					textStack[0] += `<a href="#${BookUtil.curRender.curBookId},${area.chapter},${UrlUtil.encodeForHash(area.entry.name)},0" ${hoverMeta.html}>${renderText}</a>`;
+					textStack[0] += `<a href="#${BookUtil.curRender.curBookId},${area.chapter},${UrlUtil.encodeForHash(area.entry.name)},0" ${hoverMeta.html}>${displayText}</a>`;
 				}
 
 				break;
@@ -2065,34 +2071,56 @@ Renderer.applyProperties = function (entry, object) {
 	for (let i = 0; i < len; ++i) {
 		const s = propSplit[i];
 		if (!s) continue;
+
+		if (!s.startsWith("{=")) {
+			textStack += s;
+			continue;
+		}
+
 		if (s.startsWith("{=")) {
 			const [path, modifiers] = s.slice(2, -1).split("/");
 			let fromProp = object[path];
 
-			if (modifiers) {
-				for (const modifier of modifiers) {
-					switch (modifier) {
-						case "a": // render "a"/"an" depending on prop value
-							fromProp = Renderer.applyProperties._leadingAn.has(fromProp[0].toLowerCase()) ? "an" : "a";
-							break;
+			if (!modifiers) {
+				textStack += fromProp;
+				continue;
+			}
 
-						case "l": fromProp = fromProp.toLowerCase(); break; // convert text to lower case
-						case "t": fromProp = fromProp.toTitleCase(); break; // title-case text
-						case "u": fromProp = fromProp.toUpperCase(); break; // uppercase text
-						case "v": fromProp = Parser.numberToVulgar(fromProp); break; // vulgarize number
-						case "r": fromProp = Math.round(fromProp); break; // round number
-						case "f": fromProp = Math.floor(fromProp); break; // floor number
-						case "c": fromProp = Math.ceil(fromProp); break; // ceiling number
-					}
+			modifiers
+				.split("")
+				.sort((a, b) => Renderer.applyProperties._OP_ORDER.indexOf(a) - Renderer.applyProperties._OP_ORDER.indexOf(b));
+
+			for (const modifier of modifiers) {
+				switch (modifier) {
+					case "a": // render "a"/"an" depending on prop value
+						fromProp = Renderer.applyProperties._LEADING_AN.has(fromProp[0].toLowerCase()) ? "an" : "a";
+						break;
+
+					case "l": fromProp = fromProp.toLowerCase(); break; // convert text to lower case
+					case "t": fromProp = fromProp.toTitleCase(); break; // title-case text
+					case "u": fromProp = fromProp.toUpperCase(); break; // uppercase text
+					case "v": fromProp = Parser.numberToVulgar(fromProp); break; // vulgarize number
+					case "x": fromProp = Parser.numberToText(fromProp); break; // convert number to text
+					case "r": fromProp = Math.round(fromProp); break; // round number
+					case "f": fromProp = Math.floor(fromProp); break; // floor number
+					case "c": fromProp = Math.ceil(fromProp); break; // ceiling number
+
+					default: throw new Error(`Unhandled property modifier "${modifier}"`);
 				}
 			}
+
 			textStack += fromProp;
-		} else textStack += s;
+		}
 	}
 
 	return textStack;
 };
-Renderer.applyProperties._leadingAn = new Set(["a", "e", "i", "o", "u"]);
+Renderer.applyProperties._LEADING_AN = new Set(["a", "e", "i", "o", "u"]);
+Renderer.applyProperties._OP_ORDER = [
+	"r", "f", "c", // operate on value first
+	"v", "x", // cast to desired type
+	"l", "t", "u", "a", // operate on value representation
+];
 
 Renderer.applyAllProperties = function (entries, object = null) {
 	let lastObj = null;
@@ -3193,8 +3221,16 @@ Renderer.utils = {
 
 		static _getHtml_spell ({v, isListMode, isTextOnly}) {
 			return isListMode
-				? v.map(x => x.split("#")[0].split("|")[0].toTitleCase()).join("/")
-				: v.map(sp => Parser.prereqSpellToFull(sp, {isTextOnly})).joinConjunct(", ", " or ");
+				? v.map(sp => {
+					if (typeof sp === "string") return sp.split("#")[0].split("|")[0].toTitleCase();
+					return sp.entrySummary || sp.entry;
+				})
+					.join("/")
+				: v.map(sp => {
+					if (typeof sp === "string") return Parser.prereqSpellToFull(sp, {isTextOnly});
+					return Renderer.get().render(`{@filter ${sp.entry}|spells|${sp.choose}}`);
+				})
+					.joinConjunct(", ", " or ");
 		}
 
 		static _getHtml_feat ({v, isListMode, isTextOnly}) {
@@ -4084,6 +4120,9 @@ Renderer.tag = class {
 
 		/** @abstract */
 		_getStripped (tag, text) { throw new Error("Unimplemented!"); }
+
+		getMeta (tag, text) { return this._getMeta(tag, text); }
+		_getMeta (tag, text) { throw new Error("Unimplemented!"); }
 	};
 
 	static _TagBaseAt = class extends this._TagBase {
@@ -4647,6 +4686,19 @@ Renderer.tag = class {
 				? compactText
 				: `${flags && flags.includes("u") ? "A" : "a"}rea ${compactText}`;
 		}
+
+		_getMeta (tag, text) {
+			const [compactText, areaId, flags] = Renderer.splitTagByPipe(text);
+
+			const displayText = flags && flags.includes("x")
+				? compactText
+				: `${flags && flags.includes("u") ? "A" : "a"}rea ${compactText}`;
+
+			return {
+				areaId,
+				displayText,
+			};
+		}
 	};
 
 	static TagHomebrew = class extends this._TagBaseAt {
@@ -4823,15 +4875,17 @@ Renderer.events = {
 	},
 
 	bindGeneric ({element = document.body} = {}) {
-		$(element)
+		const $ele = $(element)
 			.on("click", `[data-rd-data-embed-header]`, evt => {
 				Renderer.events.handleClick_dataEmbedHeader(evt, evt.currentTarget);
-			})
-			.on("click", `[data-rd-h-toggle-button]`, evt => {
-				Renderer.events.handleClick_headerToggleButton(evt, evt.currentTarget);
-			})
-			.on("click", `[data-rd-h-special-toggle-button]`, evt => {
-				Renderer.events.handleClick_headerToggleButton(evt, evt.currentTarget, {isSpecial: true});
+			});
+
+		Renderer.events._HEADER_TOGGLE_CLICK_SELECTORS
+			.forEach(selector => {
+				$ele
+					.on("click", selector, evt => {
+						Renderer.events.handleClick_headerToggleButton(evt, evt.currentTarget, {selector});
+					});
 			})
 		;
 	},
@@ -4846,11 +4900,32 @@ Renderer.events = {
 		$ele.closest("table").find("tbody").toggleVe();
 	},
 
-	handleClick_headerToggleButton (evt, ele, {isSpecial = false} = {}) {
+	_HEADER_TOGGLE_CLICK_SELECTORS: [
+		`[data-rd-h-toggle-button]`,
+		`[data-rd-h-special-toggle-button]`,
+	],
+
+	handleClick_headerToggleButton (evt, ele, {selector = false} = {}) {
 		evt.stopPropagation();
 		evt.preventDefault();
 
-		const isShow = ele.innerHTML.includes("+");
+		const isShow = this._handleClick_headerToggleButton_doToggleEle(ele, {selector});
+
+		if (!EventUtil.isCtrlMetaKey(evt)) return;
+
+		Renderer.events._HEADER_TOGGLE_CLICK_SELECTORS
+			.forEach(selector => {
+				[...document.querySelectorAll(selector)]
+					.filter(eleOther => eleOther !== ele)
+					.forEach(eleOther => {
+						Renderer.events._handleClick_headerToggleButton_doToggleEle(eleOther, {selector, force: isShow});
+					});
+			})
+		;
+	},
+
+	_handleClick_headerToggleButton_doToggleEle (ele, {selector = false, force = null} = {}) {
+		const isShow = force != null ? force : ele.innerHTML.includes("+");
 
 		let eleNxt = ele.closest(".rd__h").nextElementSibling;
 
@@ -4862,7 +4937,7 @@ Renderer.events = {
 			}
 
 			// For special sections, always collapse the whole thing.
-			if (!isSpecial) {
+			if (selector !== `[data-rd-h-special-toggle-button]`) {
 				const eleToCheck = Renderer.events._handleClick_headerToggleButton_getEleToCheck(eleNxt);
 				if (
 					eleToCheck.classList.contains("rd__b-special")
@@ -4871,11 +4946,13 @@ Renderer.events = {
 				) break;
 			}
 
-			eleNxt.classList.toggle("rd__ele-toggled-hidden");
+			eleNxt.classList.toggle("rd__ele-toggled-hidden", !isShow);
 			eleNxt = eleNxt.nextElementSibling;
 		}
 
 		ele.innerHTML = isShow ? "[\u2013]" : "[+]";
+
+		return isShow;
 	},
 
 	_handleClick_headerToggleButton_getEleToCheck (eleNxt) {
@@ -5022,7 +5099,7 @@ Renderer.feat = {
 			${opts.isSkipNameRow ? "" : Renderer.utils.getNameTr(feat, {page: UrlUtil.PG_FEATS})}
 			<tr class="text"><td colspan="6" class="text">
 			${prerequisite ? `<p>${prerequisite}</p>` : ""}
-			${ptRepeatable ? `<p>${prerequisite}</p>` : ""}
+			${ptRepeatable ? `<p>${ptRepeatable}</p>` : ""}
 		`);
 		renderer.recursiveRender({entries: feat._fullEntries || feat.entries}, renderStack, {depth: 2});
 		renderStack.push(`</td></tr>`);
@@ -8323,19 +8400,24 @@ Renderer.item = {
 		return Renderer.item._createSpecificVariants_isRequiresExcludesMatch(baseItem, genericVariant.excludes, "some");
 	},
 
-	_createSpecificVariants_isRequiresExcludesMatch (baseItem, toMatch, method) {
-		if (!toMatch) return false;
+	_createSpecificVariants_isRequiresExcludesMatch (candidate, requirements, method) {
+		if (candidate == null || requirements == null) return false;
 
-		return Object.entries(toMatch)[method](([k, v]) => {
-			if (v instanceof Array) {
-				return baseItem[k] instanceof Array
-					? baseItem[k].some(it => v.includes(it))
-					: v.includes(baseItem[k]);
+		return Object.entries(requirements)[method](([reqKey, reqVal]) => {
+			if (reqVal instanceof Array) {
+				return candidate[reqKey] instanceof Array
+					? candidate[reqKey].some(it => reqVal.includes(it))
+					: reqVal.includes(candidate[reqKey]);
 			}
 
-			return baseItem[k] instanceof Array
-				? baseItem[k].some(it => v === it)
-				: v === baseItem[k];
+			// Recurse for e.g. `"customProperties": { ... }`
+			if (reqVal != null && typeof reqVal === "object") {
+				return Renderer.item._createSpecificVariants_isRequiresExcludesMatch(candidate[reqKey], reqVal, method);
+			}
+
+			return candidate[reqKey] instanceof Array
+				? candidate[reqKey].some(it => reqVal === it)
+				: reqVal === candidate[reqKey];
 		});
 	},
 
@@ -8678,30 +8760,30 @@ Renderer.item = {
 			if (item._isItemGroup) {
 				if (item.scfType === "arcane" && item.source !== Parser.SRC_ERLW) {
 					Renderer.item._initFullEntries(item);
-					item._fullEntries.push({type: "wrapper", wrapped: "An arcane focus is a special item\u2014an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item\u2014designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "An arcane focus is a special item\u2014an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item\u2014designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 				if (item.scfType === "druid") {
 					Renderer.item._initFullEntries(item);
-					item._fullEntries.push({type: "wrapper", wrapped: "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 				if (item.scfType === "holy") {
 					Renderer.item._initFullEntries(item);
-					item._fullEntries.push({type: "wrapper", wrapped: "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 			} else {
 				if (item.scfType === "arcane") {
 					Renderer.item._initFullEntries(item);
-					item._fullEntries.push({type: "wrapper", wrapped: "An arcane focus is a special item designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "An arcane focus is a special item designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 				if (item.scfType === "druid") {
 					Renderer.item._initFullEntries(item);
-					item._fullEntries.push({type: "wrapper", wrapped: "A druid can use this object as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "A druid can use this object as a spellcasting focus.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 				if (item.scfType === "holy") {
 					Renderer.item._initFullEntries(item);
 
-					item._fullEntries.push({type: "wrapper", wrapped: "A holy symbol is a representation of a god or pantheon.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
-					item._fullEntries.push({type: "wrapper", wrapped: "A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "A holy symbol is a representation of a god or pantheon.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
+					item._fullEntries.push({type: "wrapper", wrapped: "A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", data: {[VeCt.ENTDATA_ITEM_MERGED_ENTRY_TAG]: "type.SCF"}});
 				}
 			}
 		}
@@ -9619,6 +9701,7 @@ Renderer.adventureBook = {
 	getEntryIdLookup (bookData, doThrowError = true) {
 		const out = {};
 		const titlesRel = {};
+		const titlesRelChapter = {};
 
 		let chapIx;
 		const depthStack = [];
@@ -9649,10 +9732,18 @@ Renderer.adventureBook = {
 								};
 
 								if (obj.name) {
+									out[obj.id].name = obj.name;
+
 									const cleanName = obj.name.toLowerCase();
+									out[obj.id].nameClean = cleanName;
+
+									// Relative title index for full-book mode
 									titlesRel[cleanName] = titlesRel[cleanName] || 0;
 									out[obj.id].ixTitleRel = titlesRel[cleanName]++;
-									out[obj.id].nameClean = cleanName;
+
+									// Relative title index per-chapter
+									MiscUtil.getOrSet(titlesRelChapter, chapIx, cleanName, -1);
+									out[obj.id].ixTitleRelChapter = ++titlesRelChapter[chapIx][cleanName];
 								}
 							}
 						}
@@ -9729,10 +9820,13 @@ Renderer.recipe = {
 	},
 
 	getBodyHtml (it) {
-		const {ptMakes, ptServes} = Renderer.recipe._getMakesServesHtml(it);
+		const ptTime = Renderer.recipe.getTimeHtml(it);
+		const {ptMakes, ptServes} = Renderer.recipe.getMakesServesHtml(it);
 
 		return `<div class="ve-flex w-100 rd-recipes__wrp-recipe">
 			<div class="ve-flex-1 ve-flex-col br-1p pr-2">
+				${ptTime || ""}
+
 				${ptMakes || ""}
 				${ptServes || ""}
 
@@ -9743,13 +9837,13 @@ Renderer.recipe = {
 				${it.noteCook ? `<div class="w-100 ve-flex-col mt-4"><div class="ve-flex-vh-center bold mb-1 small-caps">Cook's Notes</div><div class="italic">${Renderer.get().render({entries: it.noteCook})}</div></div>` : ""}
 			</div>
 
-			<div class="pl-2 ve-flex-2 rd-recipes__wrp-instructions">
+			<div class="pl-2 ve-flex-2 rd-recipes__wrp-instructions overflow-x-auto">
 				${Renderer.get().setFirstSection(true).render({entries: it.instructions}, 2)}
 			</div>
 		</div>`;
 	},
 
-	_getMakesServesHtml (it) {
+	getMakesServesHtml (it) {
 		const ptMakes = it.makes ? `<div class="mb-2 ve-flex-v-center">
 			<div class="bold small-caps mr-2">Makes</div>
 			<div>${it._scaleFactor ? `${it._scaleFactor}× ` : ""}${Renderer.get().render(it.makes || it.serves)}</div>
@@ -9761,6 +9855,42 @@ Renderer.recipe = {
 		</div>` : null;
 
 		return {ptMakes, ptServes};
+	},
+
+	getTimeHtml (ent) {
+		if (!Object.keys(ent.time || {}).length) return "";
+
+		return [
+			"total",
+			"preparation",
+			"cooking",
+			...Object.keys(ent.time),
+		]
+			.unique()
+			.filter(prop => ent.time[prop])
+			.map((prop, i, arr) => {
+				const val = ent.time[prop];
+
+				const ptsTime = (
+					val.min != null && val.max != null
+						? [
+							Parser.getMinutesToFull(val.min),
+							Parser.getMinutesToFull(val.max),
+						]
+						: [Parser.getMinutesToFull(val)]
+				);
+
+				const suffix = MiscUtil.findCommonSuffix(ptsTime, {isRespectWordBoundaries: true});
+				const ptTime = ptsTime
+					.map(it => !suffix.length ? it : it.slice(0, -suffix.length))
+					.join(" to ");
+
+				return `<div class="split-v-center ${i === arr.length - 1 ? "mb-2" : "mb-1p"}">
+					<b class="small-caps">${prop.toTitleCase()} Time:</b>
+					<span>${ptTime}${suffix}</span>
+				</div>`;
+			})
+			.join("");
 	},
 
 	pGetFluff (it) {
@@ -9777,6 +9907,7 @@ Renderer.recipe = {
 	},
 
 	_RE_AMOUNT: /(?<tagAmount>{=amount\d+(?:\/[^}]+)?})/g,
+	_SCALED_PRECISION_LIMIT: 10 ** 6,
 	getScaledRecipe (r, scaleFactor) {
 		const cpyR = MiscUtil.copyFast(r);
 
@@ -9803,10 +9934,7 @@ Renderer.recipe = {
 									}
 
 									let scaled = base * scaleFactor;
-									if (Math.abs(scaled - Math.round(scaled)) < 0.1) {
-										scaled = Math.round(scaled);
-									}
-									obj[k] = scaled;
+									obj[k] = Math.round(base * scaleFactor * Renderer.recipe._SCALED_PRECISION_LIMIT) / Renderer.recipe._SCALED_PRECISION_LIMIT;
 								});
 
 							// region Attempt to singleize/pluralize units
@@ -9925,6 +10053,10 @@ Renderer.recipe = {
 			const c = obj.entry[i];
 			switch (c) {
 				case "{": {
+					if (!depth && stack) {
+						parts.push(stack);
+						stack = "";
+					}
 					depth++;
 					stack += c;
 					break;
@@ -10765,7 +10897,7 @@ Renderer.hover = {
 		hoverWindow.doMaximize = Renderer.hover._getShowWindow_doMaximize.bind(this, {$brdrTop, $hov});
 		hoverWindow.doZIndexToFront = Renderer.hover._getShowWindow_doZIndexToFront.bind(this, {$hov, hoverWindow, hoverId});
 
-		if (opts.isPopout) pDoPopout().then(null);
+		if (opts.isPopout) Renderer.hover._getShowWindow_pDoPopout({$hov, position, mouseUpId, mouseMoveId, resizeId, hoverId, opts, hoverWindow, $content});
 
 		return hoverWindow;
 	},
@@ -10856,7 +10988,7 @@ Renderer.hover = {
 		$hov.toggleClass("hwin--minified", false);
 	},
 
-	async _getShowWindow_pDoPopout ({$hov, position, mouseUpId, mouseMoveId, resizeId, hoverId, opts, hoverWindow, $content}, {evt}) {
+	async _getShowWindow_pDoPopout ({$hov, position, mouseUpId, mouseMoveId, resizeId, hoverId, opts, hoverWindow, $content}, {evt} = {}) {
 		const dimensions = opts.fnGetPopoutSize ? opts.fnGetPopoutSize() : {width: 600, height: $content.height()};
 		const win = window.open(
 			"",
