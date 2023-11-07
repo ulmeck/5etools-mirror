@@ -1929,7 +1929,15 @@ class SearchWidget {
 			fnTransform: doc => {
 				const cpy = MiscUtil.copyFast(doc);
 				Object.assign(cpy, SearchWidget.docToPageSourceHash(cpy));
-				cpy.tag = `{@spell ${doc.n.toSpellCase()}${doc.s !== Parser.SRC_PHB ? `|${doc.s}` : ""}}`;
+				const hashName = UrlUtil.decodeHash(cpy.u)[0].toTitleCase();
+				const isRename = hashName.toLowerCase() !== cpy.n.toLowerCase();
+				const pts = [
+					isRename ? hashName : cpy.n.toSpellCase(),
+					doc.s !== Parser.SRC_PHB ? doc.s : "",
+					isRename ? cpy.n.toSpellCase() : "",
+				];
+				while (pts.at(-1) === "") pts.pop();
+				cpy.tag = `{@spell ${pts.join("|")}}`;
 				return cpy;
 			},
 		};
@@ -2751,6 +2759,8 @@ class InputUiUtil {
 	/**
 	 * @param [opts] Options.
 	 * @param [opts.title] Prompt title.
+	 * @param [opts.htmlDescription] Description HTML for the modal.
+	 * @param [opts.$eleDescription] Description element for the modal.
 	 * @param [opts.default] Default value.
 	 * @param [opts.autocomplete] Array of autocomplete strings. REQUIRES INCLUSION OF THE TYPEAHEAD LIBRARY.
 	 * @param [opts.isCode] If the text is code.
@@ -2809,6 +2819,7 @@ class InputUiUtil {
 		const {$modalInner, doClose, pGetResolved, doAutoResize: doAutoResizeModal} = await InputUiUtil._pGetShowModal({
 			title: opts.title || "Enter Text",
 			isMinHeight0: true,
+			isWidth100: true,
 		});
 
 		const $btnOk = this._$getBtnOk({comp, opts, doClose});
@@ -2816,6 +2827,8 @@ class InputUiUtil {
 		const $btnSkip = this._$getBtnSkip({comp, opts, doClose});
 
 		if (opts.$elePre) opts.$elePre.appendTo($modalInner);
+		if (opts.$eleDescription?.length) $$`<div class="ve-flex w-100 mb-1">${opts.$eleDescription}</div>`.appendTo($modalInner);
+		else if (opts.htmlDescription && opts.htmlDescription.trim()) $$`<div class="ve-flex w-100 mb-1">${opts.htmlDescription}</div>`.appendTo($modalInner);
 		$iptStr.appendTo($modalInner);
 		if (opts.$elePost) opts.$elePost.appendTo($modalInner);
 		$$`<div class="ve-flex-v-center ve-flex-h-right pb-1 px-1">${$btnOk}${$btnCancel}${$btnSkip}</div>`.appendTo($modalInner);
@@ -5038,7 +5051,7 @@ class ComponentUiUtil {
 
 	static _$getSelSearchable_getSearchString (str) {
 		if (str == null) return "";
-		return str.trim().toLowerCase().replace(/\s+/g, " ");
+		return CleanUtil.getCleanString(str.trim().toLowerCase().replace(/\s+/g, " "));
 	}
 
 	/**

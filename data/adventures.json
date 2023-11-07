@@ -16651,7 +16651,7 @@
 					"name": "Sidekicks"
 				},
 				{
-					"name": "Quest Cards"
+					"name": "Printable Assets"
 				}
 			]
 		},
@@ -23642,7 +23642,7 @@
 							"depth": 1,
 							"header": "G5. Barn"
 						},
-						"Temple of the Burnt Tongue Cult ",
+						"Temple of the Burnt Tongue Cult",
 						{
 							"depth": 1,
 							"header": "B1. Antechamber"
@@ -24137,7 +24137,7 @@
 							"depth": 1,
 							"header": "L11. Xanthoria's Grove of Horrors"
 						},
-						"Xanthoria's Defeat ",
+						"Xanthoria's Defeat",
 						"Lichen Lich"
 					]
 				}
@@ -27601,7 +27601,24 @@
 						"Getting Started",
 						"The Forgotten Realms",
 						"Adventure Background",
-						"The Dungeon Master"
+						"The Dungeon Master",
+						"Voyage to Stormwreck Isle",
+						{
+							"depth": 1,
+							"header": "Explaining the Game"
+						},
+						{
+							"depth": 1,
+							"header": "Run the Encounter"
+						},
+						{
+							"depth": 1,
+							"header": "Shenanigans"
+						},
+						{
+							"depth": 1,
+							"header": "Wrap Up"
+						}
 					]
 				},
 				{
@@ -30980,8 +30997,13 @@
 			"id": "LK",
 			"source": "LK",
 			"group": "supplement-alt",
-			"published": "2023-09-26",
 			"coverUrl": "img/covers/LK.png",
+			"published": "2023-09-26",
+			"storyline": "Minecraft",
+			"level": {
+				"start": 3,
+				"end": 3
+			},
 			"contents": [
 				{
 					"name": "Lightning Keep",
@@ -31077,12 +31099,862 @@
 						"Concluding the Adventure"
 					]
 				}
-			],
+			]
+		},
+		{
+			"name": "Turn of Fortune's Wheel",
+			"id": "ToFW",
+			"source": "ToFW",
+			"group": "supplement",
+			"coverUrl": "img/covers/PAitM.png",
+			"published": "2023-10-17",
+			"storyline": "Planescape",
 			"level": {
 				"start": 3,
-				"end": 3
+				"end": 18
 			},
-			"storyline": "Minecraft"
+			"contents": [
+				{
+					"name": "Introduction: Beginning of the End",
+					"headers": [
+						"Adventure Summary",
+						"Running the Adventure",
+						"Glitch Characters"
+					]
+				},
+				{
+					"name": "Schemes in Sigil",
+					"ordinal": {
+						"type": "part",
+						"identifier": 1
+					},
+					"headers": [
+						"Chapter 1: Grave Escape",
+						{
+							"depth": 1,
+							"header": "M1: Morgue"
+						},
+						{
+							"depth": 1,
+							"header": "M2: Autopsy Room"
+						},
+						{
+							"depth": 1,
+							"header": "M3: Possessions Room"
+						},
+						{
+							"depth": 1,
+							"header": "M4: Cold Locker"
+						},
+						{
+							"depth": 1,
+							"header": "M5: Crematorium"
+						},
+						{
+							"depth": 1,
+							"header": "M6: Corpse Retrieval"
+						},
+						{
+							"depth": 1,
+							"header": "M7: Dining Hall"
+						},
+						{
+							"depth": 1,
+							"header": "M8: Burial Grove"
+						},
+						{
+							"depth": 1,
+							"header": "M9: Records Room"
+						},
+						{
+							"depth": 1,
+							"header": "M10: Hallway"
+						},
+						"Chapter 2: Philosophers with Clubs",
+						"Chapter 3: Fortune Favors the Bold",
+						{
+							"depth": 1,
+							"header": "F1: Dragon Bar"
+						},
+						{
+							"depth": 1,
+							"header": "F2: Casino Cages"
+						},
+						{
+							"depth": 1,
+							"header": "F3: Illusory Fountain"
+						},
+						{
+							"depth": 1,
+							"header": "F4: Slot Machines"
+						},
+						{
+							"depth": 1,
+							"header": "F5: Table Games"
+						},
+						{
+							"depth": 1,
+							"header": "F6: Big-Ticket Prize"
+						},
+						{
+							"depth": 1,
+							"header": "F7: Fortune's Wheel"
+						},
+						{
+							"depth": 1,
+							"header": "F8: Ice Lounge"
+						},
+						{
+							"depth": 1,
+							"header": "F9: Stage"
+						},
+						{
+							"depth": 1,
+							"header": "F10: Security Room"
+						},
+						{
+							"depth": 1,
+							"header": "F11: Private Rooms"
+						},
+						{
+							"depth": 1,
+							"header": "F12. Portal to the Platinum Rooms"
+						}
+					]
+				},
+				{
+					"name": "The Mosaic Mimir",
+					"ordinal": {
+						"type": "part",
+						"identifier": 2
+					},
+					"headers": [
+						"Chapter 4\u2013Into the Outlands",
+						{
+							"depth": 1,
+							"header": "W1: Terrace"
+						},
+						{
+							"depth": 1,
+							"header": "W2: Library"
+						},
+						{
+							"depth": 1,
+							"header": "W3: Main Room"
+						},
+						{
+							"depth": 1,
+							"header": "W4: Bedrooms"
+						},
+						{
+							"depth": 1,
+							"header": "W5: Study"
+						},
+						{
+							"depth": 1,
+							"header": "W6: Castellan Chamber"
+						},
+						{
+							"depth": 1,
+							"header": "W7: Meditation Chamber"
+						},
+						{
+							"depth": 1,
+							"header": "W8. Signal Tower"
+						},
+						"Chapter 5\u2013Automata: Recalibration",
+						"Chapter 6\u2013Curst: Invisible Bonds",
+						{
+							"depth": 1,
+							"header": "C1. Junk Heaps"
+						},
+						{
+							"depth": 1,
+							"header": "C2. Hidden Tunnel"
+						},
+						{
+							"depth": 1,
+							"header": "C3. Escape Route"
+						},
+						"Chapter 7\u2013Excelsior: Lost Souls",
+						"Chapter 8\u2013Faunel: Vicious Alliances",
+						"Chapter 9\u2013Glorium: Heroes of the Day",
+						"Chapter 10\u2013Rigus: Eternity's Rampart",
+						"Chapter 11\u2013Sylvania: Titan on the Town",
+						"Chapter 12\u2013Outlands Explorations",
+						"Chapter 13\u2013Secrets of the Spire"
+					]
+				},
+				{
+					"name": "Secret Realities",
+					"ordinal": {
+						"type": "part",
+						"identifier": 3
+					},
+					"headers": [
+						"Chapter 14: Behind the Wheel",
+						{
+							"depth": 1,
+							"header": "P1: Fortune's End"
+						},
+						{
+							"depth": 1,
+							"header": "P2: Dungeonland"
+						},
+						{
+							"depth": 1,
+							"header": "P4: Fiend's Ante"
+						},
+						{
+							"depth": 1,
+							"header": "P5: Shemeshka's Guard"
+						},
+						"Chapter 15: Echoes of Delusion",
+						{
+							"depth": 1,
+							"header": "T1: Lair of the Eye"
+						},
+						{
+							"depth": 1,
+							"header": "T2: Beherit's Head"
+						},
+						{
+							"depth": 1,
+							"header": "T3: Ocular Space"
+						},
+						{
+							"depth": 1,
+							"header": "T4: Arlgolcheir's Morass"
+						},
+						{
+							"depth": 1,
+							"header": "T5: Gzemnid's Maw"
+						},
+						{
+							"depth": 1,
+							"header": "T6: X01's Throng"
+						},
+						"Conclusion"
+					]
+				},
+				{
+					"name": "Cover"
+				}
+			]
+		},
+		{
+			"name": "Chains of Asmodeus",
+			"id": "CoA",
+			"source": "CoA",
+			"group": "supplement-alt",
+			"coverUrl": "img/covers/CoA.png",
+			"published": "2023-10-30",
+			"storyline": "Extra Life",
+			"level": {
+				"start": 11,
+				"end": 20
+			},
+			"contents": [
+				{
+					"name": "Introduction: Welcome to the Nine Hells",
+					"headers": [
+						"The Nine Hells",
+						"Sins",
+						"Running the Adventure",
+						"Story Overview",
+						"Adventure Flowchart",
+						"The Nine Hells",
+						"Great Heroes",
+						"New Characters",
+						"Saving Souls",
+						"Lost Souls",
+						"Souls of the Damned",
+						"Group Patrons",
+						"Hellriders of Elturel",
+						"Conclave of Halruaa",
+						"Deathstalkers of Bhaal"
+					]
+				},
+				{
+					"name": "Kelemvor's Cathedral",
+					"headers": [
+						"Running this Chapter",
+						"The Infernal Contracts",
+						"The Cathedral",
+						"Entering the Nine Hells",
+						"Meeting Tiax",
+						"No Turning Back"
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 1
+					}
+				},
+				{
+					"name": "The Nine Hells",
+					"headers": [
+						"Character Objectives",
+						"River Styx Encounters",
+						"Asmodeus and the Nine Sins",
+						"Let Me Tempt You",
+						"The Dukes",
+						"Life in the Nine Hells",
+						"Features of the Nine Hells"
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 2
+					}
+				},
+				{
+					"name": "Avernus, the Eternal Battlefield",
+					"headers": [
+						"Running This Chapter",
+						"Avernus Overview",
+						"Key Locations in Avernus",
+						"Adventure: The War-Slough",
+						"War-Slough Locations",
+						{
+							"depth": 1,
+							"header": "W1: Sentry Tower"
+						},
+						{
+							"depth": 1,
+							"header": "W2: Ruined Tower"
+						},
+						{
+							"depth": 1,
+							"header": "W3: Ichor Lake and the Demon Nest"
+						},
+						{
+							"depth": 1,
+							"header": "W4: Canyon Trove"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 3
+					}
+				},
+				{
+					"name": "Dis, the City of Burning Iron",
+					"headers": [
+						"Running This Chapter",
+						"Dis Overview",
+						"Key Locations in the City of Dis",
+						"Adventure: The Agora of Floating Knives",
+						"The Outer Agora Locations",
+						{
+							"depth": 1,
+							"header": "A1: The Arena"
+						},
+						{
+							"depth": 1,
+							"header": "A2: Neogi Shop"
+						},
+						"The Inner Agora Locations",
+						{
+							"depth": 1,
+							"header": "A3: Barges of Theater"
+						},
+						{
+							"depth": 1,
+							"header": "A4: The Market of Killers"
+						},
+						{
+							"depth": 1,
+							"header": "A5: The Market of Victims"
+						},
+						{
+							"depth": 1,
+							"header": "A6: Orishada's Palace"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 4
+					}
+				},
+				{
+					"name": "Minauros, the Endless Swamp",
+					"headers": [
+						"Running This Chapter",
+						"Minauros Overview",
+						"Key Locations in Minauros",
+						"Adventure: The Ineffable Trove",
+						"In Search of the Discarded and Forgotten",
+						{
+							"depth": 1,
+							"header": "I1: Klassk's Lair"
+						},
+						{
+							"depth": 1,
+							"header": "I2: Ilfrich's Lair"
+						},
+						{
+							"depth": 1,
+							"header": "I3: Thelekarna's Roost"
+						},
+						{
+							"depth": 1,
+							"header": "I4: The Grinken Eyre"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 5
+					}
+				},
+				{
+					"name": "Phlegethos, the Fiery Wasteland",
+					"headers": [
+						"Running This Chapter",
+						"Phlegethos Overview",
+						"Key Locations in Phelegethos",
+						"Adventure: The Elemental Preserve",
+						"The Elemental Preserve Locations",
+						{
+							"depth": 1,
+							"header": "E1: Hunting Lodge"
+						},
+						{
+							"depth": 1,
+							"header": "E2: Hateli of the Storm's Realm"
+						},
+						{
+							"depth": 1,
+							"header": "E3: Anagwendol's Prison"
+						},
+						{
+							"depth": 1,
+							"header": "E4: Kordichai's Manor"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 6
+					}
+				},
+				{
+					"name": "Stygia, the Frozen Sea",
+					"headers": [
+						"Running This Chapter",
+						"Stygia Overview",
+						"Key Locations in Stygia",
+						"Adventure: The Chasm of Found Things",
+						"Chasm of Found Things Locations",
+						{
+							"depth": 1,
+							"header": "C1: The Entrance"
+						},
+						{
+							"depth": 1,
+							"header": "C2: Congregation of Gjaaki"
+						},
+						{
+							"depth": 1,
+							"header": "C3: The Echoes"
+						},
+						{
+							"depth": 1,
+							"header": "C4: Angel of the Ice"
+						},
+						{
+							"depth": 1,
+							"header": "C5: The Aboleth"
+						},
+						{
+							"depth": 1,
+							"header": "C6: Keeper of Found Things"
+						},
+						{
+							"depth": 1,
+							"header": "C7: The Awful Fisher"
+						},
+						{
+							"depth": 1,
+							"header": "C8: Gjaaki"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 7
+					}
+				},
+				{
+					"name": "Malbolge, the Realm of Decay",
+					"headers": [
+						"Running This Chapter",
+						"Malbolge Overview",
+						"Key Locations in Malbolge",
+						"Adventure: The Sign of the Hag's Arms",
+						"The Sign of the Hag's Arms Locations",
+						{
+							"depth": 1,
+							"header": "S1: The Swarm"
+						},
+						{
+							"depth": 1,
+							"header": "S2: Ekengarik's Hive"
+						},
+						{
+							"depth": 1,
+							"header": "S3: Entrance"
+						},
+						{
+							"depth": 1,
+							"header": "S4: Feasting Hall"
+						},
+						{
+							"depth": 1,
+							"header": "S5: Kitchens"
+						},
+						{
+							"depth": 1,
+							"header": "S6: Guest Rooms"
+						},
+						{
+							"depth": 1,
+							"header": "S7: The Basements"
+						},
+						{
+							"depth": 1,
+							"header": "S8: Irabella's Workshops"
+						},
+						{
+							"depth": 1,
+							"header": "S9: Malecki's Workshops"
+						},
+						{
+							"depth": 1,
+							"header": "S10: Anacreda the Angelmaker"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 8
+					}
+				},
+				{
+					"name": "Maladomini, the Domain of Ruined Cities",
+					"headers": [
+						"Running This Chapter",
+						"Maladomini Overview",
+						"Key Locations in Maladomini",
+						"Adventure: The Eye Market",
+						"Eye Market Locations",
+						{
+							"depth": 1,
+							"header": "M1: Outer Streets"
+						},
+						{
+							"depth": 1,
+							"header": "M2: Ganglands\u2014Ilkatar's Territory"
+						},
+						{
+							"depth": 1,
+							"header": "M3: Ganglands\u2014Memnoriac's Territory"
+						},
+						{
+							"depth": 1,
+							"header": "M4: Ganglands\u2014Jacelisk's territory"
+						},
+						{
+							"depth": 1,
+							"header": "M5: The Slums"
+						},
+						{
+							"depth": 1,
+							"header": "M6: The Eye Market"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 9
+					}
+				},
+				{
+					"name": "Cania, the Relentless Cold",
+					"headers": [
+						"Running This Chapter",
+						"Cania Overview",
+						"Key Locations in Cania",
+						"Adventure: The Sorrow Mine",
+						"A Thankful Patron",
+						"Before Leaving Cania",
+						"Tiax's Betrayal",
+						"Leaving Cania",
+						"The Sorrow Mine Locations",
+						{
+							"depth": 1,
+							"header": "T1: The Mining Town"
+						},
+						{
+							"depth": 1,
+							"header": "T2: Baron Klendisk's Fort"
+						},
+						{
+							"depth": 1,
+							"header": "T3: Kargan Skul's Home"
+						},
+						{
+							"depth": 1,
+							"header": "T4: Cornelius Brassgrave's House"
+						},
+						{
+							"depth": 1,
+							"header": "T5: The Rendering Sheds"
+						},
+						{
+							"depth": 1,
+							"header": "T6: The Mines"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 10
+					}
+				},
+				{
+					"name": "Hunted by the Dukes",
+					"headers": [
+						"Running this Chapter",
+						"Ambushed by the Infernal Warship",
+						"Ambushed by Abigor",
+						"The Brothers' Infernal Warship",
+						"Locations in The Brothers' Infernal Warship",
+						{
+							"depth": 1,
+							"header": "N1: Top Deck"
+						},
+						{
+							"depth": 1,
+							"header": "N2: Acid Vats"
+						},
+						{
+							"depth": 1,
+							"header": "N3: Hellfire Fuel"
+						},
+						{
+							"depth": 1,
+							"header": "N4: Command and Navigation Bridge"
+						},
+						{
+							"depth": 1,
+							"header": "N5: Brig"
+						},
+						{
+							"depth": 1,
+							"header": "N6: Nest"
+						},
+						{
+							"depth": 1,
+							"header": "N7: Engine Room"
+						},
+						{
+							"depth": 1,
+							"header": "N8: Kitchens"
+						},
+						{
+							"depth": 1,
+							"header": "N9: Mess Hall"
+						},
+						{
+							"depth": 1,
+							"header": "N10: Common Quarters"
+						},
+						{
+							"depth": 1,
+							"header": "N11: Officer's Quarters"
+						},
+						{
+							"depth": 1,
+							"header": "N12: Workshop"
+						},
+						{
+							"depth": 1,
+							"header": "N13: Storage"
+						},
+						{
+							"depth": 1,
+							"header": "N14: Soul Fire Engine"
+						},
+						{
+							"depth": 1,
+							"header": "N15: Fuel Reserve"
+						},
+						{
+							"depth": 1,
+							"header": "N16: Armory"
+						},
+						{
+							"depth": 1,
+							"header": "N17: Kennels"
+						},
+						{
+							"depth": 1,
+							"header": "N18: Watchtower"
+						},
+						"Baalzebul's Infernal Submersible",
+						{
+							"depth": 1,
+							"header": "B1: Bridge"
+						},
+						{
+							"depth": 1,
+							"header": "B2: Brig"
+						},
+						{
+							"depth": 1,
+							"header": "B3: Communication Room"
+						},
+						{
+							"depth": 1,
+							"header": "B4: Engine Room"
+						},
+						{
+							"depth": 1,
+							"header": "B5: Kitchens"
+						},
+						{
+							"depth": 1,
+							"header": "B6: Showers"
+						},
+						{
+							"depth": 1,
+							"header": "B7: Common Quarters"
+						},
+						{
+							"depth": 1,
+							"header": "B8: Officer's Quarters"
+						},
+						{
+							"depth": 1,
+							"header": "B9: Storage"
+						},
+						{
+							"depth": 1,
+							"header": "B10: Abigor's Bedchamber"
+						},
+						{
+							"depth": 1,
+							"header": "B11: Torpedo Room"
+						},
+						{
+							"depth": 1,
+							"header": "B12: Depth Charge Room"
+						}
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 11
+					}
+				},
+				{
+					"name": "Nessus, the Bastion of Asmodeus",
+					"headers": [
+						"Running this Chapter",
+						"The Final Stage",
+						"Nessus Overview",
+						"Adventure: The Oasis of the Lethe",
+						"Oasis of the Lethe Locations",
+						{
+							"depth": 1,
+							"header": "O1: Arrival"
+						},
+						{
+							"depth": 1,
+							"header": "O2: Home of Teskethmus"
+						},
+						{
+							"depth": 1,
+							"header": "O3: Home of Orvedarc"
+						},
+						{
+							"depth": 1,
+							"header": "O4: Home of Isitrix"
+						},
+						{
+							"depth": 1,
+							"header": "O5: Home of Elihandrel"
+						},
+						{
+							"depth": 1,
+							"header": "O6: The Library"
+						},
+						"Adventure: Malsheem",
+						"Leaving the Nine Hells"
+					],
+					"ordinal": {
+						"type": "chapter",
+						"identifier": 12
+					}
+				},
+				{
+					"name": "Lords of the Nine",
+					"headers": [
+						"Archdevil Lair Actions"
+					],
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "A"
+					}
+				},
+				{
+					"name": "Monsters",
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "B"
+					}
+				},
+				{
+					"name": "Non-Player Characters",
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "C"
+					}
+				},
+				{
+					"name": "Infernal Magic Items",
+					"headers": [
+						"Infernal Item Corruption",
+						"Infernal Artifacts"
+					],
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "D"
+					}
+				},
+				{
+					"name": "Corruption",
+					"headers": [
+						"Corruption Tracker",
+						"Corruption Score",
+						"Final Outcomes"
+					],
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "E"
+					}
+				},
+				{
+					"name": "Player Handouts",
+					"headers": [
+						"Infernal Maps",
+						"Normal Maps",
+						"The War-Slough",
+						"The Ineffable Trove",
+						"The Elemental Preserve",
+						"The Oasis of the Lethe",
+						"The Agora of Floating Knives",
+						"The Eye Market"
+					],
+					"ordinal": {
+						"type": "appendix",
+						"identifier": "F"
+					}
+				}
+			]
 		}
 	]
 }
