@@ -2,7 +2,7 @@
 
 // in deployment, `IS_DEPLOYED = "<version number>";` should be set below.
 globalThis.IS_DEPLOYED = undefined;
-globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.188.1"/* 5ETOOLS_VERSION__CLOSE */;
+globalThis.VERSION_NUMBER = /* 5ETOOLS_VERSION__OPEN */"1.191.1"/* 5ETOOLS_VERSION__CLOSE */;
 globalThis.DEPLOYED_STATIC_ROOT = ""; // "https://static.5etools.com/"; // FIXME re-enable this when we have a CDN again
 globalThis.DEPLOYED_IMG_ROOT = undefined;
 // for the roll20 script to set
@@ -2879,6 +2879,7 @@ UrlUtil.URL_TO_HASH_BUILDER["itemMastery"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["skill"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["sense"] = UrlUtil.URL_TO_HASH_GENERIC;
 UrlUtil.URL_TO_HASH_BUILDER["raceFeature"] = (it) => UrlUtil.encodeArrayForHash(it.name, it.raceName, it.raceSource, it.source);
+UrlUtil.URL_TO_HASH_BUILDER["citation"] = UrlUtil.URL_TO_HASH_GENERIC;
 
 // Add lowercase aliases
 Object.keys(UrlUtil.URL_TO_HASH_BUILDER)
@@ -3293,6 +3294,10 @@ globalThis.SortUtil = {
 		return SortUtil.ascSortLower(a.set, b.set) || SortUtil.ascSortLower(a.source, b.source) || SortUtil.ascSortLower(a.name, b.name);
 	},
 
+	ascSortEncounter (a, b) {
+		return SortUtil.ascSortLower(a.name, b.name) || SortUtil.ascSortLower(a.caption || "", b.caption || "") || SortUtil.ascSort(a.minlvl || 0, b.minlvl || 0) || SortUtil.ascSort(a.maxlvl || Number.MAX_SAFE_INTEGER, b.maxlvl || Number.MAX_SAFE_INTEGER);
+	},
+
 	_ITEM_RARITY_ORDER: ["none", "common", "uncommon", "rare", "very rare", "legendary", "artifact", "varies", "unknown (magic)", "unknown"],
 	ascSortItemRarity (a, b) {
 		const ixA = SortUtil._ITEM_RARITY_ORDER.indexOf(a);
@@ -3466,7 +3471,18 @@ globalThis.DataUtil = {
 					reject(new Error(`Could not parse JSON from ${url}: ${e.message}`));
 				}
 			};
-			request.onerror = (e) => reject(new Error(`Error during JSON request: ${e.target.status}`));
+			request.onerror = (e) => {
+				const ptDetail = [
+					"status",
+					"statusText",
+					"readyState",
+					"response",
+					"responseType",
+				]
+					.map(prop => `${prop}=${JSON.stringify(e.target[prop])}`)
+					.join(" ");
+				reject(new Error(`Error during JSON request: ${ptDetail}`));
+			};
 
 			request.send();
 		});
@@ -4848,6 +4864,16 @@ globalThis.DataUtil = {
 
 		static _SPELL_SOURCE_LOOKUP = null;
 
+		static PROPS_SPELL_SOURCE = [
+			"classes",
+			"races",
+			"optionalfeatures",
+			"backgrounds",
+			"feats",
+			"charoptions",
+			"rewards",
+		];
+
 		// region Utilities for external applications (i.e., the spell source generation script) to use
 		static setSpellSourceLookup (lookup, {isExternalApplication = false} = {}) {
 			if (!isExternalApplication) throw new Error("Should not be calling this!");
@@ -4861,14 +4887,16 @@ globalThis.DataUtil = {
 
 		static unmutEntity (sp, {isExternalApplication = false} = {}) {
 			if (!isExternalApplication) throw new Error("Should not be calling this!");
-			delete sp.classes;
-			delete sp.races;
-			delete sp.optionalfeatures;
-			delete sp.backgrounds;
-			delete sp.feats;
-			delete sp.charoptions;
-			delete sp.rewards;
+			this.PROPS_SPELL_SOURCE.forEach(prop => delete sp[prop]);
 			delete sp._isMutEntity;
+		}
+		// endregion
+
+		// region Special mutator for the homebrew builder
+		static mutEntityBrewBuilder (sp, sourcesLookup) {
+			const out = this._mutEntity(sp, {sourcesLookup});
+			delete sp._isMutEntity;
+			return out;
 		}
 		// endregion
 
@@ -4876,10 +4904,10 @@ globalThis.DataUtil = {
 			this._SPELL_SOURCE_LOOKUP = await DataUtil.loadRawJSON(`${Renderer.get().baseUrl}data/generated/gendata-spell-source-lookup.json`);
 		}
 
-		static _mutEntity (sp) {
+		static _mutEntity (sp, {sourcesLookup = null} = {}) {
 			if (sp._isMutEntity) return sp;
 
-			const spSources = this._SPELL_SOURCE_LOOKUP[sp.source.toLowerCase()]?.[sp.name.toLowerCase()];
+			const spSources = (sourcesLookup ?? this._SPELL_SOURCE_LOOKUP)[sp.source.toLowerCase()]?.[sp.name.toLowerCase()];
 			if (!spSources) return sp;
 
 			this._mutSpell_class({sp, spSources, propSources: "class", propClasses: "fromClassList"});
@@ -5144,6 +5172,10 @@ globalThis.DataUtil = {
 	itemFluff: class extends _DataUtilPropConfigSingleSource {
 		static _PAGE = UrlUtil.PG_ITEMS;
 		static _FILENAME = "fluff-items.json";
+	},
+
+	itemType: class extends _DataUtilPropConfig {
+		static _PAGE = "itemType";
 	},
 
 	language: class extends _DataUtilPropConfigSingleSource {

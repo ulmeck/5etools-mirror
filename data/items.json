@@ -828,6 +828,68 @@
 			]
 		},
 		{
+			"name": "Accounting and Valuation of All Things",
+			"source": "CoA",
+			"page": 272,
+			"rarity": "artifact",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"The Accounting and Valuation of All Things is bound in gold leaf, with pages of silver and text of blood.",
+				"This is a magic tome that functions as a spellbook and arcane focus. You have a +3 bonus to your spell attack and spell save DC.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Accounting and Valuation of All Things has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"1 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} property",
+								"1 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "The Soul Trade",
+					"entries": [
+						"One section of the book is dedicated to negotiating and valuing mortal souls. When the book is opened within 10 feet of a creature with a soul, that creature must make a DC 22 Wisdom saving throw. On a failed save, the tome analyzes their greatest desires and calculates exactly what they would need to give up their soul. That information is then displayed within the tome, such that the user can offer a trade to acquire a soul. Creatures that succeed on the saving throw simply show up as a question mark in the book's pages and are immune to further valuations."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Mammon's Tax",
+					"entries": [
+						"When the Accounting and Valuation of All Things is used as a spellbook, it maintains a unique ability to forcibly acquire souls. Any creature killed by a spell transcribed within the book has their soul ripped from their body and sent to Minauros. This process renders the subject immune to all forms of resurrection aside from {@spell True Resurrection}. In payment for their soul, Mammon drops gold equal to (20 × CR) or (2 × Level) on their corpse."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Negotiation Tactics",
+					"entries": [
+						"The tome is capable of providing some assistance to all negotiations, not just those made for souls. You gain a passive +5 to Charisma ({@skill Persuasion}) checks made to barter. Additionally, as an action, you can surrender your consciousness to the tome, allowing it to take over. For 1 minute, the Accounting and Valuation of All Things speaks for you, using a +12 Charisma ({@skill Persuasion}) skill and gaining advantage on your rolls. Using the book in this manner has a corrupting influence, and each use compels you to become increasingly greedy, vain, and evil\u2014much like its original owner, Mammon. When the duration ends, if your alignment is non-evil, you suffer {@damage 6d6} necrotic damage."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Transcribed Spells",
+					"entries": [
+						"The spellbook section of the Accounting and Valuation of All Things comes with some spells already recorded. For each spell level, roll ({@dice 1d4 - 1}). The DM will determine the necessary spells of each level that already exist within the tome. If you copy spells from the tome to your own spellbook, the cost in gold is doubled. On the opposite end, copying spells from your spellbook to the tome only costs half the gold it normally would."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Tome",
+					"entries": [
+						"Destroying the Accounting and Valuation of All Things can be done in two ways. The first option is a simple bribe to Mammon to have him destroy the tome. An offering of 99,999 gp must be made, at midnight, by opening the book and placing the gold inside. If Mammon accepts the offering, the gold melts around the book, then both vanish.",
+						"The second route, in case Mammon is unavailable or unwilling, is to incinerate the book. To accomplish this task, a pot of platinum (valued at no less than 99,999 gp) must be melted, enough to fully submerge the book. Once the platinum is prepared, dropping the tome into the molten solution melts the tome. The process completely destroys the tome, as well as the platinum."
+					]
+				}
+			]
+		},
+		{
 			"name": "Acid (vial)",
 			"source": "PHB",
 			"page": 148,
@@ -1638,12 +1700,54 @@
 			"value": 500
 		},
 		{
+			"name": "Amulet of Appearance",
+			"source": "CoA",
+			"page": 267,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"Your armor, weapons, and other equipment always shine as if just polished. Even if you're wounded, your wounds do not appear to others. You're immune to the {@condition frightened} and {@condition poisoned} conditions, as these would otherwise ruin your elegant appearance. However, whenever you would otherwise have been affected by one of these conditions, a random non-evil Humanoid on the Material Plane whom you have previously met gets the condition instead. You know this."
+			]
+		},
+		{
+			"name": "Amulet of Betrayal",
+			"source": "CoA",
+			"page": 267,
+			"rarity": "very rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"You can use a bonus action to move one of the following conditions from yourself to an ally within 60 feet of you: {@condition blinded}, {@condition deafened}, {@condition frightened}, {@condition poisoned}, {@condition stunned}, {@condition exhaustion}. When transferring {@condition exhaustion}, move all your {@condition exhaustion} levels. If the chosen ally is immune to a transferred condition, the transfer fails."
+			]
+		},
+		{
 			"name": "Amulet of dinosaur feathers (Sun Empire)",
 			"source": "PSX",
 			"page": 24,
 			"type": "$",
 			"rarity": "none",
 			"value": 2500
+		},
+		{
+			"name": "Amulet of Duplicity",
+			"source": "CoA",
+			"page": 267,
+			"rarity": "very rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"curse": true,
+			"entries": [
+				"When you die, you're transported to an extradimensional space where you're stabilized at 0 hit points and kept in that state. The amulet creates a perfect copy of your corpse and places it where you were just before you died, but without any of your worn or carried items. After 24 hours, you regain 1 hit point and are returned to the location of your near-death. Everything about you is the same, except that your facial features are entirely different from before. Only a {@spell Wish} spell can restore your true identity.",
+				"Until then, you have disadvantage on any Charisma ({@skill Persuasion}) checks to attempt to reveal who you really are.",
+				{
+					"type": "entries",
+					"name": "Curse",
+					"entries": [
+						"An {@spell Identify} spell or similar reveals only that the amulet can prevent death. Once you attune to the amulet, you can't describe its ability to any other creature, and if unattuned, you immediately forget what the amulet does. A {@spell Remove Curse} spell reveals the details of the curse but does not remove it from the amulet."
+					]
+				}
+			]
 		},
 		{
 			"name": "Amulet of Harmony",
@@ -1788,6 +1892,68 @@
 			"wondrous": true,
 			"entries": [
 				"This amulet smells of old, ale-stained wood. While wearing it, you can regain {@dice 4d4 + 4} hit points when you drink a pint of beer, ale, mead, or wine. Once the amulet has restored hit points, it can't do so again until the next dawn."
+			],
+			"hasFluffImages": true
+		},
+		{
+			"name": "Amulet of the Inferno",
+			"source": "CoA",
+			"page": 273,
+			"rarity": "artifact",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"When Fierna was born, petitioners and devils from all over came to celebrate her birth. Many brought gifts and treasures, including a powerful infernal warlock. Recognizing the strength and inner fire of Fierna, the warlock gifted her with the Amulet of the Inferno, and it has been around her neck ever since.",
+				"The Amulet of the Inferno is a magic necklace that grants a +3 bonus to spell save DC and spell attack bonus.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Amulet of the Inferno has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"3 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} properties",
+								"2 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} properties"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Infernal Fire",
+					"entries": [
+						"While worn, the amulet augments any magical flames created by you, transforming normal fire into Hellfire. Hellfire ignores resistances and immunities to fire damage and deals double damage to creatures vulnerable to either fire or necrotic damage. It is also capable of melting stone, as well as igniting flammable objects."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Raging Inferno",
+					"entries": [
+						"While attuned to the Amulet of the Inferno, you may use a bonus action to cast Fire"
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Bolt or Produce Flame",
+					"entries": [
+						"The cantrips scale based on your total character level and use Intelligence as a spellcasting modifier if you're normally incapable of casting spells."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Everburning",
+					"entries": [
+						"The Amulet of the Inferno grants resistance to cold damage and the ability to breathe underwater. Any magical flames you conjure are similarly augmented: they can be used underwater, can't be extinguished through any means, and can exude any temperature. While the casting of a fire spell can still be interrupted with {@spell Counterspell}, once the spell has been cast, any lingering flames can't be removed."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Amulet",
+					"entries": [
+						"The only creature capable of destroying the amulet is the warlock that created it. Nobody living knows the warlock's identity, making destroying the amulet almost impossible."
+					]
+				}
 			],
 			"hasFluffImages": true
 		},
@@ -2557,7 +2723,8 @@
 			"value": 5000,
 			"entries": [
 				"An {@creature axe beak}'s splayed toes allow it to run across snow, and it can carry as much weight as a mule. A domesticated axe beak can be purchased in Ten-Towns for 50 gp."
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Axe of the Dwarvish Lords",
@@ -3301,17 +3468,6 @@
 			"lootTables": [
 				"Magic Item Table F"
 			]
-		},
-		{
-			"name": "Bagpipes",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 6,
-			"value": 3000
 		},
 		{
 			"name": "Balance of Harmony",
@@ -4332,16 +4488,6 @@
 			"hasFluffImages": true
 		},
 		{
-			"name": "Birdpipes",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"Pan pipes or satyr pipes, also known as the shalm, these are sacred to {@deity Lliira|Faerûnian|scag} and popular with wood elf and wild elf bards."
-			]
-		},
-		{
 			"name": "Bit and bridle",
 			"source": "PHB",
 			"page": 157,
@@ -4626,7 +4772,8 @@
 			],
 			"attachedSpells": [
 				"haste"
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Blackstaff",
@@ -6033,6 +6180,33 @@
 			"hasFluffImages": true
 		},
 		{
+			"name": "Bracers of Asmodeus",
+			"source": "CoA",
+			"page": 267,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"curse": true,
+			"bonusAc": "+2",
+			"entries": [
+				"You have a +2 bonus to AC while wearing these bracers, if you do not wear armor or use a shield at the same time.",
+				{
+					"type": "entries",
+					"name": "Curse",
+					"entries": [
+						"While attuned to the bracers, you become obsessed with plotting, scheming, and manipulation. You always barter for better deals, often using secrets or leveraging other offers in the process. If you ever decline an opportunity to better yourself financially at another's expense, you immediately take {@damage 3d10} necrotic damage. Only the {@spell Remove Curse} spell allows you to end attunement to this item."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Corrupting",
+					"entries": [
+						"This item corrupts. See the \"{@adventure Infernal Item Corruption|CoA|16|Infernal Item Corruption}\" section."
+					]
+				}
+			]
+		},
+		{
 			"name": "Bracers of Celerity",
 			"source": "PaBTSO",
 			"page": 217,
@@ -6787,6 +6961,45 @@
 			"wondrous": true,
 			"entries": [
 				"The flame of this candle is not extinguished when immersed in water. It gives off light and heat like a normal candle."
+			]
+		},
+		{
+			"name": "Canian Fork",
+			"source": "CoA",
+			"page": 267,
+			"baseItem": "trident|PHB",
+			"type": "M",
+			"rarity": "rare",
+			"reqAttune": true,
+			"curse": true,
+			"weight": 4,
+			"weaponCategory": "martial",
+			"property": [
+				"T",
+				"V"
+			],
+			"range": "20/60",
+			"dmg1": "1d6",
+			"dmgType": "P",
+			"dmg2": "1d8",
+			"bonusWeapon": "+3",
+			"entries": [
+				"You have a +3 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one additional attack with it as a bonus action on each of your turns.",
+				{
+					"type": "entries",
+					"name": "Curse",
+					"entries": [
+						"You're unwilling to part with this weapon while attuned to it. You're also vulnerable to radiant damage and each time you receive magical healing, you must make a DC 15 Constitution saving throw.",
+						"On a failed save, the healing has no effect. Only the {@spell Remove Curse} spell allows you to end attunement to this item."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Corrupting",
+					"entries": [
+						"This item corrupts. See the \"{@adventure Infernal Item Corruption|CoA|16|Infernal Item Corruption}\" section."
+					]
+				}
 			]
 		},
 		{
@@ -8684,6 +8897,16 @@
 				"blight"
 			],
 			"hasFluffImages": true
+		},
+		{
+			"name": "Condensed Order",
+			"source": "CoA",
+			"page": 267,
+			"rarity": "uncommon",
+			"wondrous": true,
+			"entries": [
+				"Condensed Order is a silvery powder that can be extracted from those of a lawful persuasion. Devils bound for the warfronts of Avernus take flasks and snuff boxes of the stuff to fortify themselves against exposure to the raw chaos of demons. Taking the substance requires an action and makes you immune to the flesh warping feature of demonic ichor. It also gives you advantage on saving throws against any effect from a demonic source. These benefits last for 8 hours."
+			]
 		},
 		{
 			"name": "Constantori's Portrait",
@@ -12363,28 +12586,6 @@
 			"hasFluffImages": true
 		},
 		{
-			"name": "Drum",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 3,
-			"value": 600
-		},
-		{
-			"name": "Dulcimer",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 10,
-			"value": 2500
-		},
-		{
 			"name": "Dungeoneer's Pack",
 			"source": "PHB",
 			"page": 151,
@@ -13948,7 +14149,7 @@
 							"The creature sprinkled with dust gains a flying speed of 60 feet for 10 minutes."
 						],
 						[
-							"71-80 ",
+							"71-80",
 							"The creature sprinkled with dust must succeed on a DC 11 Constitution saving throw or fall {@condition unconscious} for 1 minute. The creature awakens if it takes damage or if it is shaken or slapped as an action."
 						],
 						[
@@ -15289,17 +15490,6 @@
 			"value": 2
 		},
 		{
-			"name": "Flute",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 1,
-			"value": 200
-		},
-		{
 			"name": "Flying Chariot",
 			"source": "MOT",
 			"page": 196,
@@ -15635,6 +15825,54 @@
 			]
 		},
 		{
+			"name": "Gate Warden Trinket",
+			"source": "SatO",
+			"type": "G",
+			"rarity": "none",
+			"entries": [
+				{
+					"type": "table",
+					"colStyles": [
+						"col-2 text-center",
+						"col-10"
+					],
+					"colLabels": [
+						"d6",
+						"Trinket"
+					],
+					"rows": [
+						[
+							"1",
+							"A tiny vial pendant filled with a drop of honey that glows faintly"
+						],
+						[
+							"2",
+							"A small lead ingot that has a strange thumbprint pressed into it and whispers when held tightly"
+						],
+						[
+							"3",
+							"Two lodestone spheres that chime when they attract each other"
+						],
+						[
+							"4",
+							"A smoldering pebble of coal that, while always hot, doesn't burn skin, fur, scales, or clothing"
+						],
+						[
+							"5",
+							"A feather that sheds {@quickref Vision and Light||2||dim light} in a 5-foot radius"
+						],
+						[
+							"6",
+							"A ring made from a chain link that, once donned, won't come off without pulling painfully hard"
+						]
+					]
+				}
+			],
+			"miscTags": [
+				"TT"
+			]
+		},
+		{
 			"name": "Gauntlets of Flaming Fury",
 			"source": "BGDIA",
 			"page": 223,
@@ -15671,6 +15909,31 @@
 				"Magic Item Table F"
 			],
 			"hasFluffImages": true
+		},
+		{
+			"name": "Gauntlets of Rage",
+			"source": "CoA",
+			"page": 268,
+			"rarity": "rare",
+			"reqAttune": "by a bard, sorcerer, warlock, or wizard",
+			"reqAttuneTags": [
+				{
+					"class": "bard"
+				},
+				{
+					"class": "sorcerer"
+				},
+				{
+					"class": "warlock"
+				},
+				{
+					"class": "wizard"
+				}
+			],
+			"wondrous": true,
+			"entries": [
+				"You gain the power of never-ending fury. After you make a melee weapon attack, you automatically enter a special fury for 1 minute. While furious, you can't cast spells, can't verbally communicate, and are immune to the {@condition charmed} and {@condition frightened} conditions. Each time you deal damage, you regain {@dice 2d8} hit points and may immediately remove a condition you currently suffer from or end this fury. Additionally, while in this fury, you may spend a spell slot before you make a melee attack. Doing so causes the attack to deal an extra 3 ({@damage 1d6}) necrotic damage per level of spell slot expended, if the attack hits. Once used you may not use this fury again until you finish a short or long rest."
+			]
 		},
 		{
 			"name": "Gavel of the Venn Rune",
@@ -15959,16 +16222,6 @@
 						]
 					]
 				}
-			]
-		},
-		{
-			"name": "Glaur",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"Short, curved horns like a cornucopia. Played with valves, glaur sound like trumpets, while those without valves, known as gloon, have a more mournful sound."
 			]
 		},
 		{
@@ -17234,16 +17487,6 @@
 				"You can use an action to unfold and place the Hammock of Worlds on a solid surface, whereupon it creates a two-way portal to the Ghost Orchid Tepui in the Feywild or to the Drought Elder in the Far Realm (the user's choice). You can use an action to close an open portal by taking hold of the edges of the cloth and folding it up. Once Hammock of Worlds has opened a portal, it can't do so again for {@dice 1d8} hours."
 			],
 			"hasFluffImages": true
-		},
-		{
-			"name": "Hand Drum",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A double-headed skin drum fitted with handles along its side."
-			]
 		},
 		{
 			"name": "Hand of Vecna",
@@ -18662,17 +18905,6 @@
 			]
 		},
 		{
-			"name": "Horn",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 2,
-			"value": 300
-		},
-		{
 			"name": "Horn of Beckoning Death",
 			"source": "HAT-LMI",
 			"rarity": "legendary",
@@ -19721,6 +19953,64 @@
 			"entries": [
 				"This braided cord is dull bronze in color, ends in a splayed set of three barbs, and gleams like metal under any light. You gain a +1 bonus to attack and damage rolls made with this magic weapon, which has a reach of 20 feet. When you hit a creature or object using this whip, you can attempt to {@action grapple} the target as a bonus action.",
 				"While you have a creature {@condition grappled} using this whip, you can use your action to either pull the creature up to 20 feet toward you, or cause the creature to be {@condition restrained} until you let go of the whip. A creature {@condition restrained} in this way can escape by making a successful Strength ({@skill Athletics}) or Dexterity ({@skill Acrobatics}) check as an action. The DC of this check equals 8 + your proficiency bonus + your Strength modifier."
+			]
+		},
+		{
+			"name": "Infernal Amulet",
+			"source": "CoA",
+			"page": 268,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"curse": true,
+			"entries": [
+				"While wearing this amulet, you can use it as a spellcasting focus for your spells, and it grants a +2 bonus to your spell save DC and spell attack bonus.",
+				{
+					"type": "entries",
+					"name": "Curse",
+					"entries": [
+						"You're unwilling to part with this amulet while attuned to it and you wear it always. While wearing the amulet you have disadvantage on Strength saving throws and Strength checks. Only the {@spell Remove Curse} spell allows you to remove the item and end attunement."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Corrupting",
+					"entries": [
+						"This item corrupts. See the \"{@adventure Infernal Item Corruption|CoA|16|Infernal Item Corruption}\" section."
+					]
+				}
+			]
+		},
+		{
+			"name": "Infernal Plate Armor",
+			"source": "CoA",
+			"page": 268,
+			"baseItem": "plate armor|PHB",
+			"type": "HA",
+			"rarity": "very rare",
+			"reqAttune": true,
+			"curse": true,
+			"weight": 65,
+			"ac": 18,
+			"strength": "15",
+			"bonusAc": "+2",
+			"stealth": true,
+			"entries": [
+				"While wearing this armor, you gain a +2 bonus to AC.",
+				{
+					"type": "entries",
+					"name": "Curse",
+					"entries": [
+						"Once you wear this armor, and are attuned to it, you can't remove it. Only the {@spell Remove Curse} spell allows you to end the attunement and finally doff it. While wearing the armor, you're vulnerable to the following damage types: force, lightning, psychic, radiant, and thunder."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Corrupting",
+					"entries": [
+						"This item corrupts. See the \"{@adventure Infernal Item Corruption|CoA|16|Infernal Item Corruption}\" section."
+					]
+				}
 			]
 		},
 		{
@@ -21925,6 +22215,27 @@
 			]
 		},
 		{
+			"name": "Knife of Stolen Resistance",
+			"source": "CoA",
+			"page": 268,
+			"baseItem": "dagger|PHB",
+			"type": "M",
+			"rarity": "rare",
+			"weight": 1,
+			"weaponCategory": "simple",
+			"property": [
+				"F",
+				"L",
+				"T"
+			],
+			"range": "20/60",
+			"dmg1": "1d4",
+			"dmgType": "P",
+			"entries": [
+				"Using an action, you carve a single infernal rune into the flesh of an {@condition unconscious} Beast, Celestial, Dragon, Fey, or Giant with this knife. Over the next 10 minutes the creature dies an agonizing death that can't be prevented short of the {@spell Wish} spell. If the creature has any resistances or immunities, you gain those resistances and immunities until the creature dies or a {@spell Wish} spell is used to save the creature. The knife's power can't be used again until you finish a long rest."
+			]
+		},
+		{
 			"name": "Korolnor Scepter",
 			"source": "SKT",
 			"page": 234,
@@ -22948,16 +23259,6 @@
 			]
 		},
 		{
-			"name": "Longhorn",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A Faerûnian flute of sophisticated make, found only in areas with skilled artisans, as in great cities or elven enclaves."
-			]
-		},
-		{
 			"name": "Longship",
 			"source": "DMG",
 			"page": 119,
@@ -23352,17 +23653,6 @@
 			"hasFluffImages": true
 		},
 		{
-			"name": "Lute",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 2,
-			"value": 3500
-		},
-		{
 			"name": "Lute crafted of exotic wood with mother-of-pearl inlay and zircon gems (Brazen Coalition)",
 			"source": "PSX",
 			"page": 24,
@@ -23396,17 +23686,6 @@
 				}
 			],
 			"hasFluffImages": true
-		},
-		{
-			"name": "Lyre",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 2,
-			"value": 3000
 		},
 		{
 			"name": "Lyre of Building",
@@ -24502,6 +24781,38 @@
 			"entries": [
 				"A military saddle braces the rider, helping you keep your seat on an active mount in battle. It gives you advantage on any check you make to remain mounted."
 			]
+		},
+		{
+			"name": "Mimir",
+			"source": "SatO",
+			"page": 13,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"weight": 5,
+			"entries": [
+				"This skull-shaped device is filled with knowledge. The device weighs 5 pounds and is covered with subtle etchings of planar sigils.",
+				"As a bonus action, you can toss the device into the air, whereupon it floats at a distance of {@dice 1d3} feet from you and you can access its properties. While the mimir is floating, a creature other than you can use an action to grasp or net the device, either by making a successful unarmed strike against AC 22 or a successful DC 22 Dexterity ({@skill Acrobatics}) check. You can use a bonus action to seize and stow the device.",
+				"The device has AC 22, 25 hit points, immunity to poison and psychic damage, and resistance to all other damage. It is considered to be an object that is being worn while it is floating near you.",
+				{
+					"type": "entries",
+					"name": "Esoteric Knowledge",
+					"entries": [
+						"While the device is floating, you can use an action to cast {@spell legend lore} from the device. The device speaks the revealed lore aloud. Once this property has been used, it can't be used again until the next dawn."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Planar Knowledge",
+					"entries": [
+						"The device knows basic, useful information about the planes of existence. While the device is floating, it verbally answers questions you or anyone you designate poses to it about that topic. It knows the information about the planes in the Dungeon Master's Guide, as well as basic information about the gate-towns of the Outlands (presented in chapter 3 of Sigil and the Outlands)."
+					]
+				}
+			],
+			"attachedSpells": [
+				"legend lore"
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Mind Crystal (Careful)",
@@ -27431,17 +27742,6 @@
 			]
 		},
 		{
-			"name": "Pan Flute",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 2,
-			"value": 1200
-		},
-		{
 			"name": "Paper (one sheet)",
 			"source": "PHB",
 			"page": 150,
@@ -28076,6 +28376,54 @@
 			]
 		},
 		{
+			"name": "Planar Philosopher Trinket",
+			"source": "SatO",
+			"type": "G",
+			"rarity": "none",
+			"entries": [
+				{
+					"type": "table",
+					"colStyles": [
+						"col-2 text-center",
+						"col-10"
+					],
+					"colLabels": [
+						"d6",
+						"Trinket"
+					],
+					"rows": [
+						[
+							"1",
+							"Locket with a picture of my mentor and an inscription I can't read"
+						],
+						[
+							"2",
+							"Bleached cranium rat skull with colored glass beads in its eye sockets"
+						],
+						[
+							"3",
+							"Torn parchment with half a rebus painted on it"
+						],
+						[
+							"4",
+							"Bracelet of twisted razorvine stems"
+						],
+						[
+							"5",
+							"Fragment of a bronze blade covered in verdigris"
+						],
+						[
+							"6",
+							"Broken holy symbol of a forgotten god"
+						]
+					]
+				}
+			],
+			"miscTags": [
+				"TT"
+			]
+		},
+		{
 			"name": "Planecaller's Codex",
 			"source": "TCE",
 			"page": 134,
@@ -28560,6 +28908,17 @@
 			"entries": [
 				"You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check."
 			]
+		},
+		{
+			"name": "Portal Compass",
+			"source": "SatO",
+			"page": 13,
+			"rarity": "uncommon",
+			"wondrous": true,
+			"entries": [
+				"This portable arcane instrument points in the direction of the last portal it passed through while it and the portal are on the same plane of existence. If that portal no longer exists, the needle becomes static until the compass passes through a new portal."
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Portfolio Keeper",
@@ -30583,6 +30942,81 @@
 			"hasFluffImages": true
 		},
 		{
+			"name": "Ranseur of Torture",
+			"source": "CoA",
+			"page": 273,
+			"baseItem": "pike|PHB",
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"weight": 18,
+			"weaponCategory": "martial",
+			"property": [
+				"H",
+				"R",
+				"2H"
+			],
+			"dmg1": "1d10",
+			"dmgType": "P",
+			"bonusWeapon": "+3",
+			"entries": [
+				"Forged of infernal iron and Hellfire through the help of Dispater, the Ranseur of Torture has been Belial's weapon of choice since he first became an archdevil.",
+				"It is so directly tied to him that one of his worshipped symbols is a two-pronged fork. The weapon never leaves his side, and he is a master at wielding it.",
+				"The Ranseur of Torture is a magic pike. You have a +3 bonus to attack and damage rolls made with this weapon, and it does {@damage 2d10} piercing damage instead of its regular damage. When you hit a good aligned creature with it, that creature takes an extra {@damage 1d10} necrotic damage.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Ranseur of Torture has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"1 {@table Artifact Properties; Minor Beneficial Properties|dmg|minor beneficial} property",
+								"1 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} property",
+								"1 {@table Artifact Properties; Minor Detrimental Properties|dmg|minor detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Wounding",
+					"entries": [
+						"Damage dealt by the Ranseur of Torture is particularly dangerous, as it can only be restored through magical means. Resting, food, and medicine won't restore hit points removed by the pike. If the damage goes untreated for 7 days, the missing hit points are permanently removed, and can be recovered only through casting a {@spell Regenerate} or {@spell Wish} spell on the victim."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Execution",
+					"entries": [
+						"If a creature with less than its full hit points is hit by this pike, the Ranseur of Torture deals {@dice 1d10} additional piercing damage. If a creature is killed by the pike, their soul is sent to Phlegethos and can be restored only through casting a {@spell Wish} spell on the victim."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Staggered",
+					"entries": [
+						"Each time a creature takes damage from the Ranseur of Torture, they must make a Constitution save, with a DC equaling the damage they took. On a failed save, their movement speed is reduced by 5 feet until the end of their next turn. This penalty stacks, though movement speed can't be reduced below 0."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Interrupting",
+					"entries": [
+						"Spellcasters damaged by the Ranseur of Torture have disadvantage on Constitution checks made to maintain {@status concentration} until the damage is healed. If a creature is {@status concentration||concentrating} on a spell when damaged by the ranseur, their {@status concentration} is immediately ended."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Ranseur",
+					"entries": [
+						"Only through the written consent of both Dispater and Belial can the Ranseur of Torture be destroyed. If either or both of the archdevils are dead, then the new archdevil to take their mantle must give permission in their stead. The two writs must be wrapped around each of the prongs of the weapon, then the weapon must be tossed into the Pit of Flame. If performed successfully, the Hellfire briefly burns a different hue."
+					]
+				}
+			],
+			"hasFluffImages": true
+		},
+		{
 			"name": "Rations (1 day)",
 			"source": "PHB",
 			"page": 153,
@@ -31025,6 +31459,20 @@
 			"hasRefs": true,
 			"entries": [
 				"{#itemEntry Ring of Resistance}"
+			]
+		},
+		{
+			"name": "Ring of Collecting",
+			"source": "CoA",
+			"page": 268,
+			"type": "RG",
+			"rarity": "very rare",
+			"reqAttune": true,
+			"entries": [
+				"While wearing this ring you can use it to cast the {@spell Leomund's Tiny Hut} spell as an action. Once this property is used, it can't be used again until the next dawn. Additionally, as a bonus action, you can use the ring to disintegrate any nonmagical piece of art (drawing, painting, or sculpture) within 60 feet that is no larger than Medium-sized. That art now appears inside the tiny hut, for you to appreciate whenever you desire. If you try to remove this art from the tiny hut, it vanishes forever. You can steadily improve this space, but only be denying such beauty to the rest of the world. For every 1,000 gp of art acquired, the tiny hut increases in size by adding another foot to its radius and lasts one additional hour."
+			],
+			"attachedSpells": [
+				"Leomund's tiny hut"
 			]
 		},
 		{
@@ -31631,6 +32079,17 @@
 			]
 		},
 		{
+			"name": "Ring of the Copycat",
+			"source": "CoA",
+			"page": 268,
+			"type": "RG",
+			"rarity": "legendary",
+			"reqAttune": true,
+			"entries": [
+				"You gain the ability to channel energy from allies to cast spells, even if you normally can't. When an ally within 60 feet of you casts a spell that you normally can't cast and that requires 10 gp or fewer in material components, you may use a reaction to cast that spell. When cast in this way, the spell is cast using your ally's spellcasting ability, spell save DC, and spell attack bonus, as needed. You decide this cloned spell's target, as specified in the spell's description, and the spell originates from you. After you use this ability, your ally can't cast this spell again until they finish a long rest."
+			]
+		},
+		{
 			"name": "Ring of the Orator",
 			"source": "PaBTSO",
 			"page": 219,
@@ -31706,6 +32165,20 @@
 			"hasRefs": true,
 			"entries": [
 				"{#itemEntry Ring of Resistance}"
+			]
+		},
+		{
+			"name": "Ring of Treachery",
+			"source": "CoA",
+			"page": 269,
+			"type": "RG",
+			"rarity": "very rare",
+			"reqAttune": true,
+			"recharge": "restLong",
+			"rechargeAmount": 3,
+			"charges": 3,
+			"entries": [
+				"This ring has 3 charges. While wearing this ring, when you're damaged, you may use a reaction to expend a charge and transfer that damage to a random creature (which could include an ally) within 60 feet. All charges are restored when you finish a long rest."
 			]
 		},
 		{
@@ -32529,6 +33002,80 @@
 			]
 		},
 		{
+			"name": "Ruby Rod of Asmodeus",
+			"source": "CoA",
+			"page": 274,
+			"type": "RD",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"bonusWeapon": "+2",
+			"recharge": "dusk",
+			"rechargeAmount": "{@dice 6d6}",
+			"charges": 66,
+			"entries": [
+				"Asmodeus's Ruby Rod is said to have been constructed from a shard of pure evil, a ruby soaked in the blood of the innocents, the drool from a draconic deity, and the tears of 777 angels. It is a magic rod that functions as a morningstar and you have a +2 bonus to attack and damage rolls made with it. All damage dealt with it is converted to necrotic, and when you hit a good aligned creature, that creature takes an extra {@damage 2d12} necrotic damage.",
+				"The Ruby Rod of Asmodeus has 66 charges and regains {@dice 6d6} charges each nightfall. Asmodeus is always capable of perceiving through the rod and knows the exact location of any creature attuned to it. If a creature uses the special abilities of the rod without Asmodeus's permission, they take {@damage 2d12} necrotic damage each use, doubled if they're good aligned. This damage ignores resistances and immunities, and if it kills the user, Asmodeus permanently claims their soul.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Ruby Rod of Asmodeus has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"1 {@table Artifact Properties; Minor Beneficial Properties|dmg|minor beneficial} property",
+								"1 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} property",
+								"2 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} properties"
+							]
+						},
+						"Asmodeus is immune to the detrimental properties of the weapon."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Bow to the King",
+					"entries": [
+						"You may use an action to expend 33 charges to use the rod to force all creatures within a 150-foot-radius to bow to you. A creature must succeed on a DC 21 Charisma saving throw or be forced to kneel for up to 1 hour. Creatures immune to the {@condition charmed} condition have advantage on their save. Each time a kneeling creature takes damage, they may repeat the save, ending the effect on a success. The effect also ends early for kneeling creatures if they're touched by the Ruby Rod."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Acid, Cold, and Lightning",
+					"entries": [
+						"At a cost of 9 charges each use, you may use an action to trigger one of the following effects:",
+						{
+							"type": "list",
+							"items": [
+								"You project acid in a 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking {@damage 12d8} acid damage on a failed save, or half as much damage on a successful one.",
+								"You project an icy blast in a 60-foot cone. Each creature in that area must make a DC 19 Constitution saving throw, taking {@damage 12d8} cold damage on a failed save, or half as much damage on a successful one.",
+								"You shoot lightning in a 90-foot line that is 5 feet wide. Each creature in that line must make a DC 19 Dexterity saving throw, taking {@damage 12d10} lightning damage on a failed save, or half as much damage on a successful one."
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Reactions",
+					"entries": [
+						"As a reaction to suffering a detrimental effect, you may cast {@spell Lesser Restoration} (expending 3 charges) or {@spell Greater Restoration} (expending 12 charges.)",
+						"Additionally, if you're the sole target of a spell, you may use a reaction to attempt to use the rod to absorb the spell and cancel its effect. You roll {@dice 1d20 + 2}, and if the result is higher than the spell level + 10, the spell is absorbed into the rod. The rod regains charges equal to the spell level it absorbed. If the absorbed charges go over the maximum of 66 charges, it overloads, dealing {@damage 1d6} necrotic damage per charge to you and expending all charges."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Rod",
+					"entries": [
+						"While Asmodeus lives, the Ruby Rod of Asmodeus can't be destroyed, and if attempted it simply returns to Asmodeus. If he were defeated, the rod could be destroyed by bringing it to the Abyss from whence it was created, then performing a ritual known only to Asmodeus."
+					]
+				}
+			],
+			"attachedSpells": [
+				"lesser restoration",
+				"greater restoration"
+			],
+			"hasFluffImages": true
+		},
+		{
 			"name": "Ruby Weave Gem",
 			"source": "FTD",
 			"page": 24,
@@ -32892,6 +33439,31 @@
 			"value": 1500
 		},
 		{
+			"name": "Sage's Mirror",
+			"source": "CoA",
+			"page": 269,
+			"rarity": "rare",
+			"wondrous": true,
+			"recharge": "dusk",
+			"rechargeAmount": 3,
+			"charges": 3,
+			"entries": [
+				"This item has 3 charges and regains all charges at dusk. You can use an action and expend 1 of the mirror's charges to cast one of the following spells:",
+				{
+					"type": "list",
+					"items": [
+						"{@spell Find the Path}",
+						"{@spell Legend Lore}"
+					]
+				},
+				"With each use, it is apparent that the information gleaned from the mirror comes from a chamber in the Nine Hells where sages and scholars are tortured for the answers to each question."
+			],
+			"attachedSpells": [
+				"find the path",
+				"legend lore"
+			]
+		},
+		{
 			"name": "Sailing Ship",
 			"source": "DMG",
 			"page": 119,
@@ -33166,6 +33738,74 @@
 			"seeAlsoVehicle": [
 				"Scorpion Ship|AAG"
 			]
+		},
+		{
+			"name": "Scourge of Shadow",
+			"source": "CoA",
+			"page": 275,
+			"baseItem": "whip|PHB",
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"weight": 3,
+			"weaponCategory": "martial",
+			"property": [
+				"F",
+				"R"
+			],
+			"dmg1": "1d4",
+			"dmgType": "S",
+			"bonusWeapon": "+3",
+			"entries": [
+				"Said to be a gift to Glasya from Asmodeus, the Scourge of Shadow is a multi-headed whip constructed from infernal iron. The scourge is nigh-in- destructible, and Glasya carries it with her wherever she goes. When she wields the whip in battle, it shrouds her in an aura of shadow.",
+				"The Scourge of Shadow is a magic whip. You have a +3 bonus to attack and damage rolls made with this weapon, and it does {@damage 3d4} slashing damage instead of its regular damage. When you hit a good aligned creature with it, that creatures takes an extra {@damage 4d4} necrotic damage.",
+				"Whenever an unattuned creature attacks with the weapon, it deals {@damage 2d4} necrotic damage, ignoring resistances and immunities, to them, but otherwise functions normally.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Scourge of Shadow has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"2 {@table Artifact Properties; Minor Beneficial Properties|dmg|minor beneficial} properties",
+								"1 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} property",
+								"2 {@table Artifact Properties; Minor Detrimental Properties|dmg|minor detrimental} properties",
+								"1 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Keen",
+					"entries": [
+						"The whip scores a critical on a roll of 18, 19, or 20. When it scores a critical, its damage dice are upgraded to {@dice 3d6} instead of {@dice 3d4} for the duration of the attack. If attacking a good aligned creature, or attacking with the weapon unattuned, the necrotic damage dice are also increased to a {@dice d6} instead of a {@dice d4}."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Fast Reflexes",
+					"entries": [
+						"While attuned to the Scourge of Shadow, you gain advantage on initiative rolls, and you add your Charisma and Dexterity modifiers to the roll. You may use either your Strength, Dexterity, or Charisma modifier for the attack and damage rolls (the same modifier must be used for both attack and damage)."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Veil of Shadow",
+					"entries": [
+						"You're protected by a field of shadow that makes you resistant to radiant and necrotic damage. While in {@quickref Vision and Light||2||dim light} or darkness you gain {@sense blindsight} out to 60 feet and Dexterity ({@skill Stealth}) checks are made with advantage."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Scourge",
+					"entries": [
+						"Though the process is known only to Glasya and Asmodeus, the Scourge of Shadow can be destroyed. It must be taken to the Pit of Fire in Phlegethos. The scourge, along with the body of an archdevil, must be thrown into the Hellfire together. As they hit the flames, a spell of Darkness must be cast at 9th level on the scourge. If each part of the ritual is performed correctly, the whip disintegrates within the Hellfire."
+					]
+				}
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Scribe's Pen",
@@ -33475,6 +34115,31 @@
 				"Magic Item Table C"
 			],
 			"hasFluffImages": true
+		},
+		{
+			"name": "Sensory Stone",
+			"source": "SatO",
+			"page": 13,
+			"rarity": "uncommon",
+			"wondrous": true,
+			"entries": [
+				"This small, smooth stone contains the essence of a single experience.",
+				"As an action, you or a willing creature you designate can touch the stone and experience the sensation as if it happened to the designated creature. The illusory experience is fleeting and harmless, however real it might feel in the moment.",
+				{
+					"type": "entries",
+					"name": "Record Sensation",
+					"entries": [
+						"You can use your reaction to record a short sensation lasting no longer than 6 seconds experienced by a creature of your choice within 30 feet of yourself, infusing the essence of that experience into the stone. This replaces any sensation already stored within the stone."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Siphon Sensation",
+					"entries": [
+						"As a bonus action, you can draw on the stone's magic to end the charmed or frightened condition on yourself, destroying the stone in the process."
+					]
+				}
+			]
 		},
 		{
 			"name": "Sentinel Shield",
@@ -34047,27 +34712,6 @@
 			"weight": 4,
 			"entries": [
 				"A shatterstick is a nonmagical, 12-inch-long, 4-pound stake made of blue-tinged infernal iron mined on Cania, the eighth layer of the Nine Hells. When embedded in earth or pounded into solid rock, the stake emits a seismic vibration in a 20-foot radius centered on itself for 1 minute, shaking the ground in that area for the duration. When the effects ends, the shatterstick breaks apart, becoming useless, and all structures within 20 feet of it take 35 ({@damage 10d6}) bludgeoning damage."
-			]
-		},
-		{
-			"name": "Shawm",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 1,
-			"value": 200
-		},
-		{
-			"name": "Shawm",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A double-reed instrument similar to an oboe or a bassoon, popular with gnomes, who have developed some bellows-powered versions."
 			]
 		},
 		{
@@ -34799,6 +35443,17 @@
 			]
 		},
 		{
+			"name": "Skull of Selfish Knowledge",
+			"source": "CoA",
+			"page": 269,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"You may use an action to make the magical skull devour a nonmagical book, map, or scroll. Once devoured the learning is forever available to you, but you can never write the information down or communicate it to others. It is for you alone."
+			]
+		},
+		{
 			"name": "Skyblinder Staff",
 			"source": "GGR",
 			"page": 181,
@@ -35247,16 +35902,6 @@
 			"value": 2
 		},
 		{
-			"name": "Songhorn",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A recorder, a simple type of flute, usually carved from wood."
-			]
-		},
-		{
 			"name": "Soothsalts",
 			"source": "EGW",
 			"page": 152,
@@ -35345,6 +35990,69 @@
 				}
 			],
 			"hasFluffImages": true
+		},
+		{
+			"name": "Soul Coin",
+			"source": "CoA",
+			"page": 269,
+			"rarity": "uncommon",
+			"wondrous": true,
+			"charges": 3,
+			"entries": [
+				"Soul Coins are about 5 inches across and about an inch thick, minted from infernal iron. Each coin weighs one-third of a pound and is inscribed with Infernal writing and a spell that magically binds a single soul to the coin. Because each Soul Coin has a unique soul trapped within it, each has a story. A creature might have been imprisoned as a result of defaulting on a deal, while another might be the victim of a night hag's curse.",
+				{
+					"type": "entries",
+					"name": "Carrying Soul Coins",
+					"entries": [
+						"To hold a Soul Coin is to feel the soul bound within it\u2014overcome with rage or fraught with despair.",
+						"An evil creature can carry as many Soul Coins as it wishes (up to its maximum weight allowance). A non-evil creature can carry a number of Soul Coins equal to or less than its Constitution modifier without penalty. A non-evil creature carrying a number of Soul Coins greater than its Constitution modifier has disadvantage on its attack rolls, ability checks, and saving throws."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Using a Soul Coin",
+					"entries": [
+						"A Soul Coin has 3 charges. A creature carrying the coin can use its action to expend 1 charge from a Soul Coin and use it to do one of the following:",
+						{
+							"type": "list",
+							"style": "list-hang-notitle",
+							"items": [
+								{
+									"type": "item",
+									"name": "Drain Life",
+									"entries": [
+										"You siphon away some of the soul's essence and gain {@dice 1d10} temporary hit points."
+									]
+								},
+								{
+									"type": "item",
+									"name": "Query",
+									"entries": [
+										"You telepathically ask the soul a question and receive a brief telepathic response, which you can understand. The soul knows only what it knew in life, but it must answer you truthfully and to the best of its ability. The answer is no more than a sentence or two and might be cryptic."
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Freeing a Soul",
+					"entries": [
+						"Casting a spell that removes a curse on a Soul Coin frees the soul trapped within it, as does expending all of the coin's charges. The coin itself rusts from within and is destroyed once the soul is released. A freed soul travels to the realm of the god it served, or the outer plane most closely tied to its alignment (DM's choice). The souls of lawful evil creatures released from Soul Coins typically emerge from the River Styx as lemure devils.",
+						"A soul can also be freed by destroying the coin that contains it. A Soul Coin has AC 19, 1 hit point for each charge it has remaining, and immunity to all damage except that which is dealt by an infernal warship's furnace.",
+						"Freeing a soul from a Soul Coin is considered a good act, even if the soul belongs to an evil creature."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Hellish Currency",
+					"entries": [
+						"Soul Coins are a currency of the Nine Hells and are highly valued by devils. The coins are used among the infernal hierarchy to barter for favors, bribe the unwilling, and reward the faithful for services rendered.",
+						"Soul Coins are created by Mammon and his greater devils on Minauros, the third layer of the Nine Hells, in a vast chamber where the captured souls of evil mortals are bound into the coins. These coins are then distributed throughout the Nine Hells to be used for goods and services, infernal deals, dark bargains, and bribes."
+					]
+				}
+			]
 		},
 		{
 			"name": "Sovereign Glue",
@@ -39421,16 +40129,6 @@
 			]
 		},
 		{
-			"name": "Tantan",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A tambourine, a popular instrument with halflings and humans south of the Dalelands."
-			]
-		},
-		{
 			"name": "Taol",
 			"source": "WDH",
 			"page": 169,
@@ -40551,16 +41249,6 @@
 			]
 		},
 		{
-			"name": "Thelarr",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"Also known as a whistlecane, a simple and easy-to-make wind instrument cut from a reed. They are so simple, in fact, that skilled bards frequently make and give them away to children\u2014to the parents' delight or regret."
-			]
-		},
-		{
 			"name": "Thermal Cube",
 			"source": "IDRotF",
 			"page": 316,
@@ -41084,16 +41772,6 @@
 				}
 			},
 			"hasFluffImages": true
-		},
-		{
-			"name": "Tocken",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A hanging set of carved oval bells, usually played with a pair of light wooden hammers (or open handed). They are most common in underground cultures, where the resonant tones can carry."
-			]
 		},
 		{
 			"name": "Tome of Clear Thought",
@@ -42877,6 +43555,167 @@
 			"hasFluffImages": true
 		},
 		{
+			"name": "True-Ice Shards (Dagger)",
+			"source": "CoA",
+			"page": 275,
+			"baseItem": "dagger|phb",
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"weaponCategory": "simple",
+			"property": [
+				"F",
+				"L",
+				"T",
+				"Vst"
+			],
+			"range": "20/60",
+			"dmg1": "1d6",
+			"dmgType": "C",
+			"bonusAc": "+3",
+			"entries": [
+				"{@note This item is paired with {@item True-Ice Shards (Rapier)|CoA}}",
+				"Crafted from the very glacier in which he was imprisoned, the True-Ice Shards are a rapier and parrying dagger (main gauche) pair used by Levistus. They exemplify his time spent in the glacier, augmenting telepathy, divination, and defense. Due to his control over ice, Levistus can conjure the True-Ice Shards from anywhere, including if they were destroyed.",
+				"When using the magic dagger, you gain a +3 bonus to your AC, as long as it is used as your offhand weapon, and it does {@damage 1d6} cold damage instead of its regular damage.",
+				"Because Levistus conjures the True-Ice Shards at will, he often rewards a copy of the artifact to his most loyal followers. The copies are identical to the original with one exception: Levistus can destroy or retrieve a copy at any time.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The True-Ice Shards have the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"2 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} properties",
+								"2 {@table Artifact Properties; Minor Detrimental Properties|dmg|minor detrimental} properties",
+								"1 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Sub-Zero",
+					"entries": [
+						"Cold damage dealt with the shards ignores resistances and immunities. Creatures vulnerable to cold damage take triple damage from the True-Ice Shards, rather than double.",
+						"After you damage a creature with the shards, you may use a bonus action to force the creature to make a DC 22 Constitution saving throw. On a failed save, the creature that took the damage becomes vulnerable to cold damage for 24 hours. Once you use this feature, you may not use it again until after you have finished a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Mental Command",
+					"entries": [
+						"While attuned to the True-Ice Shards, you can use an action to cast the {@spell Detect Thoughts} spell (save DC 20), targeting any creature you have previously met. If the targeted creature is on a different plane of existence, the spell fails.",
+						"As long as you maintain {@status concentration}, you can use a bonus action to send a telepathic message to the focused creature. It can reply\u2014using a bonus action to do so\u2014as long as the focus and {@status concentration} continue."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Omniscient",
+					"entries": [
+						"You can use the True-Ice Shards to cast a variety of divination spells. {@spell Locate Animals or Plants}, {@spell Locate Creature}, and {@spell Locate Object} may be cast at will, and don't have a maximum range. Other limitations of the spells still apply, and they can't detect subjects on other planes of existence.",
+						"Additionally, you may cast {@spell Scrying} (with a spell save DC of 20) and Find the Path. Once either spell is cast, you must finish a long rest before casting either of them again."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Shards",
+					"entries": [
+						"While Levistus still lives, destroying the True-Ice Shards serves little purpose, as he is capable of recreating them at will. That aside, the shards can be destroyed when subjected to a sufficient source of heat. A few such sources include the inside of an active volcano, a continuous source of Hellfire, or a powerful fire spell cast at 9th level."
+					]
+				}
+			],
+			"attachedSpells": [
+				"detect thoughts",
+				"locate animals or plants",
+				"locate creature",
+				"locate object",
+				"scrying"
+			]
+		},
+		{
+			"name": "True-Ice Shards (Rapier)",
+			"source": "CoA",
+			"page": 275,
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"weaponCategory": "martial",
+			"property": [
+				"F",
+				"Vst"
+			],
+			"dmg1": "1d8",
+			"dmgType": "C",
+			"bonusWeapon": "+3",
+			"entries": [
+				"{@note This item is paired with {@item True-Ice Shards (Dagger)|CoA}}",
+				"Crafted from the very glacier in which he was imprisoned, the True-Ice Shards are a rapier and parrying dagger (main gauche) pair used by Levistus. They exemplify his time spent in the glacier, augmenting telepathy, divination, and defense. Due to his control over ice, Levistus can conjure the True-Ice Shards from anywhere, including if they were destroyed.",
+				"You gain a +3 bonus to attack and damage rolls made with the magical rapier and it does {@damage 1d8} cold damage instead of its regular damage.",
+				"Because Levistus conjures the True-Ice Shards at will, he often rewards a copy of the artifact to his most loyal followers. The copies are identical to the original with one exception: Levistus can destroy or retrieve a copy at any time.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The True-Ice Shards have the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"2 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} properties",
+								"2 {@table Artifact Properties; Minor Detrimental Properties|dmg|minor detrimental} properties",
+								"1 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Sub-Zero",
+					"entries": [
+						"Cold damage dealt with the shards ignores resistances and immunities. Creatures vulnerable to cold damage take triple damage from the True-Ice Shards, rather than double.",
+						"After you damage a creature with the shards, you may use a bonus action to force the creature to make a DC 22 Constitution saving throw. On a failed save, the creature that took the damage becomes vulnerable to cold damage for 24 hours. Once you use this feature, you may not use it again until after you have finished a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "The Best Defense",
+					"entries": [
+						"As a reaction to being attacked, you use the rapier to increase your defense, adding +3 to your AC until the end of your next turn. If you attack with the rapier before the end of your next turn, you do not have its +3 bonus to attack and damage rolls."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Mental Command",
+					"entries": [
+						"While attuned to the True-Ice Shards, you can use an action to cast the {@spell Detect Thoughts} spell (save DC 20), targeting any creature you have previously met. If the targeted creature is on a different plane of existence, the spell fails.",
+						"As long as you maintain {@status concentration}, you can use a bonus action to send a telepathic message to the focused creature. It can reply\u2014using a bonus action to do so\u2014as long as the focus and {@status concentration} continue."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Omniscient",
+					"entries": [
+						"You can use the True-Ice Shards to cast a variety of divination spells. {@spell Locate Animals or Plants}, {@spell Locate Creature}, and {@spell Locate Object} may be cast at will, and don't have a maximum range. Other limitations of the spells still apply, and they can't detect subjects on other planes of existence.",
+						"Additionally, you may cast {@spell Scrying} (with a spell save DC of 20) and Find the Path. Once either spell is cast, you must finish a long rest before casting either of them again."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Shards",
+					"entries": [
+						"While Levistus still lives, destroying the True-Ice Shards serves little purpose, as he is capable of recreating them at will. That aside, the shards can be destroyed when subjected to a sufficient source of heat. A few such sources include the inside of an active volcano, a continuous source of Hellfire, or a powerful fire spell cast at 9th level."
+					]
+				}
+			],
+			"attachedSpells": [
+				"detect thoughts",
+				"locate animals or plants",
+				"locate creature",
+				"locate object",
+				"scrying"
+			]
+		},
+		{
 			"name": "Truth Serum",
 			"source": "DMG",
 			"page": 258,
@@ -43217,6 +44056,27 @@
 			]
 		},
 		{
+			"name": "Vial of Greed",
+			"source": "CoA",
+			"page": 270,
+			"rarity": "rare",
+			"reqAttune": true,
+			"wondrous": true,
+			"entries": [
+				"This small glass vial can stockpile resources for use in the future. Once stored, resources last for 1 century before vanishing. As an action you make the vial store any number of the following resources, which are magically consumed and converted into a violet-colored liquid:",
+				{
+					"type": "list",
+					"items": [
+						"Up to 31 days of food and/or drink. The flavors are lost, instead becoming tasteless.",
+						"Up to 7 days of alcohol. The flavors are lost, instead becoming tasteless.",
+						"Up to 5 magic scrolls that affect a single creature. The target of the spell is you, and if the spell requires {@status concentration}, you can concentrate.",
+						"Up to 5 magic potions. No more than 2 duplicate potions can be stored at a time."
+					]
+				},
+				"You may have more than one kind of resource in the vial, up to the limits expressed above. You can use a bonus action to consume one day of food (or alcohol) or activate one scroll or magic potion. If activating a magic scroll, the effects of that scroll must end before you can activate another scroll from the Vial of Greed."
+			]
+		},
+		{
 			"name": "Vial of Stardust",
 			"source": "WDMM",
 			"page": 251,
@@ -43239,17 +44099,6 @@
 				"The vial can also store thought strands created by the {@spell encode thoughts|ggr} cantrip. It does not extend the duration of those strands beyond 8 hours, but stored strands do not disappear if you cast {@spell encode thoughts|ggr} again during the duration of the cantrip.",
 				"The vial has 3 charges and can store up to 3 thought strands. It regains all its charges daily at dusk."
 			]
-		},
-		{
-			"name": "Viol",
-			"source": "PHB",
-			"page": 154,
-			"srd": true,
-			"basicRules": true,
-			"type": "INS",
-			"rarity": "none",
-			"weight": 1,
-			"value": 3000
 		},
 		{
 			"name": "Voting Kit",
@@ -44191,16 +45040,6 @@
 			]
 		},
 		{
-			"name": "Wargong",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A metal gong, traditionally made from a shield, particularly the shield of an enemy. Both goblins and dwarves make and play wargongs, their sound echoing through tunnels in the Underdark."
-			]
-		},
-		{
 			"name": "Warhorse",
 			"source": "PHB",
 			"page": 157,
@@ -44328,7 +45167,8 @@
 			],
 			"attachedSpells": [
 				"speak with animals"
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Wayfarer's Boots",
@@ -44638,7 +45478,8 @@
 			"attachedSpells": [
 				"detect evil and good",
 				"locate object"
-			]
+			],
+			"hasFluffImages": true
 		},
 		{
 			"name": "Whetstone",
@@ -45819,6 +46660,82 @@
 			]
 		},
 		{
+			"name": "Wrought-Iron Tower",
+			"source": "CoA",
+			"page": 276,
+			"baseItem": "warhammer|PHB",
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"weight": 2,
+			"weaponCategory": "martial",
+			"property": [
+				"V"
+			],
+			"dmg1": "1d8",
+			"dmgType": "B",
+			"dmg2": "1d10",
+			"bonusWeapon": "+3",
+			"bonusAc": "+2",
+			"bonusSavingThrow": "+2",
+			"recharge": "dawn",
+			"rechargeAmount": 10,
+			"charges": 10,
+			"entries": [
+				"Constructed from the same materials as his tower, Dispater's Wrought-Iron Tower is a powerful weapon that marks his rule over Dis. It embodies his ideals, representing defense, authority, and power. Its construction changes hourly, similar to the tower, appearing as either iron, steel, lead, or adamantine.",
+				"The Wrought-Iron Tower is a magic staff that functions as a warhammer and you have a +3 bonus to attack and damage rolls made with it. If a creature is vulnerable to a certain type of damage, all damage dealt with the staff is converted to that damage type. When you hit a good aligned creature with it, that creature takes an extra {@damage 3d6} fire damage.",
+				"While holding the staff, you can control and navigate through the Iron Tower in Dis. While the staff is on the layer of Dis, Dispater knows the exact location of it, and is capable of teleporting to within 30 feet of it at will.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The Wrought-Iron Tower has the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"2 {@table Artifact Properties; Minor Beneficial Properties|dmg|minor beneficial} properties."
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "The Best Offense",
+					"entries": [
+						"While attuned to the staff, you have a +2 bonus to AC and a +2 bonus to all saving throws.",
+						"Additionally, the staff has 10 charges. When you make an attack, you may spend 1 or more charges. For each charge spent, you deal an additional 2 fire damage on a successful attack. Charges are still consumed if the attack misses. The staff regains all charges each day at dawn.",
+						"After dealing damage with the staff, you may use a bonus action and expend 1 charge to replace the damage dealt with your total AC instead."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Rulership",
+					"entries": [
+						"The Wrought-Iron Tower also functions as a {@item Rod of Rulership}, with an increased save DC of 18. This property costs 3 charges to use, though a creature that successfully saves against one of its uses is immune to future uses for 24 hours."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Slag",
+					"entries": [
+						"You can cast {@spell Searing Smite} at 6th level on yourself, expending 1 charge. Instead of doing fire damage, you may have Searing Smite inflict acid damage. The spell requires no {@status concentration} and lasts for 1 minute."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Staff",
+					"entries": [
+						"The Wrought-Iron Tower can only be destroyed inside the Iron Tower on Dis. Located somewhere within the tower is the forge that Dispater used to create the staff. An attuned creature must place the staff into the forge fires, then cast {@spell Dispel Evil and Good} and touch the staff. They then take {@damage 20d10} fire damage, which ignores resistance and immunities. If the attuned creature survives the fire damage, the staff is destroyed."
+					]
+				}
+			],
+			"attachedSpells": [
+				"searing smite",
+				"dispel evil and good"
+			],
+			"hasFluffImages": true
+		},
+		{
 			"name": "Wukka Nut",
 			"source": "ToA",
 			"page": 205,
@@ -45934,16 +46851,6 @@
 			]
 		},
 		{
-			"name": "Yarting",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A southern instrument from Amn and Calimshan that is a Faerûnian analog to the guitar. Numerous variations have spread across the continent."
-			]
-		},
-		{
 			"name": "Yellow Sapphire",
 			"source": "DMG",
 			"page": 134,
@@ -46034,16 +46941,6 @@
 			"value": 5000,
 			"entries": [
 				"A transparent pale blue-green gemstone."
-			]
-		},
-		{
-			"name": "Zulkoon",
-			"source": "SCAG",
-			"page": 124,
-			"type": "INS",
-			"rarity": "none",
-			"entries": [
-				"A complex pump organ that originated with the zulkirs of Thay, who use it in the casting of their spells. It is considered to have a dramatic, but sinister, sound."
 			]
 		}
 	],
@@ -47331,6 +48228,9 @@
 				"Vst"
 			],
 			"recharge": "dawn",
+			"entries": [
+				"The Jewel of Three Prayers is a Vestige of Divergence (see the \"Vestiges of Divergence\" sidebar). In ancient times, Alyxian the Apotheon bore this amulet as a symbol of his covenant with three Prime Deities: Sehanine the Moon Weaver, Avandra the Change Bringer, and Corellon the Arch Heart. When the jewel is found, only Sehanine's power thrums within its dormant heart. The power of the other two deities waits to be reawakened by a hero\u2014or heroes\u2014who can follow in Alyxian's footsteps."
+			],
 			"items": [
 				"Jewel of Three Prayers (Dormant)|CRCotN",
 				"Jewel of Three Prayers (Awakened)|CRCotN",
@@ -47844,7 +48744,7 @@
 			"rarity": "rare",
 			"reqAttune": true,
 			"entries": [
-				"You have resistance to one damage type while wearing this ring. The gem in the ring indicates the type, which the DM chooses or determines randomly. ",
+				"You have resistance to one damage type while wearing this ring. The gem in the ring indicates the type, which the DM chooses or determines randomly.",
 				{
 					"type": "table",
 					"colStyles": [
@@ -48413,6 +49313,85 @@
 				"enlarge/reduce"
 			],
 			"hasFluffImages": true
+		},
+		{
+			"name": "True-Ice Shards",
+			"source": "CoA",
+			"page": 275,
+			"type": "M",
+			"rarity": "artifact",
+			"reqAttune": true,
+			"bonusWeapon": "+3",
+			"bonusAc": "+3",
+			"entries": [
+				"Crafted from the very glacier in which he was imprisoned, the True-Ice Shards are a rapier and parrying dagger (main gauche) pair used by Levistus. They exemplify his time spent in the glacier, augmenting telepathy, divination, and defense. Due to his control over ice, Levistus can conjure the True-Ice Shards from anywhere, including if they were destroyed.",
+				"You gain a +3 bonus to attack and damage rolls made with the magical rapier and it does {@damage 1d8} cold damage instead of its regular damage. When using the magic dagger, you gain a +3 bonus to your AC, as long as it is used as your offhand weapon, and it does {@damage 1d6} cold damage instead of its regular damage.",
+				"Because Levistus conjures the True-Ice Shards at will, he often rewards a copy of the artifact to his most loyal followers. The copies are identical to the original with one exception: Levistus can destroy or retrieve a copy at any time.",
+				{
+					"type": "entries",
+					"name": "Random Properties",
+					"entries": [
+						"The True-Ice Shards have the following random properties:",
+						{
+							"type": "list",
+							"items": [
+								"2 {@table Artifact Properties; Major Beneficial Properties|dmg|major beneficial} properties",
+								"2 {@table Artifact Properties; Minor Detrimental Properties|dmg|minor detrimental} properties",
+								"1 {@table Artifact Properties; Major Detrimental Properties|dmg|major detrimental} property"
+							]
+						}
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Sub-Zero",
+					"entries": [
+						"Cold damage dealt with the shards ignores resistances and immunities. Creatures vulnerable to cold damage take triple damage from the True-Ice Shards, rather than double.",
+						"After you damage a creature with the shards, you may use a bonus action to force the creature to make a DC 22 Constitution saving throw. On a failed save, the creature that took the damage becomes vulnerable to cold damage for 24 hours. Once you use this feature, you may not use it again until after you have finished a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "The Best Defense",
+					"entries": [
+						"As a reaction to being attacked, you use the rapier to increase your defense, adding +3 to your AC until the end of your next turn. If you attack with the rapier before the end of your next turn, you do not have its +3 bonus to attack and damage rolls."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Mental Command",
+					"entries": [
+						"While attuned to the True-Ice Shards, you can use an action to cast the {@spell Detect Thoughts} spell (save DC 20), targeting any creature you have previously met. If the targeted creature is on a different plane of existence, the spell fails.",
+						"As long as you maintain {@status concentration}, you can use a bonus action to send a telepathic message to the focused creature. It can reply\u2014using a bonus action to do so\u2014as long as the focus and {@status concentration} continue."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Omniscient",
+					"entries": [
+						"You can use the True-Ice Shards to cast a variety of divination spells. {@spell Locate Animals or Plants}, {@spell Locate Creature}, and {@spell Locate Object} may be cast at will, and don't have a maximum range. Other limitations of the spells still apply, and they can't detect subjects on other planes of existence.",
+						"Additionally, you may cast {@spell Scrying} (with a spell save DC of 20) and Find the Path. Once either spell is cast, you must finish a long rest before casting either of them again."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Destroying the Shards",
+					"entries": [
+						"While Levistus still lives, destroying the True-Ice Shards serves little purpose, as he is capable of recreating them at will. That aside, the shards can be destroyed when subjected to a sufficient source of heat. A few such sources include the inside of an active volcano, a continuous source of Hellfire, or a powerful fire spell cast at 9th level."
+					]
+				}
+			],
+			"items": [
+				"True-Ice Shards (Rapier)|CoA",
+				"True-Ice Shards (Dagger)|CoA"
+			],
+			"attachedSpells": [
+				"detect thoughts",
+				"locate animals or plants",
+				"locate creature",
+				"locate object",
+				"scrying"
+			]
 		},
 		{
 			"name": "Verminshroud",

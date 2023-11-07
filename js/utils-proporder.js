@@ -34,12 +34,12 @@ class PropOrder {
 
 					if (k instanceof PropOrder._ObjectKey) {
 						const nxtPath = `${path}.${key}`;
-						if (k.fnGetOrder) out[key] = this._getOrdered(obj[key], k.fnGetOrder(), opts, nxtPath);
+						if (k.fnGetOrder) out[key] = this._getOrdered(obj[key], k.fnGetOrder(obj[key]), opts, nxtPath);
 						else if (k.order) out[key] = this._getOrdered(obj[key], k.order, opts, nxtPath);
 						else out[key] = obj[key];
 					} else if (k instanceof PropOrder._ArrayKey) {
 						const nxtPath = `${path}[n].${key}`;
-						if (k.fnGetOrder) out[key] = obj[key].map(it => this._getOrdered(it, k.fnGetOrder(), opts, nxtPath));
+						if (k.fnGetOrder) out[key] = obj[key].map(it => this._getOrdered(it, k.fnGetOrder(obj[key]), opts, nxtPath));
 						else if (k.order) out[key] = obj[key].map(it => this._getOrdered(it, k.order, opts, nxtPath));
 						else out[key] = obj[key];
 
@@ -584,6 +584,7 @@ PropOrder._BACKGROUND = [
 	"toolProficiencies",
 	"weaponProficiencies",
 	"armorProficiencies",
+	"skillToolLanguageProficiencies",
 	"expertise",
 
 	"resist",
@@ -1063,7 +1064,9 @@ PropOrder._DEITY = [
 
 	"piety",
 
-	"customProperties",
+	new PropOrder._ObjectKey("customProperties", {
+		fnGetOrder: obj => Object.keys(obj).sort(SortUtil.ascSortLower),
+	}),
 
 	"entries",
 
@@ -1346,6 +1349,7 @@ PropOrder._ITEM = [
 	"mace",
 	"net",
 	"poison",
+	"polearm",
 	"spear",
 	"staff",
 	"stealth",
@@ -1372,7 +1376,9 @@ PropOrder._ITEM = [
 	"seeAlsoDeck",
 	"seeAlsoVehicle",
 
-	"customProperties",
+	new PropOrder._ObjectKey("customProperties", {
+		fnGetOrder: obj => Object.keys(obj).sort(SortUtil.ascSortLower),
+	}),
 
 	"miscTags",
 
@@ -1867,6 +1873,37 @@ PropOrder._CARD = [
 	"entries",
 ];
 
+PropOrder._ENCOUNTER = [
+	"name",
+
+	"source",
+	"page",
+
+	new PropOrder._ArrayKey("tables", {
+		order: [
+			"caption",
+			"minlvl",
+			"maxlvl",
+
+			"diceExpression",
+			"rollAttitude",
+			"table",
+
+			"footnotes",
+		],
+		fnSort: SortUtil.ascSortEncounter,
+	}),
+];
+
+PropOrder._CITATION = [
+	"name",
+
+	"source",
+	"page",
+
+	"entries",
+];
+
 PropOrder._PROP_TO_LIST = {
 	"monster": PropOrder._MONSTER,
 	"foundryMonster": PropOrder._FOUNDRY_MONSTER,
@@ -1938,6 +1975,8 @@ PropOrder._PROP_TO_LIST = {
 	"sense": PropOrder._SENSE,
 	"deck": PropOrder._DECK,
 	"card": PropOrder._CARD,
+	"encounter": PropOrder._ENCOUNTER,
+	"citation": PropOrder._CITATION,
 };
 
 globalThis.PropOrder = PropOrder;
