@@ -6264,7 +6264,7 @@
 						{
 							"type": "entries",
 							"name": "Entrance to Kalaman",
-							"page": 0,
+							"page": 80,
 							"id": "181",
 							"entries": [
 								"The trek from the villagers' landing spot to Kalaman spans two miles. As the characters and Darrett approach the city, read the following:",
@@ -27212,7 +27212,14 @@
 					"title": "Poster Map",
 					"credit": "Francesca Baerald",
 					"width": 4096,
-					"height": 2926
+					"height": 2926,
+					"grid": {
+						"type": "none",
+						"size": 51,
+						"scale": 1.206,
+						"distance": 25,
+						"units": "miles"
+					}
 				}
 			]
 		}
